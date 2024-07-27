@@ -13,41 +13,41 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/_index'
 
 // Create Virtual Routes
 
-const AboutLazyImport = createFileRoute('/about')()
-const IndexLazyImport = createFileRoute('/')()
+const IndexIndexLazyImport = createFileRoute('/_index/')()
 
 // Create/Update Routes
 
-const AboutLazyRoute = AboutLazyImport.update({
-  path: '/about',
+const IndexRoute = IndexImport.update({
+  id: '/_index',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+} as any)
 
-const IndexLazyRoute = IndexLazyImport.update({
+const IndexIndexLazyRoute = IndexIndexLazyImport.update({
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+  getParentRoute: () => IndexRoute,
+} as any).lazy(() => import('./routes/_index/index.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
+    '/_index': {
+      id: '/_index'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutLazyImport
-      parentRoute: typeof rootRoute
+    '/_index/': {
+      id: '/_index/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexIndexLazyImport
+      parentRoute: typeof IndexImport
     }
   }
 }
@@ -55,8 +55,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  IndexLazyRoute,
-  AboutLazyRoute,
+  IndexRoute: IndexRoute.addChildren({ IndexIndexLazyRoute }),
 })
 
 /* prettier-ignore-end */
@@ -67,15 +66,18 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/about"
+        "/_index"
       ]
     },
-    "/": {
-      "filePath": "index.lazy.tsx"
+    "/_index": {
+      "filePath": "_index.tsx",
+      "children": [
+        "/_index/"
+      ]
     },
-    "/about": {
-      "filePath": "about.lazy.tsx"
+    "/_index/": {
+      "filePath": "_index/index.lazy.tsx",
+      "parent": "/_index"
     }
   }
 }

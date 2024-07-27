@@ -1,2 +1,2 @@
-export * from './tailwind-indictor'
-export * from './lazy-image'
+export * from "./lazy-image"
+export * from "./tailwind-indictor"

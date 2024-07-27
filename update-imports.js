@@ -34,8 +34,8 @@ function processComponents() {
   }
 
   const importStatements = generateImportStatements(componentFiles)
-  const exportStatement = generateExportStatement(componentFiles)
-  const content = `${importStatements.join('\n')}\n${exportStatement}\n`
+  
+  const content = `${importStatements.join('\n')}`
 
   fs.writeFileSync(path.join(componentsFolder, importsFile), content)
 
@@ -79,7 +79,7 @@ function initializeShadcnUI() {
 function generateImportStatements(componentFiles) {
   return componentFiles.map(file => {
     const componentName = getComponentName(file)
-    return `import { ${componentName} } from './${componentName.toLowerCase()}';`
+    return `export * from './${componentName.toLowerCase()}'`
   })
 }
 
