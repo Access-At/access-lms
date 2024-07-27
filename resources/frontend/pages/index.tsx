@@ -1,5 +1,5 @@
-import { LazyImage } from '@/components/ui'
-import { TransitionType } from '@/components/ui/lazy-image'
+import { LazyImage } from '@/components/shared'
+import { TransitionType } from '@/components/shared/lazy-image'
 import { getImages } from '@/lib/utils'
 
 export default function index() {
