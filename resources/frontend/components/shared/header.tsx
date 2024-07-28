@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router"
 import DesktopMenu from "./desktopMenu"
+import { Link } from "@tanstack/react-router"
 import MobileMenu from "./mobileMenu"
 
 export default function Header() {
@@ -17,7 +17,7 @@ export default function Header() {
           >
             ACCESS LMS
           </Link>
-          <MobileMenu />
+        <MobileMenu />
         </div>
         <DesktopMenu />
       </nav>

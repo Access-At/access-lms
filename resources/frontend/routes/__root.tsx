@@ -2,6 +2,8 @@ import * as React from "react"
 
 import { Outlet, createRootRoute } from "@tanstack/react-router"
 
+import Loading from "@/components/shared/loading"
+
 const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
     ? () => null // Render nothing in production
@@ -25,7 +27,7 @@ const TailwindIndictor =
 
 export const Route = createRootRoute({
   component: () => (
-    <React.Suspense fallback={<>Loading...</>}>
+    <React.Suspense fallback={<Loading title="Mohon tunggu sebentar..." />}>
       <Outlet />
       <TanStackRouterDevtools />
       <TailwindIndictor />

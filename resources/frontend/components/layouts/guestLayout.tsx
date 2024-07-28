@@ -7,10 +7,10 @@ interface GuestLayoutProps {
 
 export default function GuestLayout({ children }: GuestLayoutProps) {
   return (
-    <div>
+    <>
       <Header />
       {children}
       <Footer />
-    </div>
+    </>
   )
 }

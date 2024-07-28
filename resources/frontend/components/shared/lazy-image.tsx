@@ -1,9 +1,9 @@
 import * as React from "react"
 
-import { Blur, Grow, Slide } from "transitions-kit"
+import { AsyncImage, AsyncImageProps } from "loadable-image"
+import { Blur, Collapse, Fade, Grow, Slide, Zoom } from "transitions-kit"
 
 import { TransitionType } from "@/lib/types"
-import { AsyncImage, AsyncImageProps } from "loadable-image"
 
 interface LazyImageProps extends AsyncImageProps {
   transition: TransitionType
@@ -17,6 +17,9 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     [TransitionType.Blur]: Blur,
     [TransitionType.Grow]: Grow,
     [TransitionType.Slide]: Slide,
+    [TransitionType.Collapse]: Collapse,
+    [TransitionType.Fade]: Fade,
+    [TransitionType.Zoom]: Zoom,
   }[transition]
 
   return (
