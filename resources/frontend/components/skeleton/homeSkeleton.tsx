@@ -2,9 +2,7 @@ import * as React from "react"
 
 import {
     Card,
-    CardDescription,
     CardHeader,
-    CardTitle,
     Carousel,
     CarouselContent,
     CarouselItem,
@@ -45,10 +43,10 @@ export default function HomeSkeleton() {
                         <div className='flex flex-col' key={index}>
                             <Skeleton className="w-12 h-12 rounded bg-slate-300" />
                             <div className='mt-5'>
-                                <p className="mt-1">
-                                    <Skeleton className="w-2/2 h-3 rounded bg-slate-300" />
-                                    <Skeleton className="w-1/2 h-3 rounded bg-slate-300 mt-3" />
-                                </p>
+                                
+                                <Skeleton className="w-2/2 h-3 rounded bg-slate-300" />
+                                <Skeleton className="w-1/2 h-3 rounded bg-slate-300 mt-3" />
+                                
                             </div>
                         </div>
                     ))}
@@ -106,14 +104,12 @@ export default function HomeSkeleton() {
                                     <span className='mb-1 block text-xs font-semibold uppercase text-blue-600'>
                                         <Skeleton className="w-20 h-3 rounded bg-slate-300" />
                                     </span>
-                                    <CardTitle>
-                                        <Skeleton className="w-2/3 h-6 rounded bg-slate-300" />
-                                    </CardTitle>
-                                    <CardDescription className='mt-3'>
+                                    <Skeleton className="w-2/3 h-6 rounded bg-slate-300" />
+                                    <div className='mt-3'>
                                         <Skeleton className="h-4 bg-slate-200 rounded w-full mb-1" />
                                         <Skeleton className="h-4 bg-slate-200 rounded w-1/2 mb-1" />
                                         <Skeleton className="h-4 bg-slate-200 rounded w-2/3" />
-                                    </CardDescription>
+                                    </div>
                                 </div>
                             </Card>
                         ))
