@@ -11,6 +11,6 @@ export default function GuestLayout({ children }: GuestLayoutProps) {
       <Header />
       {children}
       <Footer />
-    </>
+    </div>
   )
 }
