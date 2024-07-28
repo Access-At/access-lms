@@ -9,7 +9,7 @@ export default function CourseLink() {
         variant='outline'
         className='gap-x-2 border border-gray-300 px-4 py-3 text-base font-normal'
       >
-        <p className='text-gray-800'>Lihat seluruh kursus?</p>
+        <p className='text-gray-500'>Lihat seluruh kursus?</p>
         <Link
           className='inline-flex items-center gap-x-1.5 font-medium text-blue-600 decoration-2 hover:underline'
           href='/courses'

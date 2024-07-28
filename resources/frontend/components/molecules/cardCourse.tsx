@@ -1,7 +1,7 @@
 import { TransitionType } from "@/lib/types"
 import { Link } from "@tanstack/react-router"
+import { LazyImage } from "../shared/lazy-image"
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui"
-import { LazyImage } from "./lazy-image"
 
 interface CourseCardProps {
   title: string
@@ -37,7 +37,7 @@ export default function CardCourse({
       </div>
       <CardFooter className='mt-auto flex divide-x divide-gray-200 border-t border-gray-300 p-0'>
         <Link
-          className='inline-flex w-full items-center justify-center gap-x-2 rounded-es-xl bg-background px-4 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50'
+          className='inline-flex w-full items-center justify-center gap-x-2 rounded-b-xl bg-background px-4 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-200 disabled:pointer-events-none disabled:opacity-50'
           to='/'
           // href='/course-detail'
         >

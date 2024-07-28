@@ -1,6 +1,6 @@
 import { materiCourse } from "@/constant/materiCourse"
-import CardCourse from "./cardCourse"
-import CourseLink from "./courseLink"
+import CourseLink from "../atoms/courseLink"
+import CardCourse from "../molecules/cardCourse"
 
 export default function Blog() {
   return (

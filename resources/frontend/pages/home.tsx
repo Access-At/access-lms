@@ -1,8 +1,8 @@
-import Blog from "@/components/shared/blog"
-import Feature from "@/components/shared/feature"
-import Hero from "@/components/shared/hero"
-import JobPosition from "@/components/shared/jobPosition"
-import Team from "@/components/shared/team"
+import Blog from "@/components/organisms/blog"
+import Feature from "@/components/organisms/feature"
+import Hero from "@/components/organisms/hero"
+import JobPosition from "@/components/organisms/jobPosition"
+import Team from "@/components/organisms/team"
 
 export default function Home() {
   return (
