@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Trainer;
+use App\Models\Administrator;
+
 return [
 
     /*
@@ -40,6 +43,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin'=>[
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+        'trainer'=>[
+            'driver' => 'session',
+            'provider' => 'trainer',
+        ],
     ],
 
     /*
@@ -63,6 +74,16 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => Administrator::class,
+        ],
+
+        'trainer' => [
+            'driver' => 'eloquent',
+            'model' => Trainer::class,
         ],
 
         // 'users' => [
