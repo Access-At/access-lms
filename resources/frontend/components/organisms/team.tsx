@@ -3,7 +3,7 @@ import { TransitionType } from "@/lib/types"
 import { Link } from "@tanstack/react-router"
 import { FaGithub, FaSlack } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
-import { LazyImage } from "./lazy-image"
+import { LazyImage } from "../shared/lazy-image"
 
 export default function Team() {
   return (
@@ -44,13 +44,9 @@ export default function Team() {
                     href='#'
                     key={index}
                   >
-                    {item.name === "Twitter" ? (
-                      <FaXTwitter />
-                    ) : item.name === "Github" ? (
-                      <FaGithub />
-                    ) : (
-                      <FaSlack />
-                    )}
+                    {item.name === "Twitter" && <FaXTwitter />}
+                    {item.name === "Github" && <FaGithub />}
+                    {item.name === "Slack" && <FaSlack />}
                   </Link>
                 ))}
               </div>

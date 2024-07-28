@@ -1,6 +1,6 @@
 import DesktopMenu from "./desktopMenu"
 import { Link } from "@tanstack/react-router"
-import MobileMenu from "./mobileMenu"
+import MobileMenu from "../organisms/mobileMenu"
 
 export default function Header() {
   return (
@@ -17,7 +17,7 @@ export default function Header() {
           >
             ACCESS LMS
           </Link>
-        <MobileMenu />
+          <MobileMenu />
         </div>
         <DesktopMenu />
       </nav>

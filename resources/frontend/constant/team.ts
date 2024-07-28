@@ -14,7 +14,7 @@ export const team = [
         link: "https://github.com/",
       },
       {
-        name: "slack",
+        name: "Slack",
         link: "#",
       },
     ],
@@ -35,7 +35,7 @@ export const team = [
         link: "https://github.com/",
       },
       {
-        name: "slack",
+        name: "Slack",
         link: "#",
       },
     ],
@@ -56,7 +56,7 @@ export const team = [
         link: "https://github.com/",
       },
       {
-        name: "slack",
+        name: "Slack",
         link: "#",
       },
     ],

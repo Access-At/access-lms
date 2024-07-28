@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Helpers;
+
+class ResponseHelper{
+    const HTTP_CONTINUE = 100;
+    const HTTP_SWITCHING_PROTOCOL = 101;
+    const HTTP_PROCESSING = 102;
+    const HTTP_OK = 200;
+    const HTTP_CREATED = 201;
+    const HTTP_ACCEPTED = 202;
+    const HTTP_NON_AUTHORITATIVE_INFORMATION = 203;
+    const HTTP_NO_CONTENT = 204;
+    const HTTP_RESET_CONTENT = 205;
+    const HTTP_PARTIAL_CONTENT = 206;
+    const HTTP_MULTI_STATUS = 207;
+    const HTTP_ALREADY_REPORTED = 208;
+    const HTTP_IM_USED = 226;
+    const HTTP_MULTIPLE_CHOICE = 300;
+    const HTTP_MOVED_PERMANENTLY = 301;
+    const HTTP_NOT_FOUND = 404;
+    const HTTP_METHOD_NOT_ALLOWED = 405;
+    const HTTP_NOT_ACCEPTABLE = 406;
+    const HTTP_INTERNAL_SERVER_ERROR = 500;
+    const HTTP_UNAUTHORIZED = 401;
+    const HTTP_FORBIDDEN = 403;
+    const HTTP_BAD_REQUEST = 400;
+    const HTTP_UNPROCESSABLE_ENTITY = 422;
+}
