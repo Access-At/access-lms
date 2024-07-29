@@ -21,13 +21,13 @@ class AuthService {
     public function login(array $data): JsonResponse
     {
         if(!$token = auth()->guard('admin')->attempt($data)) {
-            return ResponseHelper::unAuthenticated(null, 'Email atau password anda salah!');
+            return ResponseHelper::unAuthenticated(null, 'Email or Password is incorrect', false);
         }
-
-        return ResponseHelper::success([
+        $responseData = [
             'user' => auth()->guard('admin')->user(),
-            'token' => $token
-        ]);
+            'token' => $token,
+        ];
+        return ResponseHelper::success((object) $responseData);
     }
 
     public function me(): JsonResponse

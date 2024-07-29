@@ -21,7 +21,7 @@ class AuthController extends Controller
 
     public function login(AuthRequest $request)
     {
-        return $this->authService->login($request->toArray());
+        return $this->authService->login($request->only('email', 'password'));
     }
 
     public function getUser()

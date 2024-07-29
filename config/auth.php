@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Models\Trainer;
 use App\Models\Administrator;
 
@@ -43,13 +44,20 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'admin'=>[
+        'user' => [
             'driver' => 'session',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+        'admin'=>[
+            'driver' => 'jwt',
             'provider' => 'admin',
+            'hash' => false,
         ],
         'trainer'=>[
-            'driver' => 'session',
+            'driver' => 'jwt',
             'provider' => 'trainer',
+            'hash' => false,
         ],
     ],
 
@@ -73,7 +81,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
 
         'admin' => [

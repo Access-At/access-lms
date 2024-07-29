@@ -3,16 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable; // <-- import Auth Laravel
+
 
 class Administrator extends Authenticatable implements JWTSubject
 {
     use HasFactory, HasUuids;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
+    protected $table = 'administrators';
 
     protected $hidden = ['password'];
 
