@@ -1,32 +1,31 @@
-<?php 
+<?php
 
 namespace App\Services\Administrator;
 
 use App\Helpers\ResponseHelper;
-use App\Repository\Administrator\AuthRepository;
 use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Repository\Administrator\AuthRepository;
 
-class AuthService {
-
+class AuthService
+{
     protected $authRepository;
 
-    public function __construct (
+    public function __construct(
         AuthRepository $authRepository
-    )
-    {
+    ) {
         $this->authRepository = $authRepository;
     }
 
     public function login(array $data): JsonResponse
     {
-        if(!$token = auth()->guard('admin')->attempt($data)) {
+        if ( ! $token = auth()->guard('admin')->attempt($data)) {
             return ResponseHelper::unAuthenticated(null, 'Email atau password anda salah!');
         }
 
         return ResponseHelper::success([
             'user' => auth()->guard('admin')->user(),
-            'token' => $token
+            'token' => $token,
         ]);
     }
 
@@ -44,13 +43,14 @@ class AuthService {
 
         return ResponseHelper::success([
             'user' => auth()->guard('admin')->user(),
-            'token' => $refreshToken
+            'token' => $refreshToken,
         ]);
     }
 
     public function logout(): JsonResponse
     {
         JWTAuth::invalidate(JWTAuth::getToken());
+
         return ResponseHelper::noContent();
     }
 }

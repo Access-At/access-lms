@@ -49,12 +49,12 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-        'admin'=>[
+        'admin' => [
             'driver' => 'jwt',
             'provider' => 'admin',
             'hash' => false,
         ],
-        'trainer'=>[
+        'trainer' => [
             'driver' => 'jwt',
             'provider' => 'trainer',
             'hash' => false,

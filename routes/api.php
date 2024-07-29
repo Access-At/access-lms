@@ -1,20 +1,22 @@
 <?php
 
-use App\Http\Controllers\Administrator\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\Administrator\AuthController;
 
 Route::prefix('v1')->group(function () {
-    
+
     Route::prefix('admin')->group(function () {
         Route::post('/login', [AuthController::class, 'login']);
-        
-        Route::group(['middleware' => 'auth:admin'], function() {
+
+        Route::group(['middleware' => 'auth:admin'], function () {
             Route::get('/user', [AuthController::class, 'getUser']);
             Route::get('/refresh', [AuthController::class, 'refreshToken']);
             Route::post('/logout', [AuthController::class, 'logout']);
         });
     });
+
+    Route::get('/test', [TestController::class, 'index']);
 
     // trainer => auth:trainer
 

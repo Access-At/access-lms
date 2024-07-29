@@ -2,6 +2,4 @@
 
 namespace App\Repository\Administrator;
 
-class AuthRepository {
-
-}
+class AuthRepository {}

@@ -1,3 +1,3 @@
-<?php 
+<?php
 
 namespace App\Repository\Adminstrator;

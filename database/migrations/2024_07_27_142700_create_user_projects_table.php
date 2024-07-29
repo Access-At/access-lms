@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('imageUrl')->nullable();
-            $table->string('links')->default("#");
+            $table->string('links')->default('#');
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
 
             $table->timestamps();

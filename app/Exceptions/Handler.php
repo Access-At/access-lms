@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use App\Helpers\ResponseHelper;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -23,8 +26,27 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        // $this->reportable(function (Throwable $e) {
+        //     //
+        // });
+
+        $this->renderable(function (CustomeException $e) {
+            return ResponseHelper::custome(
+                ['status' => false, 'message' => $e->getMessage()],
+                $e->getCode()
+            );
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     */
+    public function render($request, Throwable $exception): JsonResponse
+    {
+        if ($exception instanceof ThrottleRequestsException) {
+            return ResponseHelper::toManyRequestValidation(null, 'Terlalu banyak percobaan. Silakan coba lagi nanti.');
+        }
+
+        return parent::render($request, $exception);
     }
 }

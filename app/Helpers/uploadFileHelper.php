@@ -2,9 +2,9 @@
 
 namespace App\Helpers;
 
-
-class uploadFileHelper{
+class uploadFileHelper
+{
     // TODO
 
-    public static function uploadFile($file, $path){}
+    public static function uploadFile($file, $path) {}
 }

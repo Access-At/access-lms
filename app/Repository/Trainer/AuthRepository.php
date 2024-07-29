@@ -1,12 +1,12 @@
-<?php 
+<?php
 
 namespace App\Repository\Trainer;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class AuthRepository {
-    
+class AuthRepository
+{
     // public function loginUser(Request $request)
     // {
     //     $validator = Validator::make([

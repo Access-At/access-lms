@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
+use App\Http\Controllers\Controller;
 use App\Services\Administrator\AuthService;
-use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -13,11 +12,9 @@ class AuthController extends Controller
 
     public function __construct(
         AuthService $authService
-    )
-    {
+    ) {
         $this->authService = $authService;
     }
-   
 
     public function login(AuthRequest $request)
     {
@@ -29,14 +26,13 @@ class AuthController extends Controller
         return $this->authService->me();
     }
 
-    // public function refreshToken(Request $request)
-    // {
-    //     return $this->authRepository->refreshToken($request);
-    // }
+    public function refreshToken()
+    {
+        return $this->authService->refresh();
+    }
 
     public function logout()
     {
         return $this->authService->logout();
     }
-        
 }

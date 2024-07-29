@@ -8,7 +8,9 @@ const GuestLayout = React.lazy(() => import("@/components/layouts/guestLayout"))
 
 export const Route = createFileRoute("/_index")({
   component: () => (
-    <React.Suspense fallback={<Loading title="Sedang mempersiapkan halaman..." />}>
+    <React.Suspense
+      fallback={<Loading title='Sedang mempersiapkan halaman...' />}
+    >
       <GuestLayout>
         <Outlet />
       </GuestLayout>

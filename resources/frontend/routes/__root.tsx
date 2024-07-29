@@ -27,7 +27,7 @@ const TailwindIndictor =
 
 export const Route = createRootRoute({
   component: () => (
-    <React.Suspense fallback={<Loading title="Mohon tunggu sebentar..." />}>
+    <React.Suspense fallback={<Loading title='Mohon tunggu sebentar...' />}>
       <Outlet />
       <TanStackRouterDevtools />
       <TailwindIndictor />

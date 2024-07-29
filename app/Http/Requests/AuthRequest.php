@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Response;
 use App\Helpers\ResponseHelper;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Response;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class AuthRequest extends FormRequest
 {
@@ -27,25 +27,19 @@ class AuthRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ];
     }
 
     public function messages()
     {
         return [
-            'required' => ':attribute wajib diisi'
+            'required' => ':attribute wajib diisi',
         ];
     }
 
-    protected function failedValidation(Validator $validator) {
-        throw new HttpResponseException(ResponseHelper::custome(
-            [
-                'status' => false,
-                'message' => 'Validation errors',
-                'error' => $validator->errors()
-            ],
-            Response::HTTP_UNPROCESSABLE_ENTITY
-        ));
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(ResponseHelper::custome(['status' => false, 'message' => 'Validation errors', 'error' => $validator->errors()], Response::HTTP_UNPROCESSABLE_ENTITY));
     }
 }

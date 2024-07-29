@@ -1,9 +1,11 @@
-import HomeSkeleton from "@/components/skeleton/homeSkeleton";
-import React from "react";
+import HomeSkeleton from "@/components/skeleton/homeSkeleton"
+import React from "react"
 
 const Hero = React.lazy(() => import("@/components/organisms/hero"))
 const Feature = React.lazy(() => import("@/components/organisms/feature"))
-const JobPosition = React.lazy(() => import("@/components/organisms/jobPosition"))
+const JobPosition = React.lazy(
+  () => import("@/components/organisms/jobPosition"),
+)
 const Team = React.lazy(() => import("@/components/organisms/team"))
 const Blog = React.lazy(() => import("@/components/organisms/blog"))
 
