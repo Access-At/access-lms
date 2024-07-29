@@ -1,7 +1,8 @@
-import { TransitionType } from "@/lib/types"
-import { Link } from "@tanstack/react-router"
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
+
 import { LazyImage } from "../shared/lazy-image"
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui"
+import { Link } from "@tanstack/react-router"
+import { TransitionType } from "@/lib/types"
 
 interface CourseCardProps {
   title: string

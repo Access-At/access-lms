@@ -1,5 +1,6 @@
+import { Menubar, MenubarContent, MenubarMenu, MenubarTrigger } from "../ui/menubar"
+
 import { Menu } from "lucide-react"
-import { Menubar, MenubarContent, MenubarMenu, MenubarTrigger } from "../ui"
 import MobileMenuItem from "./mobileMenuItem"
 
 export default function MobileMenu() {

@@ -1,8 +1,13 @@
 import { Link } from "@tanstack/react-router"
+import { cn } from "@/lib/utils"
 
 export default function Hero() {
   return (
-    <div className="relative mt-20 overflow-hidden before:absolute before:start-1/2 before:top-0 before:-z-[1] before:size-full before:-translate-x-1/2 before:transform before:bg-[url('https://preline.co/assets/svg/examples/squared-bg-element.svg')] before:bg-top before:bg-no-repeat">
+    <div className={cn(
+      "relative mt-20 overflow-hidden before:absolute before:start-1/2 before:top-0 before:-z-[1] before:size-full before:-translate-x-1/2 before:transform before:bg-top before:bg-no-repeat",
+      `before:bg-[url('/assets/icons/banner.svg')]`
+    )}>
+      {/* https://preline.co/assets/svg/examples/squared-bg-element.svg */}
       <div className='px-4 pb-10 pt-24 sm:px-6 lg:px-8'>
         {/* <!-- Announcement Banner --> */}
         <div className='flex justify-center'>

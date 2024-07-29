@@ -1,5 +1,6 @@
+import { MenubarSub, MenubarSubContent, MenubarSubTrigger } from "../ui/menubar"
+
 import { SubmenuProps } from "@/lib/types"
-import { MenubarSub, MenubarSubContent, MenubarSubTrigger } from "../ui"
 
 export default function Submenu({ trigger, children }: SubmenuProps) {
   return (

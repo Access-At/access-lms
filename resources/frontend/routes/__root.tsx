@@ -20,7 +20,7 @@ const TailwindIndictor =
   process.env.NODE_ENV === "production"
     ? () => null
     : React.lazy(() =>
-        import("@/components/shared").then(res => ({
+        import("@/components/shared/tailwind-indictor").then(res => ({
           default: res.TailwindIndictor,
         })),
       )

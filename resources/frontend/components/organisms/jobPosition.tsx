@@ -1,13 +1,7 @@
 import * as React from "react"
 
-import {
-  Card,
-  CardDescription,
-  CardTitle,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "../ui"
+import { Card, CardDescription, CardTitle } from "../ui/card"
+import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel"
 
 import Autoscroll from "embla-carousel-auto-scroll"
 import { ChevronRight } from "lucide-react"

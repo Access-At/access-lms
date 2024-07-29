@@ -1,7 +1,7 @@
-import { MenuLinkProps } from "@/lib/types"
-import { cn } from "@/lib/utils"
 import { Link } from "@tanstack/react-router"
-import { MenubarItem } from "../ui"
+import { MenuLinkProps } from "@/lib/types"
+import { MenubarItem } from "../ui/menubar"
+import { cn } from "@/lib/utils"
 
 export default function MenuLink({
   children,

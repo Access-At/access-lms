@@ -1,15 +1,14 @@
 import * as React from "react"
 
+import { Card, CardHeader } from "../ui/card"
 import {
-    Card,
-    CardHeader,
     Carousel,
     CarouselContent,
     CarouselItem,
-    Skeleton
-} from "../ui"
+} from "../ui/carousel"
 
 import Autoscroll from "embla-carousel-auto-scroll"
+import { Skeleton } from "../ui/skeleton"
 import { cn } from "@/lib/utils"
 import { useMediaQuery } from "@/hooks/useMediaQuery"
 
@@ -43,10 +42,10 @@ export default function HomeSkeleton() {
                         <div className='flex flex-col' key={index}>
                             <Skeleton className="w-12 h-12 rounded bg-slate-300" />
                             <div className='mt-5'>
-                                
+
                                 <Skeleton className="w-2/2 h-3 rounded bg-slate-300" />
                                 <Skeleton className="w-1/2 h-3 rounded bg-slate-300 mt-3" />
-                                
+
                             </div>
                         </div>
                     ))}
