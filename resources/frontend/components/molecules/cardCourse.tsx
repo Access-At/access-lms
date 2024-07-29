@@ -1,8 +1,14 @@
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card"
 
-import { LazyImage } from "../shared/lazy-image"
-import { Link } from "@tanstack/react-router"
 import { TransitionType } from "@/lib/types"
+import { Link } from "@tanstack/react-router"
+import { LazyImage } from "../shared/lazy-image"
 
 interface CourseCardProps {
   title: string

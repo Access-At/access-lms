@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
- // <-- import Auth Laravel
+// <-- import Auth Laravel
 
 class Administrator extends Authenticatable implements JWTSubject
 {

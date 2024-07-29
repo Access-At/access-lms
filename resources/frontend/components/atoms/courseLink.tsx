@@ -1,6 +1,6 @@
-import { Badge } from "../ui/badge"
-import { ChevronRight } from "lucide-react"
 import { Link } from "@tanstack/react-router"
+import { ChevronRight } from "lucide-react"
+import { Badge } from "../ui/badge"
 
 export default function CourseLink() {
   return (

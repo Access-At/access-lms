@@ -7,7 +7,7 @@
         "serve": "concurrently \"php artisan serve\" \"npm run dev\"",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
-        "format": "prettier --config .prettierrc resources/frontend/**/*.{ts,tsx} --write",
+        "format": "prettier --config .prettierrc './resources/frontend/**/*.{ts,tsx}' --write",
         "pint-test": "./vendor/bin/pint --test -v",
         "pint-format": "./vendor/bin/pint -v",
         "format:all": "concurrently \"npm run format\" \"npm run pint-format\""

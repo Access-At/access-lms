@@ -1,3 +1,4 @@
+import { Link, useLocation } from "@tanstack/react-router"
 import { ChevronDown, User } from "lucide-react"
 import {
   DropdownMenu,
@@ -9,10 +10,9 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-import { Link, useLocation } from "@tanstack/react-router"
 
-import { cn } from "@/lib/utils"
 import { menu } from "@/constant/menu"
+import { cn } from "@/lib/utils"
 
 export default function DesktopMenuItem() {
   const pathname = useLocation().pathname

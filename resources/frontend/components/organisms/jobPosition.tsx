@@ -3,30 +3,29 @@ import * as React from "react"
 import { Card, CardDescription, CardTitle } from "../ui/card"
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel"
 
-import Autoscroll from "embla-carousel-auto-scroll"
-import { ChevronRight } from "lucide-react"
-import { Link } from "@tanstack/react-router"
-import { cn } from "@/lib/utils"
 import { jobPositions } from "@/constant/jobPositions"
 import { useMediaQuery } from "@/hooks/useMediaQuery"
+import { cn } from "@/lib/utils"
+import { Link } from "@tanstack/react-router"
+import Autoscroll from "embla-carousel-auto-scroll"
+import { ChevronRight } from "lucide-react"
 
 export default function JobPosition() {
   const isDesktop = useMediaQuery("(min-width: 768px)")
-  const direction = isDesktop ? 'forward' : 'backward'
-
+  const direction = isDesktop ? "forward" : "backward"
 
   const [plugin, setPlugin] = React.useState(() =>
     Autoscroll({
       direction: direction,
-    })
-  );
+    }),
+  )
 
   React.useEffect(() => {
     const newPlugin = Autoscroll({
       direction: direction,
-    });
-    setPlugin(newPlugin);
-  }, [direction]);
+    })
+    setPlugin(newPlugin)
+  }, [direction])
 
   return (
     <Carousel
