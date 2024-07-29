@@ -2,28 +2,267 @@
 
 namespace App\Helpers;
 
-class ResponseHelper{
-    const HTTP_CONTINUE = 100;
-    const HTTP_SWITCHING_PROTOCOL = 101;
-    const HTTP_PROCESSING = 102;
-    const HTTP_OK = 200;
-    const HTTP_CREATED = 201;
-    const HTTP_ACCEPTED = 202;
-    const HTTP_NON_AUTHORITATIVE_INFORMATION = 203;
-    const HTTP_NO_CONTENT = 204;
-    const HTTP_RESET_CONTENT = 205;
-    const HTTP_PARTIAL_CONTENT = 206;
-    const HTTP_MULTI_STATUS = 207;
-    const HTTP_ALREADY_REPORTED = 208;
-    const HTTP_IM_USED = 226;
-    const HTTP_MULTIPLE_CHOICE = 300;
-    const HTTP_MOVED_PERMANENTLY = 301;
-    const HTTP_NOT_FOUND = 404;
-    const HTTP_METHOD_NOT_ALLOWED = 405;
-    const HTTP_NOT_ACCEPTABLE = 406;
-    const HTTP_INTERNAL_SERVER_ERROR = 500;
-    const HTTP_UNAUTHORIZED = 401;
-    const HTTP_FORBIDDEN = 403;
-    const HTTP_BAD_REQUEST = 400;
-    const HTTP_UNPROCESSABLE_ENTITY = 422;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+
+class ResponseHelper {
+
+    /**
+     * Response array
+     *
+     * @var array
+     */
+
+     private static $response = [
+        'status' => true,
+        'message' => '',
+    ];
+
+    /**
+     * Prepare Response
+     *
+     * @param  mixed|null   $data       Response data
+     * @param  string       $message    Response message
+     * @param  bool         $status     Response status
+     * @param  mixed|null   $error      Response error
+     *
+     * @return array
+     */
+
+     private static function prepareResponse($data, $message, $status): array
+     {
+         $response = self::$response;
+         $response['status'] = $status;
+         $response['message'] = $message;
+
+         if($data != null) {
+            $response['data'] = $data;
+         }
+
+         return $response;
+     }
+
+        /**
+     * Format Success Response
+     *
+     * @param  mixed|null   $data       Response data
+     * @param  string|null  $message    Response message
+     * @param  bool         $status     Response status
+     *
+     * @return JsonResponse
+     */
+
+     public static function success(
+        $data = null,
+        $message = null ?? 'OK',
+        $status = true,
+    ): JsonResponse {
+        return response()->json(
+            self::prepareResponse($data, $message, $status),
+            Response::HTTP_OK
+        );
+    }
+
+    /**
+     * Format Success Response
+     *
+     * @param  mixed|null   $data       Response data
+     * @param  string|null  $message    Response message
+     * @param  bool         $status     Response status
+     *
+     * @return JsonResponse
+     */
+
+    public static function created(
+        $data = null,
+        $message = null ?? 'Created',
+        $status = true,
+    ): JsonResponse {
+        return response()->json(
+            self::prepareResponse($data, $message, $status),
+            Response::HTTP_CREATED
+        );
+    }
+
+    /**
+     * Format Success Response
+     *
+     * @param  mixed|null   $data       Response data
+     * @param  string|null  $message    Response message
+     * @param  bool         $status     Response status
+     *
+     * @return JsonResponse
+     */
+
+    public static function noContent(
+        $data = null,
+        $message = null ?? 'No Content',
+        $status = true,
+    ): JsonResponse {
+        return response()->json(
+            self::prepareResponse($data, $message, $status),
+            Response::HTTP_NO_CONTENT
+        );
+    }
+
+    /**
+     * Format Error Response
+     *
+     * @param  string|null  $message    Response message
+     * @param  bool         $status     Response status
+     *
+     * @return JsonResponse
+     */
+
+    public static function error(
+        $data = null,
+        $message = null ?? 'Bad Request',
+        $status = false,
+    ): JsonResponse {
+        return response()->json(
+            self::prepareResponse($data, $message, $status),
+            Response::HTTP_BAD_REQUEST
+        );
+    }
+
+    /**
+     * Format Error Response
+     *
+     * @param  string|null  $message    Response message
+     * @param  bool         $status     Response status
+     *
+     * @return JsonResponse
+     */
+
+    public static function unAuthenticated(
+        $data = null,
+        $message = null ?? 'Unauthenticated',
+        $status = false,
+    ): JsonResponse {
+        return response()->json(
+            self::prepareResponse($data, $message, $status),
+            Response::HTTP_UNAUTHORIZED
+        );
+    }
+
+    /**
+     * Format Error Response
+     *
+     * @param  string|null  $message    Response message
+     * @param  bool         $status     Response status
+     *
+     * @return JsonResponse
+     */
+
+    public static function forbidden(
+        $data = null,
+        $message = null ?? 'Forbidden',
+        $status = false,
+    ): JsonResponse {
+        return response()->json(
+            self::prepareResponse($data, $message, $status),
+            Response::HTTP_FORBIDDEN
+        );
+    }
+
+    /**
+     * Format Error Response
+     *
+     * @param  string|null  $message    Response message
+     * @param  bool         $status     Response status
+     *
+     * @return JsonResponse
+     */
+
+    public static function notFound(
+        $data = null,
+        $message = null ?? 'Not Found',
+        $status = false,
+    ): JsonResponse {
+        return response()->json(
+            self::prepareResponse($data, $message, $status),
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /**
+     * Format Error Response
+     *
+     * @param  string|null  $message    Response message
+     * @param  bool         $status     Response status
+     *
+     * @return JsonResponse
+     */
+
+    public static function methodNotAllowed(
+        $data = null,
+        $message = null ?? 'Method Not Allowed',
+        $status = false,
+    ): JsonResponse {
+        return response()->json(
+            self::prepareResponse($data, $message, $status),
+            Response::HTTP_METHOD_NOT_ALLOWED
+        );
+    }
+
+    /**
+     * Format Error Response
+     *
+     * @param  string|null          $message    Response message
+     * @param  bool                 $status     Response status
+     * @param  array|string|null    $error      Response error
+     *
+     * @return JsonResponse
+     */
+
+    public static function failedValidation(
+        $data = null,
+        $message = null ?? 'Unprocessable Entity',
+        $status = false,
+    ): JsonResponse {
+        return response()->json(
+            self::prepareResponse($data, $message, $status),
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
+    }
+
+    /**
+     * Format Internal Server Error
+     *
+     * @param  string|null  $message    Response message
+     * @param  bool         $status     Response status
+     *
+     * @return JsonResponse
+     */
+
+    public static function internalServerError(
+        $data = null,
+        $message = null ?? 'Internal Server Error',
+        $status = false,
+    ): JsonResponse {
+        return response()->json(
+            self::prepareResponse($data, $message, $status),
+            Response::HTTP_INTERNAL_SERVER_ERROR
+        );
+    }
+
+     /**
+     * Format Internal Server Error
+     *
+     * @param  array|null   $data           Response message
+     * @param  Response     $response       Response Response
+     *
+     * @return JsonResponse
+     */
+
+    public static function custome(
+        $data,
+        $response
+    ): JsonResponse {
+        return response()->json(
+            $data,
+            $response
+        );
+    }
+
 }

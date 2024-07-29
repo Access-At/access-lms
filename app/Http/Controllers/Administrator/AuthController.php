@@ -3,35 +3,40 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
-use App\Repository\Adminstrator\AuthRepository;
+use App\Http\Requests\AuthRequest;
+use App\Services\Administrator\AuthService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    protected $authRepository;
-    public function __construct(AuthRepository $authRepository)
+    protected $authService;
+
+    public function __construct(
+        AuthService $authService
+    )
     {
-        $this->authRepository = $authRepository;
-        
+        $this->authService = $authService;
     }
-    public function login(Request $request)
+   
+
+    public function login(AuthRequest $request)
     {
-        return $this->authRepository->loginUser($request);
+        return $this->authService->login($request->toArray());
     }
 
     public function getUser()
     {
-        return $this->authRepository->getUser();
+        return $this->authService->me();
     }
 
-    public function refreshToken(Request $request)
-    {
-        return $this->authRepository->refreshToken($request);
-    }
+    // public function refreshToken(Request $request)
+    // {
+    //     return $this->authRepository->refreshToken($request);
+    // }
 
     public function logout()
     {
-        return $this->authRepository->logout();
+        return $this->authService->logout();
     }
         
 }

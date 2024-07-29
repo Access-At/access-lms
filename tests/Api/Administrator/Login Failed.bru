@@ -1,0 +1,39 @@
+meta {
+  name: Login Failed
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BASE_URL}}/admin/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "admin@gmail.com",
+    "password": "admins"
+  }
+}
+
+assert {
+  res.status: eq 401
+  res.body.message: eq Email atau password anda salah!
+  res.body.status: isBoolean
+  res.body.status: eq false
+}
+
+tests {
+  // test("status code test", function(){
+  //   expect(res.getStatus()).to.equal(422)
+  // })
+  
+  // test("body status", function(){
+  //   expect(res.getBody().status).to.equal(false)
+  // })
+  
+  // test("body message", function(){
+  //   expect(res.getBody().message).to.equal("Validation errors")
+  // })
+}

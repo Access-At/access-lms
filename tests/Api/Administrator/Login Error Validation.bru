@@ -1,0 +1,41 @@
+meta {
+  name: Login Error Validation
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/admin/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "",
+    "password": ""
+  }
+}
+
+assert {
+  res.body.message: eq Validation errors
+  res.body.error: isJson
+  res.body.status: isBoolean
+  res.status: eq 422
+  res.body.error: isDefined
+  res.body.status: eq false
+}
+
+tests {
+  // test("status code test", function(){
+  //   expect(res.getStatus()).to.equal(422)
+  // })
+  
+  // test("body status", function(){
+  //   expect(res.getBody().status).to.equal(false)
+  // })
+  
+  // test("body message", function(){
+  //   expect(res.getBody().message).to.equal("Validation errors")
+  // })
+}

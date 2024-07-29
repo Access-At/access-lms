@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('no_cert')->unique();
             $table->foreignUuid('course_id')->constrained('courses')->cascadeOnDelete();
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignUuid('grade_id')->constrained('grades')->cascadeOnDelete();
+            $table->foreignId('grade_id')->constrained('grades')->cascadeOnDelete();
             $table->timestamps();
         });
     }
