@@ -21,7 +21,7 @@ assert {
   res.status: eq 200
   res.body.message: eq OK
   res.body.data.user: isDefined
-  res.body.token: isString
+  res.body.data.token: isString
   res.body.status: isBoolean
   res.body.status: eq true
 }
