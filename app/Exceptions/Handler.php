@@ -5,16 +5,16 @@ namespace App\Exceptions;
 use Throwable;
 use App\Helpers\ResponseHelper;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
 {
     protected $dontReport = [
         CustomException::class,
     ];
-    
+
     /**
      * The list of the inputs that are never flashed to the session on validation exceptions.
      *
@@ -25,11 +25,6 @@ class Handler extends ExceptionHandler
         'password',
         'password_confirmation',
     ];
-
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        return ResponseHelper::unAuthenticated();
-    }
 
     /**
      * Register the exception handling callbacks for the application.
@@ -46,7 +41,7 @@ class Handler extends ExceptionHandler
                 $e->getCode()
             );
         });
-    
+
     }
 
     /**
@@ -59,5 +54,10 @@ class Handler extends ExceptionHandler
         }
 
         return parent::render($request, $exception);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return ResponseHelper::unAuthenticated();
     }
 }

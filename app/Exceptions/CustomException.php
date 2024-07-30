@@ -11,5 +11,4 @@ class CustomException extends Exception
     {
         return new static("data {$title} tidak ditemukan", Response::HTTP_NOT_FOUND);
     }
-
 }

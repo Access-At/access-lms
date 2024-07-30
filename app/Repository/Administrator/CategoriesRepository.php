@@ -4,8 +4,8 @@ namespace App\Repository\Administrator;
 
 use App\Models\Category;
 
-class CategoriesRepository {
-
+class CategoriesRepository
+{
     public static function getAll(): \Illuminate\Database\Eloquent\Collection
     {
         return Category::get();
@@ -21,19 +21,17 @@ class CategoriesRepository {
         return Category::create($data);
     }
 
-    public static function update($id, $data)
+    public static function update($id, $data): bool
     {
         $category = self::findById($id);
+
         return $category->update($data);
-        
-        // return Category::find($id)->update($data);
     }
 
-    public static function delete($id)
+    public static function delete($id): bool
     {
         $category = self::findById($id);
-        return $category->delete();
 
-        // return Category::find($id)->delete();
+        return $category->delete();
     }
 }

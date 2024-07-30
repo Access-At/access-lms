@@ -2,29 +2,19 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Administrator\CategoriesRequest;
-use App\Services\Administrator\CategoriesService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\Administrator\CategoriesService;
+use App\Http\Requests\Administrator\CategoriesRequest;
 
 class CategoriesController extends Controller
 {
-    protected $categoriesService;
-
-    public function __construct(
-        CategoriesService $categoriesService
-    )
-    {
-        $this->categoriesService = $categoriesService;
-    }
-
     /**
      * Display a listing of the resource.
      */
     public function index(): JsonResponse
     {
-        return $this->categoriesService->getAllCategory();
+        return CategoriesService::getAllCategory();
     }
 
     /**
@@ -32,7 +22,7 @@ class CategoriesController extends Controller
      */
     public function store(CategoriesRequest $request): JsonResponse
     {
-        return $this->categoriesService->insert($request);
+        return CategoriesService::insert($request);
     }
 
     /**
@@ -40,7 +30,7 @@ class CategoriesController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        return $this->categoriesService->findById($id);
+        return CategoriesService::findById($id);
     }
 
     /**
@@ -48,7 +38,7 @@ class CategoriesController extends Controller
      */
     public function update(CategoriesRequest $request, string $id): JsonResponse
     {
-        return $this->categoriesService->update($id, $request);
+        return CategoriesService::update($id, $request);
     }
 
     /**
@@ -56,6 +46,6 @@ class CategoriesController extends Controller
      */
     public function destroy(string $id): JsonResponse
     {
-        return $this->categoriesService->delete($id);
+        return CategoriesService::delete($id);
     }
 }

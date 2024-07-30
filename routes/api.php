@@ -15,7 +15,6 @@ Route::prefix('v1')->group(function () {
             Route::get('/refresh', [AuthController::class, 'refreshToken']);
             Route::post('/logout', [AuthController::class, 'logout']);
 
-
             Route::apiResource('categories', CategoriesController::class);
         });
     });
