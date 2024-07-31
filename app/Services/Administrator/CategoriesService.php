@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Administrator\CategoriesRequest;
 use App\Repository\Administrator\CategoriesRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class CategoriesService
 {
@@ -80,24 +82,32 @@ class CategoriesService
     /**
      * Handle errors uniformly.
      */
-    private function handleError(Throwable $th): JsonResponse
+    private static function handleError(Throwable $th): JsonResponse
     {
         return ResponseHelper::internalServerError(null, $th->getMessage());
     }
 
-    private function processImage(CategoriesRequest $request, ?string $id = null): array
+    private static function processImage(CategoriesRequest $request, ?string $id = null): array
     {
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
+
             $file = $request->file('image');
 
+            // create new manager instance with desired driver
+            $manager = new ImageManager(new Driver());
+
             // Generate a unique file name
-            $filename = 'Image_LMS_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('uploads', $filename, 'public');
+            $filename = 'Image_LMS_' . hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+            
+            // read image from filesystem then compress them :)
+            $image = $manager->read($file);
+            $image = $image->resize(300,300);
+            $image->toJpeg(80)->save(storage_path('app/public/uploads/'.$filename));
 
             // Prepare data with imageUrl
-            $data['imageUrl'] = $path;
+            $data['imageUrl'] = "uploads/$filename";
 
             // Remove old image if updating
             if ($id) {

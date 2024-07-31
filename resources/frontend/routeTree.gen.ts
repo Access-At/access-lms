@@ -17,6 +17,7 @@ import { Route as IndexImport } from './routes/_index'
 
 // Create Virtual Routes
 
+const AdminIndexLazyImport = createFileRoute('/admin/')()
 const IndexIndexLazyImport = createFileRoute('/_index/')()
 
 // Create/Update Routes
@@ -25,6 +26,11 @@ const IndexRoute = IndexImport.update({
   id: '/_index',
   getParentRoute: () => rootRoute,
 } as any)
+
+const AdminIndexLazyRoute = AdminIndexLazyImport.update({
+  path: '/admin/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/admin/index.lazy').then((d) => d.Route))
 
 const IndexIndexLazyRoute = IndexIndexLazyImport.update({
   path: '/',
@@ -49,6 +55,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexIndexLazyImport
       parentRoute: typeof IndexImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -56,6 +69,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute: IndexRoute.addChildren({ IndexIndexLazyRoute }),
+  AdminIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -66,7 +80,8 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_index"
+        "/_index",
+        "/admin/"
       ]
     },
     "/_index": {
@@ -78,6 +93,9 @@ export const routeTree = rootRoute.addChildren({
     "/_index/": {
       "filePath": "_index/index.lazy.tsx",
       "parent": "/_index"
+    },
+    "/admin/": {
+      "filePath": "admin/index.lazy.tsx"
     }
   }
 }

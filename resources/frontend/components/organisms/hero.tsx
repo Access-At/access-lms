@@ -1,12 +1,13 @@
-import { cn } from "@/lib/utils"
 import { Link } from "@tanstack/react-router"
+import { cn } from "@/lib/utils"
+import svg from "@/assets/svg/banner.svg";
 
 export default function Hero() {
   return (
     <div
       className={cn(
         "relative mt-20 overflow-hidden before:absolute before:start-1/2 before:top-0 before:-z-[1] before:size-full before:-translate-x-1/2 before:transform before:bg-top before:bg-no-repeat",
-        `before:bg-[url('/assets/icons/banner.svg')]`,
+        `before:bg-[url('${svg}')]`,
       )}
     >
       {/* https://preline.co/assets/svg/examples/squared-bg-element.svg */}
