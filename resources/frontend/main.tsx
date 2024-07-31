@@ -1,11 +1,10 @@
 import "./globals.css"
 
-// import React, { StrictMode } from 'react'
-import * as React from "react"
-
+import { AuthProvider, useAuth } from "@/contexts"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { RouterProvider, createRouter } from "@tanstack/react-router"
 
-import { QueryClient } from "@tanstack/react-query"
+import { StrictMode } from "react"
 import ReactDOM from "react-dom/client"
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen"
@@ -17,7 +16,7 @@ const queryClient = new QueryClient()
 const router = createRouter({
   routeTree,
   context: {
-    // auth: undefined!,
+    auth: undefined!,
     queryClient,
   },
   defaultPreload: "intent",
@@ -33,13 +32,26 @@ declare module "@tanstack/react-router" {
   }
 }
 
+function InnerApp() {
+  const auth = useAuth()
+  return <RouterProvider router={router} context={{ auth }} />
+}
+
 // Render the app
 const rootElement = document.getElementById("root")!
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>,
+    <StrictMode>
+      {/* <JotaiProvider> */}
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          {/* <ThemeProvider> */}
+          <InnerApp />
+          {/* </ThemeProvider> */}
+        </AuthProvider>
+      </QueryClientProvider>
+      {/* </JotaiProvider> */}
+    </StrictMode>,
   )
 }

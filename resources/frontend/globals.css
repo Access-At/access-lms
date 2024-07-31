@@ -59,12 +59,23 @@
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+
+  /* TOASTER */
+  .toaster-error {
+      @apply bg-destructive text-destructive-foreground capitalize border-destructive
+  }
+
+  .toaster-success {
+      @apply bg-primary text-primary-foreground capitalize border-primary
   }
 }
