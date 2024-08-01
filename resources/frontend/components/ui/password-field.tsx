@@ -1,4 +1,3 @@
-import { EyeIcon, EyeOffIcon } from 'lucide-react'
 import {
   FormControl,
   FormDescription,
@@ -6,13 +5,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { createElement, useState } from 'react'
+} from "@/components/ui/form"
+import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { createElement, useState } from "react"
 
-import { Box } from '@/components/ui/box'
-import { Input } from '@/components/ui/input'
-import { cn } from '@/lib/utils'
-import { useFormContext } from 'react-hook-form'
+import { Box } from "@/components/ui/box"
+import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
+import { useFormContext } from "react-hook-form"
 
 type PasswordFieldProps = {
   name?: string
@@ -23,8 +23,8 @@ type PasswordFieldProps = {
 }
 
 export function PasswordField({
-  name = 'password',
-  placeholder = 'Enter password',
+  name = "password",
+  placeholder = "Enter password",
   description,
   label,
   isRequired = false,
@@ -39,11 +39,13 @@ export function PasswordField({
       render={({ field }) => (
         <FormItem>
           {label && (
-            <FormLabel className={
-              cn(
-                isRequired ? "after:content-['\\00a0*'] after:text-destructive" : ""
-              )
-            }>
+            <FormLabel
+              className={cn(
+                isRequired
+                  ? "after:text-destructive after:content-['\\00a0*']"
+                  : "",
+              )}
+            >
               {label}
             </FormLabel>
           )}
@@ -51,17 +53,17 @@ export function PasswordField({
             <Box className='relative'>
               <Input
                 {...field}
-                type={passwordVisibility ? 'text' : 'password'}
+                type={passwordVisibility ? "text" : "password"}
                 autoComplete='on'
                 placeholder={placeholder}
-                className={`pr-12 ${getFieldState(name).error && 'text-destructive'}`}
+                className={`pr-12 ${getFieldState(name).error && "text-destructive"}`}
               />
               <Box
                 className='absolute inset-y-0 right-0 flex cursor-pointer items-center p-3 text-muted-foreground'
                 onClick={() => setPasswordVisibility(!passwordVisibility)}
               >
                 {createElement(passwordVisibility ? EyeOffIcon : EyeIcon, {
-                  className: 'h-6 w-6',
+                  className: "h-6 w-6",
                 })}
               </Box>
             </Box>

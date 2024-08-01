@@ -1,7 +1,5 @@
-import Login from '@/pages/admin/login'
-import React from 'react'
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from "@tanstack/react-router"
 
-export const Route = createLazyFileRoute('/admin/')({
-  component: React.memo(Login),
+export const Route = createLazyFileRoute("/admin/")({
+  component: () => <div>Hello /admin/! ini dashboard</div>,
 })
