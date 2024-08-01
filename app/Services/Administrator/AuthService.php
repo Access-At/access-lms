@@ -9,7 +9,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthService
 {
-    public static function login(AuthRequest $data): JsonResponse
+    public static function login($data)
     {
         if (!$token = auth()->guard('admin')->attempt($data->validated())) {
             return ResponseHelper::unAuthenticated(null, 'Email atau password anda salah!');
@@ -21,14 +21,14 @@ class AuthService
         ]);
     }
 
-    public static function me(): JsonResponse
+    public static function me()
     {
         return ResponseHelper::success([
             'user' => auth()->guard('admin')->user(),
         ]);
     }
 
-    public static function refresh(): JsonResponse
+    public static function refresh()
     {
         $refreshToken = JWTAuth::refresh(JWTAuth::getToken());
         JWTAuth::setToken($refreshToken)->toUser();
@@ -39,7 +39,7 @@ class AuthService
         ]);
     }
 
-    public static function logout(): JsonResponse
+    public static function logout()
     {
         JWTAuth::invalidate(JWTAuth::getToken());
 

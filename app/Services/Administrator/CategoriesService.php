@@ -4,7 +4,6 @@ namespace App\Services\Administrator;
 
 use Throwable;
 use App\Helpers\ResponseHelper;
-use Illuminate\Http\JsonResponse;
 use App\Exceptions\CustomException;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Administrator\CategoriesRequest;
@@ -15,7 +14,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class CategoriesService
 {
-    public static function getAllCategory(): JsonResponse
+    public static function getAllCategory()
     {
         try {
             $data = CategoriesRepository::getAll();
@@ -26,7 +25,7 @@ class CategoriesService
         }
     }
 
-    public static function findById(string $id): JsonResponse
+    public static function findById(string $id)
     {
         try {
             $data = CategoriesRepository::findById($id);
@@ -39,7 +38,7 @@ class CategoriesService
         }
     }
 
-    public static function insert(CategoriesRequest $request): JsonResponse
+    public static function insert(CategoriesRequest $request)
     {
         try {
             $data = self::processImage($request);
@@ -51,7 +50,7 @@ class CategoriesService
         }
     }
 
-    public static function update(string $id, CategoriesRequest $request): JsonResponse
+    public static function update(string $id, CategoriesRequest $request)
     {
         try {
             $data = self::processImage($request, $id);
@@ -66,7 +65,7 @@ class CategoriesService
         }
     }
 
-    public static function delete($id): JsonResponse
+    public static function delete($id)
     {
         try {
             CategoriesRepository::delete($id);
@@ -82,7 +81,7 @@ class CategoriesService
     /**
      * Handle errors uniformly.
      */
-    private static function handleError(Throwable $th): JsonResponse
+    private static function handleError(Throwable $th)
     {
         return ResponseHelper::internalServerError(null, $th->getMessage());
     }
@@ -91,9 +90,9 @@ class CategoriesService
     {
         $data = $request->validated();
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('imageUrl')) {
 
-            $file = $request->file('image');
+            $file = $request->file('imageUrl');
 
             // create new manager instance with desired driver
             $manager = new ImageManager(new Driver());
@@ -106,6 +105,7 @@ class CategoriesService
             $image = $image->resize(300,300);
             $image->toJpeg(80)->save(storage_path('app/public/uploads/'.$filename));
 
+            // Prepare data with imageUrl
             // Prepare data with imageUrl
             $data['imageUrl'] = "uploads/$filename";
 

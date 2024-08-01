@@ -31,8 +31,8 @@ class AuthRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(ResponseHelper::custome(['status' => false, 'message' => 'Validation errors', 'error' => $validator->errors()], Response::HTTP_UNPROCESSABLE_ENTITY));
-    }
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     throw new HttpResponseException(ResponseHelper::custome(['status' => false, 'message' => 'Validation errors', 'error' => $validator->errors()], Response::HTTP_UNPROCESSABLE_ENTITY));
+    // }
 }
