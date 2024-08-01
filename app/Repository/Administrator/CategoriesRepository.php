@@ -6,9 +6,16 @@ use App\Models\Category;
 
 class CategoriesRepository
 {
-    public static function getAll(): \Illuminate\Database\Eloquent\Collection
+    public static function getAll()
     {
-        return Category::get();
+        $category = Category::query();
+        $title = request()->query('title');
+        $page = request()->query('page', 1);
+        if($title) {
+            $category->where('title', 'like', "%{$title}%");
+        }
+
+        return $category->paginate(10, ['*'], 'page', $page);
     }
 
     public static function findById($id): ?Category

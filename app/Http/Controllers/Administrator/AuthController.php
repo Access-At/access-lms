@@ -2,29 +2,28 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use Illuminate\Http\JsonResponse;
 use App\Http\Requests\AuthRequest;
 use App\Http\Controllers\Controller;
 use App\Services\Administrator\AuthService;
 
 class AuthController extends Controller
 {
-    public function login(AuthRequest $request): JsonResponse
+    public function login(AuthRequest $request)
     {
         return AuthService::login($request);
     }
 
-    public function getUser(): JsonResponse
+    public function getUser()
     {
         return AuthService::me();
     }
 
-    public function refreshToken(): JsonResponse
+    public function refreshToken()
     {
         return AuthService::refresh();
     }
 
-    public function logout(): JsonResponse
+    public function logout()
     {
         return AuthService::logout();
     }

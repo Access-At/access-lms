@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Trainer extends Model implements JWTSubject
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
+
 
     protected $guarded = [];
+    public $incrementing = false;
 
     public function getJWTIdentifier()
     {

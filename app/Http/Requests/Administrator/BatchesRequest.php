@@ -8,7 +8,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CategoriesRequest extends FormRequest
+
+class BatchesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,19 +26,9 @@ class CategoriesRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'title' => 'required|string',
-            'description' => 'required|string',
+        return [
+            'title' => 'required',
         ];
-
-        // Jika ada file yang diunggah (misalnya pada operasi update)
-        if ($this->isMethod('put')) {
-            $rules['imageUrl'] = 'file|mimes:jpeg,png,jpg|max:2048'; // Max size in kilobytes  2 mb
-        } else {
-            $rules['imageUrl'] = 'required|file|mimes:jpeg,png,jpg|max:2048'; // Max size in kilobytes  2 mb
-        }
-
-        return $rules;
     }
 
     protected function failedValidation(Validator $validator)
