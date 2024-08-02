@@ -31,7 +31,6 @@ export default defineConfig({
       input: "resources/frontend/main.tsx",
       refresh: true,
     }),
-    TanStackRouterVite(),
     VitePWA({
       registerType: "autoUpdate",
       outDir: "public",
@@ -88,6 +87,7 @@ export default defineConfig({
         ],
       },
     }),
+    TanStackRouterVite(),
     react(),
     // compression()
   ],

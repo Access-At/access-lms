@@ -16,10 +16,11 @@ class Courses extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 
-    protected $guarded = ['id'];
-    protected $table = 'courses';
-    
     public $incrementing = false;
+
+    protected $guarded = ['id'];
+
+    protected $table = 'courses';
 
     public function getRouteKeyName()
     {
@@ -29,13 +30,13 @@ class Courses extends Model
     public function scopeRelation($value){
          $value->with(['curriculums', 'benefits', 'batches', 'category']);   
     }
-
-    public function administrator(): BelongsTo{ 
+    public function administrator(): BelongsTo
+    {
         return $this->belongsTo(Administrator::class);
     }
 
     // batches
-    public function batches() : HasMany
+    public function batches(): HasMany
     {
         return $this->hasMany(Batch::class);
     }

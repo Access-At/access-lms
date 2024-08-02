@@ -2,8 +2,5 @@
     "routesDirectory": "./resources/frontend/routes",
     "generatedRouteTree": "./resources/frontend/routeTree.gen.ts",
     "routeFileIgnorePrefix": "-",
-    "quoteStyle": "single",
-    "experimental": {
-        "enableCodeSplitting": true
-    }
+    "quoteStyle": "single"
 }

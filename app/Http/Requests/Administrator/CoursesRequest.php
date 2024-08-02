@@ -25,7 +25,7 @@ class CoursesRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules =  [
+        $rules = [
             'title' => 'required',
             'short_desc' => 'nullable',
             'full_desc' => 'nullable',
@@ -48,6 +48,7 @@ class CoursesRequest extends FormRequest
 
         return $rules;
     }
+
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(ResponseHelper::custome(['status' => false, 'message' => 'Validation errors', 'error' => $validator->errors()], Response::HTTP_UNPROCESSABLE_ENTITY));

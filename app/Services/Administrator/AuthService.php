@@ -3,8 +3,6 @@
 namespace App\Services\Administrator;
 
 use App\Helpers\ResponseHelper;
-use Illuminate\Http\JsonResponse;
-use App\Http\Requests\AuthRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthService

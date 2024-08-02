@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Administrator extends Authenticatable implements JWTSubject
 {
     use HasFactory, HasUuids;
+
     public $incrementing = false;
 
     protected $guarded = ['id'];

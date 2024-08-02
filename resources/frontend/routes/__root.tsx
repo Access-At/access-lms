@@ -1,8 +1,16 @@
 import * as React from "react"
 
-import { Outlet, createRootRoute } from "@tanstack/react-router"
+import { Outlet, createRootRouteWithContext } from "@tanstack/react-router"
 
 import Loading from "@/components/shared/loading"
+import { AuthContext } from "@/contexts"
+import { QueryClient } from "@tanstack/react-query"
+import { Toaster } from "sonner"
+
+export interface MyRouterContext {
+  auth: AuthContext
+  queryClient: QueryClient
+}
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -25,10 +33,11 @@ const TailwindIndictor =
         })),
       )
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
     <React.Suspense fallback={<Loading title='Mohon tunggu sebentar...' />}>
       <Outlet />
+      <Toaster position='top-right' expand={true} />
       <TanStackRouterDevtools />
       <TailwindIndictor />
     </React.Suspense>

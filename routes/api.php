@@ -33,9 +33,9 @@ Route::prefix('v1')->group(function () {
                 Route::delete('/{batch}', [BatchesController::class, 'destroy']);
                 Route::put('/{batch}/trash', [BatchesController::class, 'trash']); // hapus dipindahkan ketong sampah
                 Route::put('/{batch}/restore', [BatchesController::class, 'restore']); // mengambil kembali ke data setelah direstore
-                
+
             });
-            
+
             Route::prefix('courses')->group(function () {
                 Route::get('', [CoursesController::class, 'index']);
                 Route::get('/arsip', [CoursesController::class, 'listTrash']);

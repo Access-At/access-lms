@@ -15,16 +15,18 @@ class BatchesService
     {
         try {
             $data = BatchsRepository::getAll();
+
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
         }
     }
 
-    public static function getAllTrashed() 
+    public static function getAllTrashed()
     {
         try {
             $data = BatchsRepository::getAllTrashed();
+
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -35,6 +37,7 @@ class BatchesService
     {
         try {
             $data = BatchsRepository::findById($id);
+
             return ResponseHelper::success($data);
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
@@ -51,6 +54,7 @@ class BatchesService
                 'title' => $request->title,
             ];
             $batch = BatchsRepository::insert($data);
+
             return ResponseHelper::created($batch, 'Batch berhasil dibuat', 201);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -65,6 +69,7 @@ class BatchesService
                 'slug' => Str::slug($request->title),
             ];
             BatchsRepository::update($id, $data);
+
             return ResponseHelper::success(null, 'Batch berhasil diperbarui');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
@@ -76,38 +81,41 @@ class BatchesService
     public static function deleteSoft($id)
     {
         try {
-            
+
             $batch = BatchsRepository::deleteSoft($id);
-            if($batch){
+            if ($batch) {
                 return ResponseHelper::success(null, 'Batch berhasil dihapus, dan tersedia di trash');
-            }else{
-                throw CustomException::notFound('Batch');
             }
+            throw CustomException::notFound('Batch');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
         } catch (Throwable $th) {
             return self::handleError($th);
         }
     }
-    
+
     public static function restoreSoft($id)
     {
         try {
             $batch = BatchsRepository::restoreSoft($id);
-            if($batch) return ResponseHelper::success(null, 'Batch berhasil dikembalikan');
-            else throw CustomException::notFound('Batch');
-        } catch (\Throwable $th) {
+            if ($batch) {
+                return ResponseHelper::success(null, 'Batch berhasil dikembalikan');
+            }
+            throw CustomException::notFound('Batch');
+        } catch (Throwable $th) {
             return self::handleError($th);
-            
+
         }
     }
-    
+
     public static function delete($id)
     {
         try {
             $batch = BatchsRepository::delete($id);
-            if($batch) return ResponseHelper::success(null, 'Batch berhasil dihapus permanen');
-            else throw CustomException::notFound('Batch');
+            if ($batch) {
+                return ResponseHelper::success(null, 'Batch berhasil dihapus permanen');
+            }
+            throw CustomException::notFound('Batch');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
         } catch (Throwable $th) {

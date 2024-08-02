@@ -1,6 +1,6 @@
-import { Link } from "@tanstack/react-router"
+import svg from "@/assets/svg/banner.svg"
 import { cn } from "@/lib/utils"
-import svg from "@/assets/svg/banner.svg";
+import { Link } from "@tanstack/react-router"
 
 export default function Hero() {
   return (
