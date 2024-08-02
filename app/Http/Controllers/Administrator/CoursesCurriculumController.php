@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Administrator\CoursesCurriculumRequest;
 use App\Services\Administrator\CourseCurriculumService;
+use App\Http\Requests\Administrator\CoursesCurriculumRequest;
 
 class CoursesCurriculumController extends Controller
 {
@@ -22,10 +21,11 @@ class CoursesCurriculumController extends Controller
     public function updateCurriculum(string $courseId, string $id, CoursesCurriculumRequest $request)
     {
         $req = $request->all();
+
         return CourseCurriculumService::updateCurriculumWithCourse($courseId, $id, $req);
     }
 
-    public function deleteCurriculum($courseId,string $id)
+    public function deleteCurriculum($courseId, string $id)
     {
         return CourseCurriculumService::deleteCurriculumWithCourse($courseId, $id);
     }

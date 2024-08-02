@@ -1,0 +1,21 @@
+meta {
+  name: DELETE
+  type: http
+  seq: 7
+}
+
+delete {
+  url: http://localhost:8000/api/v1/admin/batches/9ca973ff-6a34-4c45-9126-dd2e29532f7f
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTE2MDI1LCJleHAiOjE3MjI1MTk2MjUsIm5iZiI6MTcyMjUxNjAyNSwianRpIjoiTnhpUmw2alJHRU9KcFI1ZCIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.oI8N2FDilJIiK_oZDG6jZA-9sGpfugZeqpOjYim8Ob4
+}
+
+body:json {
+  {
+    "title": "batch 3 updated"
+  }
+}

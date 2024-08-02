@@ -11,10 +11,11 @@ class Pages extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $guarded = ['id'];
-    protected $table = 'pages';
-
     public $incrementings = false;
+
+    protected $guarded = ['id'];
+
+    protected $table = 'pages';
 
     public function getRouteKeyName()
     {

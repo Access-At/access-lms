@@ -1,9 +1,9 @@
 import { UseMutationResult, useMutation } from "@tanstack/react-query"
 
-import { RequestService } from "@/lib/request-service"
-import { LoginFormType } from "@/schemas/admin/login-form-schema"
-import { apiResponseSchema } from "@/schemas/api-response-schema"
 import { AxiosError } from "axios"
+import { LoginFormType } from "@/schemas/admin/login-form-schema"
+import { RequestService } from "@/lib/request-service"
+import { apiResponseSchema } from "@/schemas/api-response-schema"
 import { z } from "zod"
 
 const loginResponseSchema = apiResponseSchema.extend({
@@ -13,6 +13,7 @@ const loginResponseSchema = apiResponseSchema.extend({
       username: z.string(),
       email: z.string(),
       imageUrl: z.null(),
+      role: z.string(),
       created_at: z.string(),
       updated_at: z.string(),
     }),

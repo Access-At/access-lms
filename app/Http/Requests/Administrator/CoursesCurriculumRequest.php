@@ -7,6 +7,7 @@ use App\Helpers\ResponseHelper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+
 class CoursesCurriculumRequest extends FormRequest
 {
     /**
@@ -24,16 +25,14 @@ class CoursesCurriculumRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'title' => 'required',  
-        ];
+        $rules = [];
 
         if ($this->isMethod('post')) {
             $rules['title'] = 'required';
         }
 
         if ($this->isMethod('put') || $this->isMethod('patch')) {
-            $rules['title'] = 'required';
+            $rules['title'] = 'nullable';
         }
 
         return $rules;

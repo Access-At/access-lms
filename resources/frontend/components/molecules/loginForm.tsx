@@ -1,3 +1,4 @@
+import { Card, CardContent } from "../ui/card"
 import {
   Form,
   FormControl,
@@ -6,22 +7,21 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { error, success } from "@/lib/toast"
 import {
   LoginFormType,
   loginFormSchema,
 } from "@/schemas/admin/login-form-schema"
+import { error, success } from "@/lib/toast"
 import { useNavigate, useRouter } from "@tanstack/react-router"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useAuth } from "@/contexts"
-import { useLoginQuery } from "@/features/admin/login-feature"
-import { sleep } from "@/lib/utils"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
+import { sleep } from "@/lib/utils"
+import { useAuth } from "@/contexts"
 import { useForm } from "react-hook-form"
-import { Card, CardContent } from "../ui/card"
+import { useLoginQuery } from "@/features/admin/login-feature"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 const fallback = "/dashboard" as const
 

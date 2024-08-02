@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Courses;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,11 +10,11 @@ class CoursesBenefits extends Model
 {
     use HasFactory, HasUuids;
 
+    public $incrementings = false;
+
     protected $guarded = ['id'];
 
     protected $table = 'courses_benefits';
-
-    public $incrementings = false;
 
     public function course()
     {

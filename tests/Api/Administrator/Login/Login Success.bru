@@ -18,24 +18,23 @@ body:json {
 }
 
 assert {
-  res.status: eq 200
-  res.body.message: eq OK
+  res.body.status: isBoolean
+  res.body.message: isDefined
   res.body.data.user: isDefined
   res.body.data.token: isString
-  res.body.status: isBoolean
-  res.body.status: eq true
 }
 
 tests {
-  // test("status code test", function(){
-  //   expect(res.getStatus()).to.equal(422)
-  // })
+  test("status code is 200", function(){
+    expect(res.getStatus()).to.equal(200)
+  })
   
-  // test("body status", function(){
-  //   expect(res.getBody().status).to.equal(false)
-  // })
+  test("message is OK", function(){
+    expect(res.getBody().message).to.equal("OK")
+  })
   
-  // test("body message", function(){
-  //   expect(res.getBody().message).to.equal("Validation errors")
-  // })
+  test("message is OK", function(){
+    expect(res.getBody().status).to.equal(true)
+  })
+  
 }

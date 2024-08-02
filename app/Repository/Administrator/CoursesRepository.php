@@ -10,7 +10,9 @@ class CoursesRepository
     {
         return Courses::relation()->withoutTrashed()->get();
     }
-    public static function getTrashed(){
+
+    public static function getTrashed()
+    {
         return Courses::relation()->onlyTrashed()->get();
     }
 

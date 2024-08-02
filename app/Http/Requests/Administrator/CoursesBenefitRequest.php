@@ -8,7 +8,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-
 class CoursesBenefitRequest extends FormRequest
 {
     /**
@@ -36,5 +35,4 @@ class CoursesBenefitRequest extends FormRequest
     {
         throw new HttpResponseException(ResponseHelper::custome(['status' => false, 'message' => 'Validation errors', 'error' => $validator->errors()], Response::HTTP_UNPROCESSABLE_ENTITY));
     }
-
 }

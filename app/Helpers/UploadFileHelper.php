@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Storage;
@@ -10,98 +10,52 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class UploadFileHelper
 {
-    public static function uploadFile(UploadedFile $file, string $type, ?string $id = null): array
+    public static function uploadFile(Request $request, ?string $id = null, ?string $repositoryClass = null)
     {
-        $data = [];
+        $data = $request->validated();
 
-        switch ($type) {
-            case 'image':
-                $data = self::processImage($file, $id);
-                break;
-            case 'document':
-                $data = self::processDocument($file, $id);
-                break;
-            case 'video/gif':
-                $data = self::proccessVideoGif($file, $id);
-                break;
-            default:
-                throw new Exception('Unsupported file type.');
+        if ($request->hasFile('image')) {
+            $data['imageUrl'] = self::processImage($request->file('image'), 'images');
+        }
+
+        if ($id) {
+            // Dynamically resolve repository
+            $repository = app()->make($repositoryClass);
+
+            // Remove old image if updating
+            $existingCategory = $repository->findById($id);
+            if ($existingCategory && isset($existingCategory->imageUrl)) {
+                Storage::disk('public')->delete($existingCategory->imageUrl);
+            }
         }
 
         return $data;
     }
 
-    private static function processImage(UploadedFile $file, ?string $id = null): array
+    protected static function processImage(UploadedFile $file, string $dir)
     {
-        // Create new manager instance
+        // create new manager instance with desired driver
         $manager = new ImageManager(new Driver);
 
         // Generate a unique file name
-        $filename = 'Image_LMS_' . hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+        $filename = 'LMS-ACCESS-0x' . hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
 
-        // Read image from filesystem then compress it
-        $image = $manager->make($file->getPathname());
-        $image->resize(300, 300)->encode('jpg', 80);
+        // read image from filesystem then compress them :)
+        $image = $manager->read($file);
+        $image = $image->resize(300, 300);
+        $image->toJpeg(80)->save(storage_path(self::pathStorage($dir, $filename)));
 
-        // Save the image
-        $path = "uploads/images/{$filename}";
-        Storage::disk('public')->put($path, (string) $image);
-
-        // Handle existing file deletion if necessary
-        self::removeOldFile($id, 'image', 'ImageRepository');
-
-        return ['filePath' => $path];
+        // Prepare data with imageUrl
+        return self::pathPublic($dir, $filename);
     }
 
-    private static function processDocument(UploadedFile $file, ?string $id = null): array
+    private static function pathPublic($dir, $filename): string
     {
-        // Generate a unique file name
-        $filename = 'Document_LMS_' . hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-
-        // Save the document
-        $path = "uploads/documents/{$filename}";
-        Storage::disk('public')->putFileAs('uploads/documents', $file, $filename);
-
-        // Handle existing file deletion if necessary
-        self::removeOldFile($id, 'document', 'DocumentRepository');
-
-        return ['filePath' => $path];
+        return "uploads/{$dir}/{$filename}";
     }
 
-    private static function proccessVideoGif(UploadedFile $file, ?string $id = null): array
+    private static function pathStorage($dir, $filename): string
     {
-        $filename = 'Video_LMS_' . hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-
-        $path = "uploads/videos/{$filename}";
-        Storage::disk('public')->putFileAs('uploads/videos', $file, $filename);
-
-        // Handle existing file deletion if necessary
-        self::removeOldFile($id, 'video/gif', 'VideoRepository');
-
-        return ['filePath' => $path];
-
-    }
-
-    private static function removeOldFile(?string $id, string $type, string $repositoryClass): void
-    {
-        if ($id) {
-            $existingFile = null;
-
-            // Dynamically resolve repository
-            $repository = app()->make($repositoryClass);
-
-            switch ($type) {
-                case 'image':
-                    $existingFile = $repository->getImageById($id);
-                    break;
-                case 'document':
-                    $existingFile = $repository->getDocumentById($id);
-                    break;
-            }
-
-            if ($existingFile && isset($existingFile->filePath)) {
-                Storage::disk('public')->delete($existingFile->filePath);
-            }
-        }
+        return "app/public/uploads/{$dir}/{$filename}";
     }
 }

@@ -1,0 +1,21 @@
+meta {
+  name: UPDATE
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8000/api/v1/admin/batches/9caba3e2-14f9-445b-86e9-fe5b44e16600
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNjA4OTc3LCJleHAiOjE3MjI2MTI1NzcsIm5iZiI6MTcyMjYwODk3NywianRpIjoiZTNhTWJzcFo2VUljYzk4cyIsInN1YiI6IjljYWI5NTBlLWQwZmMtNGJlOC04MjFiLTBmOGZkNGNmYmVlMCIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.Ej8RboZ2WvzxbqhaUkDC0tgbUchfW-D0ZMgJMteNtXg
+}
+
+body:json {
+  {
+    "title": "batch 1 updated"
+  }
+}

@@ -6,6 +6,7 @@ use Throwable;
 use Illuminate\Support\Str;
 use App\Helpers\ResponseHelper;
 use App\Exceptions\CustomException;
+use App\Helpers\UploadFileHelper;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -19,6 +20,7 @@ class CoursesService
     {
         try {
             $data = CoursesRepository::getAll();
+
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -29,6 +31,7 @@ class CoursesService
     {
         try {
             $data = CoursesRepository::getTrashed();
+
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -39,6 +42,7 @@ class CoursesService
     {
         try {
             $data = CoursesRepository::getById($id);
+
             return ResponseHelper::success($data);
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
@@ -51,11 +55,13 @@ class CoursesService
     {
         try {
             $adminId = auth()->guard('admin')->user()->id;
-            $imageData = self::processImage($request, $adminId);
+            $imageData = UploadFileHelper::uploadFile($request);
+
             $data = array_merge($imageData, [
                 'created_by' => $adminId,
                 'slug' => Str::slug($request->title),
             ]);
+
             $batch = CoursesRepository::insert([...$data]);
 
             return ResponseHelper::created($batch, 'Course berhasil dibuat', 201);
@@ -74,11 +80,13 @@ class CoursesService
     {
         try {
             $adminId = auth()->guard('admin')->user()->id;
-            $imageData = self::processImage($request, $adminId);
+            $imageData = UploadFileHelper::uploadFile($request, $id, CoursesRepository::class);
+
             $data = array_merge($imageData, [
                 'created_by' => $adminId,
                 'slug' => Str::slug($request->title),
             ]);
+
             CoursesRepository::update($id, [...$data]);
 
             return ResponseHelper::success(null, 'Course berhasil diperbarui');
@@ -139,38 +147,5 @@ class CoursesService
     private static function handleError(Throwable $th)
     {
         return ResponseHelper::internalServerError(null, $th->getMessage());
-    }
-
-    private static function processImage(CoursesRequest $request, ?string $id = null): array
-    {
-        $data = $request->validated();
-
-        if ($request->hasFile('imageUrl')) {
-
-            $file = $request->file('imageUrl');
-     
-            // create new manager instance with desired driver
-            $manager = new ImageManager(new Driver);
-
-            // Generate a unique file name
-            $filename = 'Image_LMS_' . hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-
-            // read image from filesystem then compress them :)
-            $image = $manager->read($file);
-            $image = $image->resize(300, 300);
-            $image->toJpeg(80)->save(storage_path('app/public/uploads/' . $filename));
-
-            $data['imageUrl'] = "uploads/$filename";
-
-            // Remove old image if updating
-            if ($id) {
-                $existingCategory = CoursesRepository::getById($id);
-                if ($existingCategory && isset($existingCategory->imageUrl)) {
-                    Storage::disk('public')->delete($existingCategory->imageUrl);
-                }
-            }
-        }
-
-        return $data;
     }
 }

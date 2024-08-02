@@ -29,7 +29,6 @@ class CoursesRequest extends FormRequest
             'title' => 'required',
             'short_desc' => 'nullable',
             'full_desc' => 'nullable',
-            'imageUrl' => 'required|file|mimes:jpeg,png,jpg|max:2048',
             'start_date' => 'required',
             'end_date' => 'required',
             'level' => 'required|in:mudah,menengah,profesional',

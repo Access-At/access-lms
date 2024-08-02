@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Batch;
-use App\Models\Administrator;
-use App\Models\CoursesCurriculum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -22,14 +19,18 @@ class Courses extends Model
 
     protected $table = 'courses';
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     public function getRouteKeyName()
     {
         return 'uuid';
     }
 
-    public function scopeRelation($value){
-         $value->with(['curriculums', 'benefits', 'batches', 'category']);   
+    public function scopeRelation($value)
+    {
+        $value->with(['curriculums', 'benefits', 'batches', 'category']);
     }
+
     public function administrator(): BelongsTo
     {
         return $this->belongsTo(Administrator::class);
@@ -38,23 +39,21 @@ class Courses extends Model
     // batches
     public function batches(): HasMany
     {
-        return $this->hasMany(Batch::class);
+        return $this->hasMany(Batch::class, 'id', 'batch_id');
     }
 
-    
-
-    public function curriculums() : HasMany
+    public function curriculums(): HasMany
     {
         return $this->hasMany(CoursesCurriculum::class, 'course_id', 'id');
     }
-    public function benefits() : HasMany
+
+    public function benefits(): HasMany
     {
         return $this->hasMany(CoursesBenefits::class, 'course_id', 'id');
     }
-    public function category() : BelongsTo
+
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
-
-
 }

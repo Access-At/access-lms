@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Courses;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,9 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class CoursesCurriculum extends Model
 {
     use HasFactory, HasUuids;
-    protected $table = 'courses_curriculums';
-    protected $guarded = ['id'];
+
     public $incrementing = false;
+
+    protected $table = 'courses_curriculums';
+
+    protected $guarded = ['id'];
 
     public function course()
     {

@@ -18,22 +18,16 @@ body:json {
 }
 
 assert {
-  res.status: eq 401
-  res.body.message: eq Email atau password anda salah!
   res.body.status: isBoolean
-  res.body.status: eq false
+  res.body.message: isDefined
 }
 
 tests {
-  // test("status code test", function(){
-  //   expect(res.getStatus()).to.equal(422)
-  // })
+  test("status code is 401", function(){
+    expect(res.getStatus()).to.equal(401)
+  })
   
-  // test("body status", function(){
-  //   expect(res.getBody().status).to.equal(false)
-  // })
-  
-  // test("body message", function(){
-  //   expect(res.getBody().message).to.equal("Validation errors")
-  // })
+  test("message is Email atau password anda salah!", function(){
+    expect(res.getBody().message).to.equal("Email atau password anda salah!")
+  })
 }

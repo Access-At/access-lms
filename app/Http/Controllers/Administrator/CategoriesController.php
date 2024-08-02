@@ -36,7 +36,7 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoriesRequest $request, string $id): JsonResponse
+    public function update(CategoriesRequest $request, string $id)
     {
         return CategoriesService::update($id, $request);
     }

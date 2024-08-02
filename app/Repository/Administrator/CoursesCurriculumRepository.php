@@ -2,12 +2,10 @@
 
 namespace App\Repository\Administrator;
 
-use App\Models\Courses;
 use App\Models\CoursesCurriculum;
 
 class CoursesCurriculumRepository
 {
-
     public static function getCurriculum($courseId)
     {
         return CoursesCurriculum::courseId($courseId)->get();
@@ -24,7 +22,10 @@ class CoursesCurriculumRepository
     public static function updateCurriculum($courseId, $curriculumId, array $request)
     {
         $curriculum = CoursesCurriculum::courseId($courseId)->findOrFail($curriculumId);
-        if(!$curriculumId) return false;
+        if (!$curriculumId) {
+            return false;
+        }
+
         return $curriculum->update([
             'title' => $request['title'],
             'course_id' => $courseId,
@@ -34,7 +35,10 @@ class CoursesCurriculumRepository
     public static function deleteCurriculum($courseId, $curriculumId)
     {
         $curriculum = CoursesCurriculum::courseId($courseId)->findOrFail($curriculumId);
-        if(!$curriculum) return false;
+        if (!$curriculum) {
+            return false;
+        }
+
         return $curriculum->delete();
 
     }

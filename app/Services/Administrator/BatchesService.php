@@ -3,18 +3,18 @@
 namespace App\Services\Administrator;
 
 use Throwable;
-use Illuminate\Support\Str;
 use App\Helpers\ResponseHelper;
 use App\Exceptions\CustomException;
-use App\Repository\Administrator\BatchsRepository;
+use App\Repository\Administrator\BatchesRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Resources\Administrator\Batches\BatchesResource;
 
 class BatchesService
 {
     public static function getAll()
     {
         try {
-            $data = BatchsRepository::getAll();
+            $data = BatchesRepository::getAll();
 
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
@@ -25,7 +25,7 @@ class BatchesService
     public static function getAllTrashed()
     {
         try {
-            $data = BatchsRepository::getAllTrashed();
+            $data = BatchesRepository::getAllTrashed();
 
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
@@ -36,7 +36,7 @@ class BatchesService
     public static function findById(string $id)
     {
         try {
-            $data = BatchsRepository::findById($id);
+            $data = new BatchesResource(BatchesRepository::findById($id));
 
             return ResponseHelper::success($data);
         } catch (ModelNotFoundException $e) {
@@ -49,11 +49,7 @@ class BatchesService
     public static function insert($request)
     {
         try {
-            $data = [
-                'slug' => Str::slug($request->title),
-                'title' => $request->title,
-            ];
-            $batch = BatchsRepository::insert($data);
+            $batch = BatchesRepository::insert($request);
 
             return ResponseHelper::created($batch, 'Batch berhasil dibuat', 201);
         } catch (Throwable $th) {
@@ -64,11 +60,7 @@ class BatchesService
     public static function update(string $id, $request)
     {
         try {
-            $data = [
-                'title' => $request->title,
-                'slug' => Str::slug($request->title),
-            ];
-            BatchsRepository::update($id, $data);
+            BatchesRepository::update($id, $request);
 
             return ResponseHelper::success(null, 'Batch berhasil diperbarui');
         } catch (ModelNotFoundException $e) {
@@ -80,13 +72,14 @@ class BatchesService
 
     public static function deleteSoft($id)
     {
-        try {
-
-            $batch = BatchsRepository::deleteSoft($id);
-            if ($batch) {
-                return ResponseHelper::success(null, 'Batch berhasil dihapus, dan tersedia di trash');
-            }
+        if (!BatchesRepository::findById($id)) {
             throw CustomException::notFound('Batch');
+        }
+
+        try {
+            BatchesRepository::deleteSoft($id);
+
+            return ResponseHelper::success(null, 'Batch berhasil dihapus, dan tersedia di trash');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
         } catch (Throwable $th) {
@@ -96,26 +89,25 @@ class BatchesService
 
     public static function restoreSoft($id)
     {
-        try {
-            $batch = BatchsRepository::restoreSoft($id);
-            if ($batch) {
-                return ResponseHelper::success(null, 'Batch berhasil dikembalikan');
-            }
+        if (!BatchesRepository::findByIdWithTrash($id)) {
             throw CustomException::notFound('Batch');
+        }
+
+        try {
+            BatchesRepository::restoreSoft($id);
+
+            return ResponseHelper::success(null, 'Batch berhasil dikembalikan');
         } catch (Throwable $th) {
             return self::handleError($th);
-
         }
     }
 
     public static function delete($id)
     {
         try {
-            $batch = BatchsRepository::delete($id);
-            if ($batch) {
-                return ResponseHelper::success(null, 'Batch berhasil dihapus permanen');
-            }
-            throw CustomException::notFound('Batch');
+            BatchesRepository::delete($id);
+
+            return ResponseHelper::success(null, 'Batch berhasil dihapus permanen');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
         } catch (Throwable $th) {

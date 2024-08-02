@@ -18,24 +18,18 @@ body:json {
 }
 
 assert {
-  res.body.message: eq Validation errors
-  res.body.error: isJson
-  res.body.status: isBoolean
-  res.status: eq 422
-  res.body.error: isDefined
-  res.body.status: eq false
+  res.body.status: isUndefined 
+  res.body.message: isDefined
 }
 
 tests {
-  // test("status code test", function(){
-  //   expect(res.getStatus()).to.equal(422)
-  // })
+  test("status code is 422", function(){
+    expect(res.getStatus()).to.equal(422)
+  })
   
-  // test("body status", function(){
-  //   expect(res.getBody().status).to.equal(false)
-  // })
+  test("message is email wajib diisi. (and 1 more error)", function(){
+    expect(res.getBody().message).to.equal("email wajib diisi. (and 1 more error)")
+  })
   
-  // test("body message", function(){
-  //   expect(res.getBody().message).to.equal("Validation errors")
-  // })
+  
 }

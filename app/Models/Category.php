@@ -14,6 +14,8 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     public function courses()
     {
         return $this->hasMany(Courses::class);

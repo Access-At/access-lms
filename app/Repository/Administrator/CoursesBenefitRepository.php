@@ -2,13 +2,10 @@
 
 namespace App\Repository\Administrator;
 
-use App\Models\Courses;
 use App\Models\CoursesBenefits;
-use App\Models\CoursesCurriculum;
 
 class CoursesBenefitRepository
 {
-
     public static function getBenefit($courseId)
     {
         return CoursesBenefits::courseId($courseId)->get();
@@ -26,7 +23,10 @@ class CoursesBenefitRepository
     public static function updateBenefit($courseId, $curriculumId, array $request)
     {
         $curriculum = CoursesBenefits::courseId($courseId)->findOrFail($curriculumId);
-        if(!$curriculumId) return false;
+        if (!$curriculumId) {
+            return false;
+        }
+
         return $curriculum->update([
             'title' => $request['title'],
             'desc' => $request['desc'],
@@ -37,7 +37,10 @@ class CoursesBenefitRepository
     public static function deleteBenefit($courseId, $curriculumId)
     {
         $curriculum = CoursesBenefits::courseId($courseId)->findOrFail($curriculumId);
-        if(!$curriculumId) return false;
+        if (!$curriculumId) {
+            return false;
+        }
+
         return $curriculum->delete();
 
     }

@@ -10,7 +10,6 @@ class BatchesController extends Controller
 {
     public function index()
     {
-
         return BatchesService::getAll();
     }
 
@@ -21,7 +20,7 @@ class BatchesController extends Controller
 
     public function store(BatchesRequest $request)
     {
-        return BatchesService::insert($request);
+        return BatchesService::insert($request->validated());
     }
 
     public function show(string $id)
@@ -31,7 +30,7 @@ class BatchesController extends Controller
 
     public function update(string $id, BatchesRequest $request)
     {
-        return BatchesService::update($id, $request);
+        return BatchesService::update($id, $request->validated());
     }
 
     public function trash(string $id)

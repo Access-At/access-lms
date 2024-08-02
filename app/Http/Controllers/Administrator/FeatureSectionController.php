@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Administrator\FeatureSectionRequest;
 use App\Services\Administrator\FeatureSectionService;
+use App\Http\Requests\Administrator\FeatureSectionRequest;
 
 class FeatureSectionController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return FeatureSectionService::getFeature();
     }
+
     public function store(FeatureSectionRequest $request)
     {
         return FeatureSectionService::storeFeature($request);

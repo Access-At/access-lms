@@ -2,15 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Public\PublicController;
 use App\Http\Controllers\Administrator\AuthController;
 use App\Http\Controllers\Administrator\PagesController;
 use App\Http\Controllers\Administrator\BatchesController;
 use App\Http\Controllers\Administrator\CoursesController;
+use App\Http\Controllers\User\AuthController as UserAuth;
 use App\Http\Controllers\Administrator\CategoriesController;
 use App\Http\Controllers\Administrator\CoursesBenefitController;
-use App\Http\Controllers\Administrator\CoursesCurriculumController;
 use App\Http\Controllers\Administrator\FeatureSectionController;
-use App\Http\Controllers\Publik\PublikController;
+use App\Http\Controllers\Administrator\CoursesCurriculumController;
 
 Route::prefix('v1')->group(function () {
 
@@ -25,10 +26,10 @@ Route::prefix('v1')->group(function () {
             Route::apiResource('categories', CategoriesController::class);
 
             Route::prefix('batches')->group(function () {
-                Route::get('', [BatchesController::class, 'index']);
+                Route::get('/', [BatchesController::class, 'index']);
                 Route::get('/arsip', [BatchesController::class, 'getTrash']); // data semua yang di trash
                 Route::get('/{batch}', [BatchesController::class, 'show']);
-                Route::post('', [BatchesController::class, 'store']);
+                Route::post('/', [BatchesController::class, 'store']);
                 Route::put('/{batch}', [BatchesController::class, 'update']);
                 Route::delete('/{batch}', [BatchesController::class, 'destroy']);
                 Route::put('/{batch}/trash', [BatchesController::class, 'trash']); // hapus dipindahkan ketong sampah
@@ -37,9 +38,9 @@ Route::prefix('v1')->group(function () {
             });
 
             Route::prefix('courses')->group(function () {
-                Route::get('', [CoursesController::class, 'index']);
+                Route::get('/', [CoursesController::class, 'index']);
                 Route::get('/arsip', [CoursesController::class, 'listTrash']);
-                Route::post('', [CoursesController::class, 'store']);
+                Route::post('/', [CoursesController::class, 'store']);
                 Route::get('/{course}', [CoursesController::class, 'show']);
                 Route::post('/{course}/duplicate', [CoursesController::class, 'duplicate']);
                 Route::put('/{course}', [CoursesController::class, 'update']);
@@ -76,18 +77,20 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    // public
-
-    Route::prefix('publik')->group(function () {
-       Route::get('/feature-section', [PublikController::class, 'getFeatures']); 
-       Route::get('/category', [PublikController::class, 'getCategories']); 
-       Route::get('/courses', [PublikController::class, 'getCourses']); 
-       Route::get('/course/{slug}', [PublikController::class, 'getCoursesBySlug']); 
-    });
-
     Route::get('/test', [TestController::class, 'index']);
 
     // trainer => auth:trainer
 
-    // user => auth:web
+    // user => auth:user
+    Route::prefix('user')->group(function () {
+        Route::post('/login', [UserAuth::class, 'login']);
+    });
+
+    // public
+    Route::prefix('public')->group(function () {
+        Route::get('/feature-section', [PublicController::class, 'getFeatures']);
+        Route::get('/category', [PublicController::class, 'getCategories']);
+        Route::get('/courses', [PublicController::class, 'getCourses']);
+        Route::get('/courses/{slug}', [PublicController::class, 'getCoursesBySlug']);
+    });
 });

@@ -1,0 +1,40 @@
+meta {
+  name: Login Success
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/user/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "user@gmail.com",
+    "password": "user"
+  }
+}
+
+assert {
+  res.body.status: isBoolean
+  res.body.message: isDefined
+  res.body.data.user: isDefined
+  res.body.data.token: isString
+}
+
+tests {
+  test("status code is 200", function(){
+    expect(res.getStatus()).to.equal(200)
+  })
+  
+  test("message is OK", function(){
+    expect(res.getBody().message).to.equal("OK")
+  })
+  
+  test("message is OK", function(){
+    expect(res.getBody().status).to.equal(true)
+  })
+  
+}

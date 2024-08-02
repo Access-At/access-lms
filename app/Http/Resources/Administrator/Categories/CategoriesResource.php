@@ -15,10 +15,10 @@ class CategoriesResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "title" => $this->title,
-            "description" => $this->description,
-            "image_url" => asset($this->imageUrl)
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'image_url' => asset($this->imageUrl),
         ];
     }
 }

@@ -1,0 +1,15 @@
+meta {
+  name: GET
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{BASE_URL}}/admin/batches
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNjEyOTk5LCJleHAiOjE3MjI2MTY1OTksIm5iZiI6MTcyMjYxMjk5OSwianRpIjoib1diMmJyYUtSaXhHbmNKYSIsInN1YiI6IjljYWI5NTBlLWQwZmMtNGJlOC04MjFiLTBmOGZkNGNmYmVlMCIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.xvm0hhBcAsDygXd1JI2PDZtI7kplcHGuZL7IzJ2UbF0
+}

@@ -4,6 +4,7 @@ namespace App\Services\Administrator;
 
 use App\Helpers\ResponseHelper;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Resources\User\UserResource;
 
 class AuthService
 {
@@ -14,7 +15,7 @@ class AuthService
         }
 
         return ResponseHelper::success([
-            'user' => auth()->guard('admin')->user(),
+            'user' => self::userDetail(),
             'token' => $token,
         ]);
     }
@@ -22,7 +23,7 @@ class AuthService
     public static function me()
     {
         return ResponseHelper::success([
-            'user' => auth()->guard('admin')->user(),
+            'user' => self::userDetail(),
         ]);
     }
 
@@ -32,7 +33,7 @@ class AuthService
         JWTAuth::setToken($refreshToken)->toUser();
 
         return ResponseHelper::success([
-            'user' => auth()->guard('admin')->user(),
+            'user' => self::userDetail(),
             'token' => $refreshToken,
         ]);
     }
@@ -42,5 +43,13 @@ class AuthService
         JWTAuth::invalidate(JWTAuth::getToken());
 
         return ResponseHelper::noContent();
+    }
+
+    protected static function userDetail()
+    {
+        $user = auth()->guard('admin')->user();
+        $userResourceArray = (new UserResource($user))->toArray(request());
+
+        return array_merge($userResourceArray, ['role' => 'admin']);
     }
 }

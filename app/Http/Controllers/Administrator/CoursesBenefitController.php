@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Administrator\CoursesBenefitRequest;
 use App\Services\Administrator\CourseBenefitService;
+use App\Http\Requests\Administrator\CoursesBenefitRequest;
 
 class CoursesBenefitController extends Controller
 {
@@ -21,10 +21,11 @@ class CoursesBenefitController extends Controller
     public function update(string $courseId, string $id, CoursesBenefitRequest $request)
     {
         $req = $request->all();
+
         return CourseBenefitService::updateBenefitWithCourse($courseId, $id, $req);
     }
 
-    public function delete($courseId,string $id)
+    public function delete($courseId, string $id)
     {
         return CourseBenefitService::deleteBenefitWithCourse($courseId, $id);
     }

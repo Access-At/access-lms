@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Publik;
+namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use PublicRepository;
+use App\Repository\Public\PublicRepository;
 
-class PublikController extends Controller
+class PublicController extends Controller
 {
     public function getFeatures()
     {
         return PublicRepository::geFeatures();
     }
 
-    public function getCategories(){
+    public function getCategories()
+    {
         return PublicRepository::getCategories();
     }
 
@@ -20,10 +21,9 @@ class PublikController extends Controller
     {
         return PublicRepository::getCourses();
     }
+
     public function getCoursesBySlug($slug)
     {
         return PublicRepository::getCourseBySlug($slug);
     }
-
-    
 }

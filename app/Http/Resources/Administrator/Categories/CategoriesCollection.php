@@ -14,13 +14,13 @@ class CategoriesCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        // $data = 
+        // $data =
         return [
             'list' => $this->collection->transform(function ($category) {
                 return [
                     'id' => $category->id,
                     'title' => $category->title,
-                    'description' => substr($category->description, 0, 50) . "...",
+                    'description' => mb_substr($category->description, 0, 50),
                     // "image_url" => asset($this->imageUrl)
                 ];
             }),

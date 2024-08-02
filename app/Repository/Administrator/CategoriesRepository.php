@@ -2,9 +2,9 @@
 
 namespace App\Repository\Administrator;
 
-use App\Http\Resources\Administrator\Categories\CategoriesCollection;
-use App\Http\Resources\Administrator\Categories\CategoriesResource;
 use App\Models\Category;
+use App\Http\Resources\Administrator\Categories\CategoriesResource;
+use App\Http\Resources\Administrator\Categories\CategoriesCollection;
 
 class CategoriesRepository
 {
@@ -23,23 +23,25 @@ class CategoriesRepository
 
     public static function findById($id): CategoriesResource
     {
-        return new CategoriesResource(Category::findOrFail($id)); 
+        return new CategoriesResource(Category::findOrFail($id));
     }
 
-    public static function insert($data): CategoriesCollection
+    public static function insert($data): CategoriesResource
     {
-        return new CategoriesCollection(Category::create($data));
+        return new CategoriesResource(Category::create($data));
     }
 
     public static function update($id, $data): bool
     {
         $category = self::findById($id);
+
         return $category->update($data);
     }
 
     public static function delete($id): bool
     {
         $category = self::findById($id);
+
         return $category->delete();
     }
 }

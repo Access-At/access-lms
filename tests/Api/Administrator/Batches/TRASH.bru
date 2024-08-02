@@ -1,0 +1,21 @@
+meta {
+  name: TRASH
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:8000/api/v1/admin/batches/a4a9a9e2-1219-4216-8d4e-293ba1ebf433/trash
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNjEyOTk5LCJleHAiOjE3MjI2MTY1OTksIm5iZiI6MTcyMjYxMjk5OSwianRpIjoib1diMmJyYUtSaXhHbmNKYSIsInN1YiI6IjljYWI5NTBlLWQwZmMtNGJlOC04MjFiLTBmOGZkNGNmYmVlMCIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.xvm0hhBcAsDygXd1JI2PDZtI7kplcHGuZL7IzJ2UbF0
+}
+
+body:json {
+  {
+    "title": "batch 3 updated"
+  }
+}

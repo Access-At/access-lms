@@ -23,7 +23,10 @@ class PagesRepository
     public static function updatePage($pageId, $request)
     {
         $page = Pages::find($pageId);
-        if(!$page) return false;
+        if (!$page) {
+            return false;
+        }
+
         return $page->update([
             'title' => $request['title'],
             'slug' => Str::slug($request['title']),
@@ -34,7 +37,10 @@ class PagesRepository
     public static function deletePage($pageId)
     {
         $page = Pages::findOrFail($pageId);
-        if(!$page) return false;
+        if (!$page) {
+            return false;
+        }
+
         return $page->delete();
 
     }

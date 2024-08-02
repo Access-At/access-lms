@@ -21,7 +21,10 @@ class FeatureSectionRepository
     public static function updateFeature($featureId, $request)
     {
         $feature = FeatureSection::find($featureId);
-        if(!$feature) return false;
+        if (!$feature) {
+            return false;
+        }
+
         return $feature->update([
             'title' => $request['title'],
             'desc' => $request['desc'],
@@ -31,7 +34,10 @@ class FeatureSectionRepository
     public static function deleteFeature($featureId)
     {
         $page = FeatureSection::findOrFail($featureId);
-        if(!$page) return false;
+        if (!$page) {
+            return false;
+        }
+
         return $page->delete();
 
     }
