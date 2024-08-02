@@ -139,20 +139,12 @@ class CoursesService
         if ($request->hasFile('imageUrl')) {
 
             $file = $request->file('imageUrl');
-
-            // create new manager instance with desired driver
             $manager = new ImageManager(new Driver());
-
-            // Generate a unique file name
             $filename = 'Image_LMS_' . hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-            
-            // read image from filesystem then compress them :)
             $image = $manager->read($file);
             $image = $image->resize(300,300);
             $image->toJpeg(80)->save(storage_path('app/public/uploads/'.$filename));
 
-            // Prepare data with imageUrl
-            // Prepare data with imageUrl
             $data['imageUrl'] = "uploads/$filename";
 
             // Remove old image if updating

@@ -32,9 +32,9 @@ class CategoriesRequest extends FormRequest
 
         // Jika ada file yang diunggah (misalnya pada operasi update)
         if ($this->isMethod('put')) {
-            $rules['imageUrl'] = 'file|mimes:jpeg,png,jpg|max:2048'; // Max size in kilobytes  2 mb
+            $rules['image'] = 'file|mimes:jpeg,png,jpg|max:2048'; // Max size in kilobytes  2 mb
         } else {
-            $rules['imageUrl'] = 'required|file|mimes:jpeg,png,jpg|max:2048'; // Max size in kilobytes  2 mb
+            $rules['image'] = 'required|file|mimes:jpeg,png,jpg|max:2048'; // Max size in kilobytes  2 mb
         }
 
         return $rules;
