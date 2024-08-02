@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Administrator;
-use App\Models\Trainer;
 use App\Models\User;
+use App\Models\Trainer;
+use App\Models\Administrator;
 use Illuminate\Database\Seeder;
 
 class AdministratorSeeder extends Seeder

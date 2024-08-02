@@ -6,13 +6,12 @@ use App\Models\Batch;
 
 class BatchsRepository
 {
-
     public static function getAll()
     {
         return Batch::withoutTrashed()->latest()->paginate(10);
     }
 
-    public static function getAllTrashed() 
+    public static function getAllTrashed()
     {
         return Batch::onlyTrashed()->paginate(10);
     }
@@ -30,18 +29,22 @@ class BatchsRepository
     public static function update($id, array $data)
     {
         $batch = self::findById($id);
-        if($batch) return $batch->update($data);
+        if ($batch) {
+            return $batch->update($data);
+        }
+
         return false;
     }
 
-    public static function deleteSoft($id) 
+    public static function deleteSoft($id)
     {
         $batch = Batch::withTrashed()->find($id);
         if ($batch) {
             return $batch->delete(); // Soft delete
         }
+
         return false;
-      
+
     }
 
     public static function restoreSoft($id)
@@ -50,6 +53,7 @@ class BatchsRepository
         if ($batch) {
             return $batch->restore(); // Restore the soft deleted record
         }
+
         return false;
     }
 
@@ -59,6 +63,7 @@ class BatchsRepository
         if ($batch) {
             return $batch->forceDelete(); // Permanently delete the record
         }
+
         return false;
     }
 }

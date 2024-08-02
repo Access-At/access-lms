@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CoursesService
 {
-
     public static function getAll()
     {
         try {
@@ -26,7 +25,8 @@ class CoursesService
         }
     }
 
-    public static function listTrash(){
+    public static function listTrash()
+    {
         try {
             $data = CoursesRepository::getTrashed();
             return ResponseHelper::success($data);
@@ -52,18 +52,20 @@ class CoursesService
         try {
             $adminId = auth()->guard('admin')->user()->id;
             $imageData = self::processImage($request, $adminId);
-            $data = array_merge($imageData,[
+            $data = array_merge($imageData, [
                 'created_by' => $adminId,
                 'slug' => Str::slug($request->title),
             ]);
             $batch = CoursesRepository::insert([...$data]);
+
             return ResponseHelper::created($batch, 'Course berhasil dibuat', 201);
         } catch (Throwable $th) {
             return self::handleError($th);
         }
     }
 
-    public static function duplicateId(string $id){
+    public static function duplicateId(string $id)
+    {
         return CoursesRepository::duplicateId($id);
 
     }
@@ -73,11 +75,12 @@ class CoursesService
         try {
             $adminId = auth()->guard('admin')->user()->id;
             $imageData = self::processImage($request, $adminId);
-            $data = array_merge($imageData,[
+            $data = array_merge($imageData, [
                 'created_by' => $adminId,
                 'slug' => Str::slug($request->title),
             ]);
             CoursesRepository::update($id, [...$data]);
+
             return ResponseHelper::success(null, 'Course berhasil diperbarui');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Course');
@@ -90,24 +93,28 @@ class CoursesService
     {
         try {
             $course = CoursesRepository::deleteSoft($id);
-            if($course) return ResponseHelper::success(null, 'Course di hapus, dan tersedia di trash');
-            else throw CustomException::notFound('Course');
+            if ($course) {
+                return ResponseHelper::success(null, 'Course di hapus, dan tersedia di trash');
+            }
+            throw CustomException::notFound('Course');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Course');
         } catch (Throwable $th) {
             return self::handleError($th);
         }
     }
-    
+
     public static function restoreSoft($id)
     {
         try {
             $course = CoursesRepository::restoreSoft($id);
-            if($course) return ResponseHelper::success(null, 'Course di restore');
-            else throw CustomException::notFound('Course');
-        } catch (\Throwable $th) {
+            if ($course) {
+                return ResponseHelper::success(null, 'Course di restore');
+            }
+            throw CustomException::notFound('Course');
+        } catch (Throwable $th) {
             return self::handleError($th);
-            
+
         }
     }
 
@@ -115,8 +122,10 @@ class CoursesService
     {
         try {
             $course = CoursesRepository::delete($id);
-            if($course) return ResponseHelper::success(null, 'Course di hapus permanen');
-            else throw CustomException::notFound('Course');
+            if ($course) {
+                return ResponseHelper::success(null, 'Course di hapus permanen');
+            }
+            throw CustomException::notFound('Course');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Course');
         } catch (Throwable $th) {
@@ -141,19 +150,18 @@ class CoursesService
             $file = $request->file('imageUrl');
 
             // create new manager instance with desired driver
-            $manager = new ImageManager(new Driver());
+            $manager = new ImageManager(new Driver);
 
             // Generate a unique file name
             $filename = 'Image_LMS_' . hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-            
+
             // read image from filesystem then compress them :)
             $image = $manager->read($file);
-            $image = $image->resize(300,300);
-            $image->toJpeg(80)->save(storage_path('app/public/uploads/'.$filename));
+            $image = $image->resize(300, 300);
+            $image->toJpeg(80)->save(storage_path('app/public/uploads/' . $filename));
 
             // Prepare data with imageUrl
-            // Prepare data with imageUrl
-            $data['imageUrl'] = "uploads/$filename";
+            $data['imageUrl'] = "uploads/{$filename}";
 
             // Remove old image if updating
             if ($id) {
