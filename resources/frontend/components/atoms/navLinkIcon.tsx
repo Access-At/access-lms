@@ -19,7 +19,7 @@ export default function NavLinkIcon({
           to={href}
           className={cn(
             buttonVariants({
-              variant: checkActiveNav(href) ? "secondary" : "ghost",
+              variant: checkActiveNav(href) ? "default" : "ghost",
               size: "icon",
             }),
             "h-12 w-12",

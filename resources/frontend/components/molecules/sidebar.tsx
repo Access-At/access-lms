@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { sidelinks } from "@/constant/menuAdmin"
+import { useAuth } from "@/contexts"
 import { cn } from "@/lib/utils"
 import { LayoutComponents } from "../atoms/layoutComponents"
 import Nav from "./nav"
@@ -19,6 +20,7 @@ export default function Sidebar({
   setIsCollapsed,
 }: SidebarProps) {
   const [navOpened, setNavOpened] = useState(false)
+  const { user } = useAuth()
   /* Make body not scrollable when navBar is opened */
   useEffect(() => {
     if (navOpened) {
@@ -77,13 +79,33 @@ export default function Sidebar({
         </LayoutComponents.Header>
 
         {/* Navigation links */}
-        <Nav
-          id='sidebar-menu'
-          className={`z-40 h-full flex-1 overflow-auto ${navOpened ? "max-h-screen" : "max-h-0 py-0 md:max-h-screen md:py-2"}`}
-          closeNav={() => setNavOpened(false)}
-          isCollapsed={isCollapsed}
-          links={sidelinks}
-        />
+        {user?.role === "admin" && (
+          <Nav
+            id='sidebar-menu'
+            className={`z-40 h-full flex-1 overflow-auto ${navOpened ? "max-h-screen" : "max-h-0 py-0 md:max-h-screen md:py-2"}`}
+            closeNav={() => setNavOpened(false)}
+            isCollapsed={isCollapsed}
+            links={sidelinks}
+          />
+        )}
+        {user?.role === "trainer" && (
+          <Nav
+            id='sidebar-menu'
+            className={`z-40 h-full flex-1 overflow-auto ${navOpened ? "max-h-screen" : "max-h-0 py-0 md:max-h-screen md:py-2"}`}
+            closeNav={() => setNavOpened(false)}
+            isCollapsed={isCollapsed}
+            links={sidelinks}
+          />
+        )}
+        {user?.role === "user" && (
+          <Nav
+            id='sidebar-menu'
+            className={`z-40 h-full flex-1 overflow-auto ${navOpened ? "max-h-screen" : "max-h-0 py-0 md:max-h-screen md:py-2"}`}
+            closeNav={() => setNavOpened(false)}
+            isCollapsed={isCollapsed}
+            links={sidelinks}
+          />
+        )}
 
         {/* Scrollbar width toggle button */}
         <Button

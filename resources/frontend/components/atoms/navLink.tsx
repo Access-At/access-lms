@@ -22,10 +22,10 @@ export default function NavLink({
           variant: checkActiveNav(href) ? "default" : "ghost",
           size: "sm",
         }),
-        "h-12 justify-start text-wrap rounded-l-full px-6",
+        "h-12 justify-start text-wrap px-6 md:rounded-l-full",
         subLink && "h-10 w-full border-l border-l-slate-500 px-2",
         checkActiveNav(href) &&
-          "translate-x-100 ml-auto mr-[-40%] w-80 transition-transform duration-300 ease-in-out",
+          "md:translate-x-100 md:ml-auto md:mr-[-40%] md:w-80 md:transition-transform md:duration-300 md:ease-in-out",
       )}
       aria-current={checkActiveNav(href) ? "page" : undefined}
     >
@@ -34,7 +34,7 @@ export default function NavLink({
       </div>
       {title}
       {label && (
-        <div className='ml-2 rounded-lg bg-primary px-1 text-[0.625rem] text-primary-foreground'>
+        <div className='ml-2 rounded-lg px-1 text-[0.625rem] text-primary-foreground'>
           {label}
         </div>
       )}

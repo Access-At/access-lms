@@ -13,6 +13,7 @@ import { Button } from "../ui/button"
 
 interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
   isCollapsed: boolean
+  role?: string
   links: SideLink[]
   closeNav: () => void
 }
@@ -75,7 +76,14 @@ export default function Nav({
           className={cn("flex items-center justify-center space-x-2")}
           onClick={handleLogout}
         >
-          <span className='text-md font-semibold uppercase'>Logout</span>
+          <span
+            className={cn(
+              "text-md hidden font-semibold uppercase",
+              isCollapsed ? "hidden" : "block",
+            )}
+          >
+            Logout
+          </span>
           <LogOut className='h-4 w-4' />
         </Button>
       </div>
