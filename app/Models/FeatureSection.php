@@ -2,20 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class FeatureSection extends Model
 {
     use HasFactory, HasUuids;
 
-    public $incrementing = false;
-
     protected $guarded = ['id'];
-
-    public function courses()
-    {
-        return $this->hasMany(Courses::class);
-    }
+    protected $table = 'feature_sections';
+    public $incrementings = false;
 }

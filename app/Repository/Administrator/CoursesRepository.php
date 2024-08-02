@@ -8,12 +8,10 @@ class CoursesRepository
 {
     public static function getAll()
     {
-        return Courses::withoutTrashed()->get();
+        return Courses::relation()->withoutTrashed()->get();
     }
-
-    public static function getTrashed()
-    {
-        return Courses::onlyTrashed()->get();
+    public static function getTrashed(){
+        return Courses::relation()->onlyTrashed()->get();
     }
 
     public static function getById($id)

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->enum('status', ['draft', 'publish'])->default('draft');
             $table->integer('price')->default(0);
             $table->boolean('isPaid')->default(true)->comment('Jika 0 = free, 1 = paid');
+            $table->foreignUuid('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignUuid('batch_id')->constrained('batches')->cascadeOnDelete();
             $table->foreignUuid('created_by')->constrained('administrators')->cascadeOnDelete();
             $table->softDeletes();

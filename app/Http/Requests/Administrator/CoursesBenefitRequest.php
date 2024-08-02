@@ -8,7 +8,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CoursesRequest extends FormRequest
+
+class CoursesBenefitRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,32 +26,15 @@ class CoursesRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
+        return [
             'title' => 'required',
-            'short_desc' => 'nullable',
-            'full_desc' => 'nullable',
-            'imageUrl' => 'required|file|mimes:jpeg,png,jpg|max:2048',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'level' => 'required|in:mudah,menengah,profesional',
-            'status' => 'required|in:draft,publish',
-            'price' => 'required',
-            'isPaid' => 'required',
-            'batch_id' => 'required',
-            'category_id' => 'required',
+            'desc' => 'required',
         ];
-
-        if ($this->isMethod('put')) {
-            $rules['image'] = 'file|mimes:jpeg,png,jpg|max:2048'; // Max size in kilobytes  2 mb
-        } else {
-            $rules['image'] = 'required|file|mimes:jpeg,png,jpg|max:2048'; // Max size in kilobytes  2 mb
-        }
-
-        return $rules;
     }
 
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(ResponseHelper::custome(['status' => false, 'message' => 'Validation errors', 'error' => $validator->errors()], Response::HTTP_UNPROCESSABLE_ENTITY));
     }
+
 }

@@ -148,7 +148,7 @@ class CoursesService
         if ($request->hasFile('imageUrl')) {
 
             $file = $request->file('imageUrl');
-
+     
             // create new manager instance with desired driver
             $manager = new ImageManager(new Driver);
 
@@ -160,8 +160,7 @@ class CoursesService
             $image = $image->resize(300, 300);
             $image->toJpeg(80)->save(storage_path('app/public/uploads/' . $filename));
 
-            // Prepare data with imageUrl
-            $data['imageUrl'] = "uploads/{$filename}";
+            $data['imageUrl'] = "uploads/$filename";
 
             // Remove old image if updating
             if ($id) {

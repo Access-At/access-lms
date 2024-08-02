@@ -1,0 +1,897 @@
+{
+  "name": "LMS",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "AUTH",
+      "items": [
+        {
+          "type": "http",
+          "name": "LOGIN",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/login",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "email",
+                  "value": "admin@gmail.com",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "password",
+                  "value": "admin",
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "BATCHES",
+      "items": [
+        {
+          "type": "http",
+          "name": "DELETE",
+          "seq": 7,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/batches/9ca973ff-6a34-4c45-9126-dd2e29532f7f",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"title\": \"batch 3 updated\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTE2MDI1LCJleHAiOjE3MjI1MTk2MjUsIm5iZiI6MTcyMjUxNjAyNSwianRpIjoiTnhpUmw2alJHRU9KcFI1ZCIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.oI8N2FDilJIiK_oZDG6jZA-9sGpfugZeqpOjYim8Ob4"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GET TRASH",
+          "seq": 8,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/batches/arsip",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTIzODI4LCJleHAiOjE3MjI1Mjc0MjgsIm5iZiI6MTcyMjUyMzgyOCwianRpIjoiNkJ1eElXelV0RkN5YVVScyIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.TktpLi2b9jVr2JWAT0yZ8PxEwwW4SdJyL06B-WLMC5E"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GET",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/batches",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTIzODI4LCJleHAiOjE3MjI1Mjc0MjgsIm5iZiI6MTcyMjUyMzgyOCwianRpIjoiNkJ1eElXelV0RkN5YVVScyIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.TktpLi2b9jVr2JWAT0yZ8PxEwwW4SdJyL06B-WLMC5E"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "POST",
+          "seq": 2,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/batches",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "title",
+                  "value": "Batch 3",
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTE2MDI1LCJleHAiOjE3MjI1MTk2MjUsIm5iZiI6MTcyMjUxNjAyNSwianRpIjoiTnhpUmw2alJHRU9KcFI1ZCIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.oI8N2FDilJIiK_oZDG6jZA-9sGpfugZeqpOjYim8Ob4"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "RESTORE",
+          "seq": 6,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/batches/9ca973ff-6a34-4c45-9126-dd2e29532f7f/trash",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"title\": \"batch 3 updated\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTE2MDI1LCJleHAiOjE3MjI1MTk2MjUsIm5iZiI6MTcyMjUxNjAyNSwianRpIjoiTnhpUmw2alJHRU9KcFI1ZCIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.oI8N2FDilJIiK_oZDG6jZA-9sGpfugZeqpOjYim8Ob4"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "SHOW",
+          "seq": 3,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/batches/9ca973ff-6a34-4c45-9126-dd2e29532f7f",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "title",
+                  "value": "Batch 3",
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTE2MDI1LCJleHAiOjE3MjI1MTk2MjUsIm5iZiI6MTcyMjUxNjAyNSwianRpIjoiTnhpUmw2alJHRU9KcFI1ZCIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.oI8N2FDilJIiK_oZDG6jZA-9sGpfugZeqpOjYim8Ob4"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "TRASH",
+          "seq": 5,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/batches/9ca9a9ee-3ebb-4ecb-9c1c-39623cf2838b/trash",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"title\": \"batch 3 updated\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTIzODI4LCJleHAiOjE3MjI1Mjc0MjgsIm5iZiI6MTcyMjUyMzgyOCwianRpIjoiNkJ1eElXelV0RkN5YVVScyIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.TktpLi2b9jVr2JWAT0yZ8PxEwwW4SdJyL06B-WLMC5E"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "UPDATE",
+          "seq": 4,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/batches/9ca973ff-6a34-4c45-9126-dd2e29532f7f",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"title\": \"batch 3 updated\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTE2MDI1LCJleHAiOjE3MjI1MTk2MjUsIm5iZiI6MTcyMjUxNjAyNSwianRpIjoiTnhpUmw2alJHRU9KcFI1ZCIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.oI8N2FDilJIiK_oZDG6jZA-9sGpfugZeqpOjYim8Ob4"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "COURSES",
+      "items": [
+        {
+          "type": "http",
+          "name": "DELETE",
+          "seq": 7,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2/restore",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "title",
+                  "value": "Test",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "start_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "end_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "level",
+                  "value": "mudah",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "status",
+                  "value": "draft",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "price",
+                  "value": "1000000",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "isPaid",
+                  "value": "1",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "batch_id",
+                  "value": "9ca94b1f-9109-4c8e-913a-99801e772e82",
+                  "enabled": true
+                },
+                {
+                  "type": "file",
+                  "name": "imageUrl",
+                  "value": [
+                    "/home/bayupm/Pictures/Screenshot from 2024-07-28 15-41-09.png"
+                  ],
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTIzODI4LCJleHAiOjE3MjI1Mjc0MjgsIm5iZiI6MTcyMjUyMzgyOCwianRpIjoiNkJ1eElXelV0RkN5YVVScyIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.TktpLi2b9jVr2JWAT0yZ8PxEwwW4SdJyL06B-WLMC5E"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "DUPLICATE",
+          "seq": 3,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2/duplicate",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "title",
+                  "value": "Test",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "start_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "end_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "level",
+                  "value": "mudah",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "status",
+                  "value": "draft",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "price",
+                  "value": "1000000",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "isPaid",
+                  "value": "1",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "batch_id",
+                  "value": "9ca94b1f-9109-4c8e-913a-99801e772e82",
+                  "enabled": true
+                },
+                {
+                  "type": "file",
+                  "name": "imageUrl",
+                  "value": [
+                    "/home/bayupm/Pictures/Screenshot from 2024-07-28 15-41-09.png"
+                  ],
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTIzODI4LCJleHAiOjE3MjI1Mjc0MjgsIm5iZiI6MTcyMjUyMzgyOCwianRpIjoiNkJ1eElXelV0RkN5YVVScyIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.TktpLi2b9jVr2JWAT0yZ8PxEwwW4SdJyL06B-WLMC5E"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GET",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/courses",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTgwNzAyLCJleHAiOjE3MjI1ODQzMDIsIm5iZiI6MTcyMjU4MDcwMiwianRpIjoianp0STh5ZXlXUFVzUGt0VSIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.V72OyjjmnYg5fk5JbuZ2DRBEY-vVdZoPbqZQqibrYVs"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "LIST TRASH",
+          "seq": 8,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/courses/arsip",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTIzODI4LCJleHAiOjE3MjI1Mjc0MjgsIm5iZiI6MTcyMjUyMzgyOCwianRpIjoiNkJ1eElXelV0RkN5YVVScyIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.TktpLi2b9jVr2JWAT0yZ8PxEwwW4SdJyL06B-WLMC5E"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "POST",
+          "seq": 2,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/courses",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "title",
+                  "value": "Test",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "start_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "end_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "level",
+                  "value": "mudah",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "status",
+                  "value": "draft",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "price",
+                  "value": "1000000",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "isPaid",
+                  "value": "1",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "batch_id",
+                  "value": "9ca94b1f-9109-4c8e-913a-99801e772e82",
+                  "enabled": true
+                },
+                {
+                  "type": "file",
+                  "name": "imageUrl",
+                  "value": [
+                    "/home/bayupm/Pictures/Screenshot from 2024-07-28 15-41-09.png"
+                  ],
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTE5ODUxLCJleHAiOjE3MjI1MjM0NTEsIm5iZiI6MTcyMjUxOTg1MSwianRpIjoicDhPUGFsblZYNWJvSlZwcCIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.FO04SAkbCp1IeJ9Vw9XPMT94ACCVsCFn2xQHn10LU9w"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "RESTORE",
+          "seq": 6,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2/restore",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "title",
+                  "value": "Test",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "start_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "end_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "level",
+                  "value": "mudah",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "status",
+                  "value": "draft",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "price",
+                  "value": "1000000",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "isPaid",
+                  "value": "1",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "batch_id",
+                  "value": "9ca94b1f-9109-4c8e-913a-99801e772e82",
+                  "enabled": true
+                },
+                {
+                  "type": "file",
+                  "name": "imageUrl",
+                  "value": [
+                    "/home/bayupm/Pictures/Screenshot from 2024-07-28 15-41-09.png"
+                  ],
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTIzODI4LCJleHAiOjE3MjI1Mjc0MjgsIm5iZiI6MTcyMjUyMzgyOCwianRpIjoiNkJ1eElXelV0RkN5YVVScyIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.TktpLi2b9jVr2JWAT0yZ8PxEwwW4SdJyL06B-WLMC5E"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "SHOW",
+          "seq": 4,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "title",
+                  "value": "Test",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "start_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "end_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "level",
+                  "value": "mudah",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "status",
+                  "value": "draft",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "price",
+                  "value": "1000000",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "isPaid",
+                  "value": "1",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "batch_id",
+                  "value": "9ca94b1f-9109-4c8e-913a-99801e772e82",
+                  "enabled": true
+                },
+                {
+                  "type": "file",
+                  "name": "imageUrl",
+                  "value": [
+                    "/home/bayupm/Pictures/Screenshot from 2024-07-28 15-41-09.png"
+                  ],
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTIzODI4LCJleHAiOjE3MjI1Mjc0MjgsIm5iZiI6MTcyMjUyMzgyOCwianRpIjoiNkJ1eElXelV0RkN5YVVScyIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.TktpLi2b9jVr2JWAT0yZ8PxEwwW4SdJyL06B-WLMC5E"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "TRASH",
+          "seq": 5,
+          "request": {
+            "url": "http://localhost:8000/api/v1/admin/courses/9ca9a922-ccc0-45b4-82e2-e534d8d402c5/trash",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "title",
+                  "value": "Test",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "start_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "end_date",
+                  "value": "2024-08-04",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "level",
+                  "value": "mudah",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "status",
+                  "value": "draft",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "price",
+                  "value": "1000000",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "isPaid",
+                  "value": "1",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "batch_id",
+                  "value": "9ca94b1f-9109-4c8e-913a-99801e772e82",
+                  "enabled": true
+                },
+                {
+                  "type": "file",
+                  "name": "imageUrl",
+                  "value": [
+                    "/home/bayupm/Pictures/Screenshot from 2024-07-28 15-41-09.png"
+                  ],
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTIzODI4LCJleHAiOjE3MjI1Mjc0MjgsIm5iZiI6MTcyMjUyMzgyOCwianRpIjoiNkJ1eElXelV0RkN5YVVScyIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.TktpLi2b9jVr2JWAT0yZ8PxEwwW4SdJyL06B-WLMC5E"
+              }
+            }
+          }
+        },
+        {
+          "type": "folder",
+          "name": "Curriculum",
+          "items": [
+            {
+              "type": "http",
+              "name": "List",
+              "seq": 1,
+              "request": {
+                "url": "localhost:8000/api/v1",
+                "method": "GET",
+                "headers": [],
+                "params": [],
+                "body": {
+                  "mode": "none",
+                  "formUrlEncoded": [],
+                  "multipartForm": []
+                },
+                "script": {},
+                "vars": {},
+                "assertions": [],
+                "tests": "",
+                "auth": {
+                  "mode": "none"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "environments": [],
+  "root": {
+    "request": {
+      "headers": [
+        {
+          "name": "content-type",
+          "value": "application/json",
+          "enabled": true,
+          "uid": "LhEhIDqcPAXspssXaGqpK"
+        },
+        {
+          "name": "accept",
+          "value": "application/json",
+          "enabled": true,
+          "uid": "HSOaJhxrTrGrWFekW5Lxf"
+        }
+      ]
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "LMS",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "presets": {
+      "requestType": "http",
+      "requestUrl": "localhost:8000/api/v1"
+    }
+  }
+}
