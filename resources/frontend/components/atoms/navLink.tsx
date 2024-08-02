@@ -24,6 +24,8 @@ export default function NavLink({
         }),
         "h-12 justify-start text-wrap rounded-l-full px-6",
         subLink && "h-10 w-full border-l border-l-slate-500 px-2",
+        checkActiveNav(href) &&
+          "translate-x-100 ml-auto mr-[-40%] w-80 transition-transform duration-300 ease-in-out",
       )}
       aria-current={checkActiveNav(href) ? "page" : undefined}
     >
