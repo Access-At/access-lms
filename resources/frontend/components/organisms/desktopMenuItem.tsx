@@ -4,10 +4,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuPortal,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
 
@@ -36,29 +32,14 @@ export default function DesktopMenuItem() {
     ) : (
       <DropdownMenu key={index}>
         <DropdownMenuTrigger className='flex items-center gap-x-2 py-3 ps-px font-medium text-gray-500 hover:bg-transparent hover:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 sm:px-3'>
-          Dropdown <ChevronDown />
+          {item.name} <ChevronDown />
         </DropdownMenuTrigger>
         <DropdownMenuContent className='w-56'>
-          {item.dropdown?.map((item, index) =>
-            !item.path ? (
-              <DropdownMenuSub key={index}>
-                <DropdownMenuSubTrigger>{item.name}</DropdownMenuSubTrigger>
-                <DropdownMenuPortal>
-                  <DropdownMenuSubContent>
-                    {item.submenu?.map((item, index) => (
-                      <DropdownMenuItem key={index}>
-                        <Link to={item.path}>{item.name}</Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuSubContent>
-                </DropdownMenuPortal>
-              </DropdownMenuSub>
-            ) : (
-              <DropdownMenuItem key={index}>
-                <Link to={item.path}>{item.name}</Link>
-              </DropdownMenuItem>
-            ),
-          )}
+          {item.dropdown?.map((item, index) => (
+            <DropdownMenuItem key={index}>
+              <Link to={item.path}>{item.name}</Link>
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuContent>
       </DropdownMenu>
     ),

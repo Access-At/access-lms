@@ -1,5 +1,5 @@
 import useIsCollapsed from "@/hooks/useIsCollapsed"
-import Sidebar from "../organisms/sidebar"
+import Sidebar from "../molecules/sidebar"
 
 interface GuestLayoutProps {
   children: React.ReactNode

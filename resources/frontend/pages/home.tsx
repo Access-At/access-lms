@@ -3,9 +3,7 @@ import React from "react"
 
 const Hero = React.lazy(() => import("@/components/organisms/hero"))
 const Feature = React.lazy(() => import("@/components/organisms/feature"))
-const JobPosition = React.lazy(
-  () => import("@/components/organisms/jobPosition"),
-)
+const Category = React.lazy(() => import("@/components/organisms/category"))
 const Team = React.lazy(() => import("@/components/organisms/team"))
 const Blog = React.lazy(() => import("@/components/organisms/blog"))
 
@@ -15,7 +13,7 @@ export default function Home() {
       <React.Suspense fallback={<HomeSkeleton />}>
         <Hero />
         <Feature />
-        <JobPosition />
+        <Category />
         <Blog />
         <Team />
       </React.Suspense>

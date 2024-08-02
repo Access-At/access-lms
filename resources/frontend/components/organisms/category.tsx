@@ -3,14 +3,16 @@ import * as React from "react"
 import { Card, CardDescription, CardTitle } from "../ui/card"
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel"
 
-import { jobPositions } from "@/constant/jobPositions"
+import { useCategoryQuery } from "@/features/public/category"
 import { useMediaQuery } from "@/hooks/useMediaQuery"
 import { cn } from "@/lib/utils"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import { Link } from "@tanstack/react-router"
 import Autoscroll from "embla-carousel-auto-scroll"
 import { ChevronRight } from "lucide-react"
 
-export default function JobPosition() {
+export default function Category() {
+  const { data: category } = useSuspenseQuery(useCategoryQuery())
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const direction = isDesktop ? "forward" : "backward"
 
@@ -37,7 +39,7 @@ export default function JobPosition() {
       className='px-4 py-10 sm:px-6 lg:px-8 lg:py-14'
     >
       <CarouselContent className={cn(!isDesktop && "h-[400px]")}>
-        {jobPositions.map((item, index) => (
+        {category.data.map((item, index) => (
           <CarouselItem
             key={index}
             className={
@@ -55,7 +57,7 @@ export default function JobPosition() {
                         {item.title}
                       </CardTitle>
                       <CardDescription className='text-sm text-gray-500'>
-                        {item.amount} job positions
+                        {item.courses_total} Kursus
                       </CardDescription>
                     </div>
                     <ChevronRight className='h-5 w-5 text-gray-500' />
