@@ -1,5 +1,5 @@
 import Image from "@/assets/image/banner-login.png"
-import LoginAdminForm from "@/forms/loginAdminForm"
+import LoginForm from "@/components/molecules/loginForm"
 import { ArrowDownCircleIcon } from "lucide-react"
 
 export default function Login() {
@@ -17,7 +17,7 @@ export default function Login() {
             </p>
           </div>
           <div className='grid gap-4'>
-            <LoginAdminForm />
+            <LoginForm />
           </div>
         </div>
       </div>

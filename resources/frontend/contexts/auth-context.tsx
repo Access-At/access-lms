@@ -1,4 +1,5 @@
 import { axios, axiosApi } from "@/lib/axios"
+import Cookies from "js-cookie" // import js-cookie
 import {
   ReactNode,
   createContext,
@@ -17,6 +18,7 @@ interface UserType {
   imageUrl: null
   created_at: string
   updated_at: string
+  role: string
 }
 
 export interface AuthContext {
@@ -32,16 +34,15 @@ const AuthContext = createContext<AuthContext | null>(null)
 const key = "auth"
 
 function getStoredUser(): UserType | null {
-  return localStorage.getItem(key)
-    ? JSON.parse(localStorage.getItem(key) as string)
-    : null
+  const cookie = Cookies.get(key)
+  return cookie ? JSON.parse(cookie) : null
 }
 
 function setStoredUser(user: UserType | null) {
   if (user) {
-    localStorage.setItem(key, JSON.stringify(user))
+    Cookies.set(key, JSON.stringify(user), { expires: 7 }) // menyimpan cookie selama 7 hari
   } else {
-    localStorage.removeItem(key)
+    Cookies.remove(key)
   }
 }
 

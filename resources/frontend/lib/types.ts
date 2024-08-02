@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react"
+
 export enum TransitionType {
   Blur = "Blur",
   Collapse = "Collapse",
@@ -24,4 +26,20 @@ export interface MenuLinkProps {
   path: string
   unauth?: boolean
   pathname: string
+}
+
+export interface NavLinkProps extends SideLink {
+  subLink?: boolean
+  closeNav: () => void
+}
+
+export interface NavLink {
+  title: string
+  label?: string
+  href: string
+  icon: LucideIcon
+}
+
+export interface SideLink extends NavLink {
+  sub?: NavLink[]
 }

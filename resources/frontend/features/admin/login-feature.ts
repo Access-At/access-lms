@@ -25,11 +25,13 @@ export type LoginResponse = z.infer<typeof loginResponseSchema>
 interface Props {
   onSuccess: (responses: LoginResponse) => void
   onError: (error: AxiosError<LoginResponse>) => void
+  role: string
 }
 
 export const useLoginQuery = ({
   onSuccess,
   onError,
+  role
 }: Props): UseMutationResult<
   LoginResponse,
   AxiosError<LoginResponse>,
@@ -37,15 +39,15 @@ export const useLoginQuery = ({
 > => {
   return useMutation<LoginResponse, AxiosError<LoginResponse>, LoginFormType>({
     mutationKey: ["login"],
-    mutationFn: (data: LoginFormType) => fetchLogin(data),
+    mutationFn: (data: LoginFormType) => fetchLogin(data, role),
     onSuccess,
     onError,
   })
 }
 
-const fetchLogin = async (data: LoginFormType): Promise<LoginResponse> => {
+const fetchLogin = async (data: LoginFormType, role: string): Promise<LoginResponse> => {
   const requestService = new RequestService({
-    url: "/admin/login",
+    url: `/${role}/login`,
     data,
     method: "POST",
     schema: loginResponseSchema,

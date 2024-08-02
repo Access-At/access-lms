@@ -2,15 +2,15 @@ import * as React from "react"
 
 import { createFileRoute, redirect } from "@tanstack/react-router"
 
-import Login from "@/pages/admin/login"
+const Login = React.lazy(() => import("@/pages/login"))
 
-export const Route = createFileRoute("/auth/admin")({
+export const Route = createFileRoute("/auth")({
   beforeLoad: ({ context }) => {
     if (context.auth.isAuthenticated) {
       throw redirect({
-        to: "/admin",
+        to: "/dashboard",
       })
     }
   },
-  component: React.memo(Login),
+  component: Login,
 })

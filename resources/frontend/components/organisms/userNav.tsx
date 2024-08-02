@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,11 +6,10 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu"
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button"
 
 export function UserNav() {
   return (
@@ -19,7 +18,7 @@ export function UserNav() {
         <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
           <Avatar className='h-8 w-8'>
             <AvatarImage src='/avatars/01.png' alt='@shadcn' />
-            <AvatarFallback>SN</AvatarFallback>
+            <AvatarFallback className='bg-white'>SN</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -38,21 +37,7 @@ export function UserNav() {
             Profile
             {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
           </DropdownMenuItem>
-          {/* <DropdownMenuItem>
-            Billing
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Settings
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem> */}
-          {/* <DropdownMenuItem>New Team</DropdownMenuItem> */}
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Log out
-          {/* <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> */}
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

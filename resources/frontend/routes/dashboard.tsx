@@ -4,13 +4,15 @@ import { Outlet, createFileRoute, redirect } from "@tanstack/react-router"
 
 import Loading from "@/components/shared/loading"
 
-const AdminLayout = React.lazy(() => import("@/components/layouts/adminLayout"))
+const DashboardLayout = React.lazy(
+  () => import("@/components/layouts/dashboardLayout"),
+)
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/dashboard")({
   beforeLoad: ({ context }) => {
     if (!context.auth.isAuthenticated) {
       throw redirect({
-        to: "/auth/admin",
+        to: "/auth",
       })
     }
   },
@@ -18,9 +20,9 @@ export const Route = createFileRoute("/admin")({
     <React.Suspense
       fallback={<Loading title='Sedang mempersiapkan halaman...' />}
     >
-      <AdminLayout>
+      <DashboardLayout>
         <Outlet />
-      </AdminLayout>
+      </DashboardLayout>
     </React.Suspense>
   ),
 })
