@@ -20,10 +20,11 @@ import { Route as DashboardUsersImport } from './routes/dashboard/users'
 import { Route as DashboardSubscriptionsImport } from './routes/dashboard/subscriptions'
 import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
 import { Route as DashboardReportsImport } from './routes/dashboard/reports'
-import { Route as DashboardPagesImport } from './routes/dashboard/pages'
 import { Route as DashboardCoursesImport } from './routes/dashboard/courses'
 import { Route as DashboardCategoriesImport } from './routes/dashboard/categories'
 import { Route as DashboardBatchesImport } from './routes/dashboard/batches'
+import { Route as DashboardPagesIndexImport } from './routes/dashboard/pages/index'
+import { Route as DashboardPagesAddImport } from './routes/dashboard/pages/add'
 
 // Create Virtual Routes
 
@@ -79,11 +80,6 @@ const DashboardReportsRoute = DashboardReportsImport.update({
   getParentRoute: () => DashboardRoute,
 } as any)
 
-const DashboardPagesRoute = DashboardPagesImport.update({
-  path: '/pages',
-  getParentRoute: () => DashboardRoute,
-} as any)
-
 const DashboardCoursesRoute = DashboardCoursesImport.update({
   path: '/courses',
   getParentRoute: () => DashboardRoute,
@@ -96,6 +92,16 @@ const DashboardCategoriesRoute = DashboardCategoriesImport.update({
 
 const DashboardBatchesRoute = DashboardBatchesImport.update({
   path: '/batches',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardPagesIndexRoute = DashboardPagesIndexImport.update({
+  path: '/pages/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardPagesAddRoute = DashboardPagesAddImport.update({
+  path: '/pages/add',
   getParentRoute: () => DashboardRoute,
 } as any)
 
@@ -145,13 +151,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardCoursesImport
       parentRoute: typeof DashboardImport
     }
-    '/dashboard/pages': {
-      id: '/dashboard/pages'
-      path: '/pages'
-      fullPath: '/dashboard/pages'
-      preLoaderRoute: typeof DashboardPagesImport
-      parentRoute: typeof DashboardImport
-    }
     '/dashboard/reports': {
       id: '/dashboard/reports'
       path: '/reports'
@@ -194,6 +193,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexLazyImport
       parentRoute: typeof DashboardImport
     }
+    '/dashboard/pages/add': {
+      id: '/dashboard/pages/add'
+      path: '/pages/add'
+      fullPath: '/dashboard/pages/add'
+      preLoaderRoute: typeof DashboardPagesAddImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/pages/': {
+      id: '/dashboard/pages/'
+      path: '/pages'
+      fullPath: '/dashboard/pages'
+      preLoaderRoute: typeof DashboardPagesIndexImport
+      parentRoute: typeof DashboardImport
+    }
   }
 }
 
@@ -206,12 +219,13 @@ export const routeTree = rootRoute.addChildren({
     DashboardBatchesRoute,
     DashboardCategoriesRoute,
     DashboardCoursesRoute,
-    DashboardPagesRoute,
     DashboardReportsRoute,
     DashboardSettingsRoute,
     DashboardSubscriptionsRoute,
     DashboardUsersRoute,
     DashboardIndexLazyRoute,
+    DashboardPagesAddRoute,
+    DashboardPagesIndexRoute,
   }),
 })
 
@@ -243,12 +257,13 @@ export const routeTree = rootRoute.addChildren({
         "/dashboard/batches",
         "/dashboard/categories",
         "/dashboard/courses",
-        "/dashboard/pages",
         "/dashboard/reports",
         "/dashboard/settings",
         "/dashboard/subscriptions",
         "/dashboard/users",
-        "/dashboard/"
+        "/dashboard/",
+        "/dashboard/pages/add",
+        "/dashboard/pages/"
       ]
     },
     "/dashboard/batches": {
@@ -261,10 +276,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/dashboard/courses": {
       "filePath": "dashboard/courses.tsx",
-      "parent": "/dashboard"
-    },
-    "/dashboard/pages": {
-      "filePath": "dashboard/pages.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/reports": {
@@ -289,6 +300,14 @@ export const routeTree = rootRoute.addChildren({
     },
     "/dashboard/": {
       "filePath": "dashboard/index.lazy.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/pages/add": {
+      "filePath": "dashboard/pages/add.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/pages/": {
+      "filePath": "dashboard/pages/index.tsx",
       "parent": "/dashboard"
     }
   }
