@@ -10,7 +10,7 @@ import { Task } from "@/schemas/schema"
 
 export const columns: ColumnDef<Task>[] = [
   {
-    id: "select",
+    id: "id",
     header: ({ table }) => (
       <Checkbox
         checked={
