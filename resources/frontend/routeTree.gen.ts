@@ -16,6 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as AuthImport } from './routes/auth'
 import { Route as IndexImport } from './routes/_index'
+import { Route as DashboardPagesImport } from './routes/dashboard/pages'
 
 // Create Virtual Routes
 
@@ -51,6 +52,11 @@ const IndexIndexLazyRoute = IndexIndexLazyImport.update({
   getParentRoute: () => IndexRoute,
 } as any).lazy(() => import('./routes/_index/index.lazy').then((d) => d.Route))
 
+const DashboardPagesRoute = DashboardPagesImport.update({
+  path: '/pages',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -76,6 +82,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard/pages': {
+      id: '/dashboard/pages'
+      path: '/pages'
+      fullPath: '/dashboard/pages'
+      preLoaderRoute: typeof DashboardPagesImport
+      parentRoute: typeof DashboardImport
+    }
     '/_index/': {
       id: '/_index/'
       path: '/'
@@ -98,7 +111,10 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexRoute: IndexRoute.addChildren({ IndexIndexLazyRoute }),
   AuthRoute,
-  DashboardRoute: DashboardRoute.addChildren({ DashboardIndexLazyRoute }),
+  DashboardRoute: DashboardRoute.addChildren({
+    DashboardPagesRoute,
+    DashboardIndexLazyRoute,
+  }),
 })
 
 /* prettier-ignore-end */
@@ -126,8 +142,13 @@ export const routeTree = rootRoute.addChildren({
     "/dashboard": {
       "filePath": "dashboard.tsx",
       "children": [
+        "/dashboard/pages",
         "/dashboard/"
       ]
+    },
+    "/dashboard/pages": {
+      "filePath": "dashboard/pages.tsx",
+      "parent": "/dashboard"
     },
     "/_index/": {
       "filePath": "_index/index.lazy.tsx",

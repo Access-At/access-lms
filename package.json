@@ -51,6 +51,7 @@
     "vite-plugin-pwa": "^0.20.1"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-react": "^8.0.0",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
     "@radix-ui/react-avatar": "^1.1.0",
@@ -63,6 +64,7 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@tanstack/react-query": "^5.51.11",
     "@tanstack/react-router": "^1.45.16",
+    "ckeditor5": "^42.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-auto-scroll": "^8.1.7",
