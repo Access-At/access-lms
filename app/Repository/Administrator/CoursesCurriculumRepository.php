@@ -24,7 +24,7 @@ class CoursesCurriculumRepository
         $curriculum = CoursesCurriculum::courseId($courseId)->findOrFail($curriculumId);
 
         return $curriculum->update([
-            'title' =>  $request->title,
+            'title' => $request->title,
             'course_id' => $courseId,
         ]);
     }

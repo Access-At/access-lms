@@ -49,9 +49,9 @@ class AuthService
     {
         $user = auth()->guard('admin')->user() ?? auth()->guard('user')->user() ?? auth()->guard('trainer')->user();
         $userResourceArray = (new UserResource($user))->toArray(request());
-        
-        $role =  auth()->guard('admin')->user() !== null ? "admin" : 
-                 (auth()->guard('trainer')->user() !== null ? "trainer" : "user");
+
+        $role = auth()->guard('admin')->user() !== null ? 'admin' :
+                 (auth()->guard('trainer')->user() !== null ? 'trainer' : 'user');
 
         return array_merge($userResourceArray, ['role' => $role]);
     }

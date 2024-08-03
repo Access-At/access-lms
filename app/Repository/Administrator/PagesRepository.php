@@ -3,7 +3,6 @@
 namespace App\Repository\Administrator;
 
 use App\Models\Pages;
-use Illuminate\Support\Str;
 
 class PagesRepository
 {
@@ -25,12 +24,14 @@ class PagesRepository
     public static function updatePage($pageId, $request)
     {
         $page = self::findById($pageId);
+
         return $page->update($request);
     }
 
     public static function deletePage($pageId)
     {
         $page = self::findById($pageId);
+
         return $page->delete();
 
     }

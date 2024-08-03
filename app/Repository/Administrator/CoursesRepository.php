@@ -88,6 +88,15 @@ class CoursesRepository
         return Courses::relation()->withoutTrashed()->get();
     }
 
+    public static function statusCourse($id)
+    {
+        $publish = Courses::where('status', 'draft')->find($id);
+        $publish->status = 'publish';
+        $publish->save();
+
+        return $publish;
+    }
+
     public static function getTrashed()
     {
         return Courses::relation()->onlyTrashed()->get();
@@ -111,6 +120,7 @@ class CoursesRepository
     public static function update($id, array $data)
     {
         $course = self::getById($id);
+
         return $course ? $course->update($data) : false;
     }
 
@@ -132,18 +142,21 @@ class CoursesRepository
     public static function deleteSoft($id)
     {
         $course = Courses::withTrashed()->find($id);
+
         return $course ? $course->delete() : false;
     }
 
     public static function restoreSoft($id)
     {
         $course = Courses::onlyTrashed()->find($id);
+
         return $course ? $course->restore() : false;
     }
 
     public static function delete($id)
     {
         $course = Courses::onlyTrashed()->find($id);
+
         return $course ? $course->forceDelete() : false;
     }
 }

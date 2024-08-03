@@ -23,6 +23,7 @@ class CoursesBenefitRepository
     public static function updateBenefit($courseId, $curriculumId, array $request)
     {
         $curriculum = CoursesBenefits::courseId($courseId)->findOrFail($curriculumId);
+
         return $curriculum->update([
             'title' => $request['title'],
             'desc' => $request['desc'],
@@ -33,6 +34,7 @@ class CoursesBenefitRepository
     public static function deleteBenefit($courseId, $curriculumId)
     {
         $curriculum = CoursesBenefits::courseId($courseId)->findOrFail($curriculumId);
+
         return $curriculum->delete();
 
     }

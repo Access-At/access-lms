@@ -24,21 +24,18 @@ class Courses extends Model
 
     public static function boot()
     {
-       parent::boot();
-       
-       static::creating(function($model)
-       {
-           $user = auth()->guard('admin')->user();
-           $model->created_by = $user->id;
-       });
+        parent::boot();
 
-       static::updating(function($model)
-       {
-           $user = auth()->guard('admin')->user();
-        //    $model->updated_by = $user->id;
-       });
+        static::creating(function ($model) {
+            $user = auth()->guard('admin')->user();
+            $model->created_by = $user->id;
+        });
+
+        static::updating(function ($model) {
+            $user = auth()->guard('admin')->user();
+            //    $model->updated_by = $user->id;
+        });
     }
-
 
     public function setTitleAttribute($value)
     {
@@ -62,9 +59,9 @@ class Courses extends Model
     }
 
     // batches
-    public function batches(): HasMany
+    public function batches(): BelongsTo
     {
-        return $this->hasMany(Batch::class, 'id', 'batch_id');
+        return $this->belongsTo(Batch::class, 'batch_id', 'id');
     }
 
     public function curriculums(): HasMany

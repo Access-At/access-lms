@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Administrator\FeatureSectionRequest;
 use App\Services\Administrator\FeatureSectionService;
+use App\Http\Requests\Administrator\FeatureSectionRequest;
 
 class FeatureSectionController extends Controller
 {
@@ -28,10 +27,7 @@ class FeatureSectionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+    public function show(string $id) {}
 
     /**
      * Update the specified resource in storage.

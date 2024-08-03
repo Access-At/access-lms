@@ -38,7 +38,7 @@ class PublicRepository
     public static function getCourses()
     {
         try {
-            $data = new CoursesCollection(Courses::with('category')->orderBy('created_at', 'desc')->take(4)->get());
+            $data = new CoursesCollection(Courses::with('category')->where('status', 'publish')->orderBy('created_at', 'desc')->take(4)->get());
 
             return ResponseHelper::success($data);
         } catch (Throwable $th) {

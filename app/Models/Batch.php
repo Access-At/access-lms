@@ -26,4 +26,9 @@ class Batch extends Model
         $this->attributes['title'] = $value;
         $this->attributes['slug'] = Str::slug($value);
     }
+
+    public function courses()
+    {
+        return $this->hasMany(Courses::class);
+    }
 }

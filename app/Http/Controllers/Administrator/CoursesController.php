@@ -26,6 +26,11 @@ class CoursesController extends Controller
         return CoursesService::insert($request);
     }
 
+    public function statusCourse($id)
+    {
+        return CoursesService::statusCourse($id);
+    }
+
     public function duplicate(string $id)
     {
         return CoursesService::duplicateId($id);

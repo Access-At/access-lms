@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Requests\Administrator\PagesRequest;
-use App\Services\Administrator\PagesService;
 use App\Http\Controllers\Controller;
+use App\Services\Administrator\PagesService;
+use App\Http\Requests\Administrator\PagesRequest;
 
 class PagesController extends Controller
 {

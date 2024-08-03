@@ -15,6 +15,7 @@ class BatchesService
     {
         try {
             $data = BatchesRepository::getAll();
+
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -25,6 +26,7 @@ class BatchesService
     {
         try {
             $data = BatchesRepository::getAllTrashed();
+
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -35,6 +37,7 @@ class BatchesService
     {
         try {
             $data = new BatchesResource(BatchesRepository::findById($id));
+
             return ResponseHelper::success($data);
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
@@ -47,6 +50,7 @@ class BatchesService
     {
         try {
             $batch = BatchesRepository::insert($request);
+
             return ResponseHelper::created($batch, 'Batch berhasil dibuat', 201);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -57,6 +61,7 @@ class BatchesService
     {
         try {
             BatchesRepository::update($id, $request);
+
             return ResponseHelper::success(null, 'Batch berhasil diperbarui');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
@@ -73,6 +78,7 @@ class BatchesService
 
         try {
             BatchesRepository::deleteSoft($id);
+
             return ResponseHelper::success(null, 'Batch berhasil dihapus, dan tersedia di trash');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
