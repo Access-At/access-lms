@@ -20,7 +20,8 @@ import { Loader2 } from "lucide-react"
 import { sleep } from "@/lib/utils"
 import { useAuth } from "@/contexts"
 import { useForm } from "react-hook-form"
-import { useLoginQuery } from "@/features/admin/login-feature"
+import useLocalStorage from "@/hooks/useLocalStorage"
+import { useLoginQuery } from "@/features/login-feature"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 const fallback = "/dashboard" as const
@@ -29,6 +30,7 @@ export default function LoginForm() {
   const navigate = useNavigate()
   const router = useRouter()
   const { login } = useAuth()
+  //   const useLocalStorage = useLocalStorage()
 
   const form = useForm<LoginFormType>({
     resolver: zodResolver(loginFormSchema),
@@ -50,6 +52,8 @@ export default function LoginForm() {
         success("Login successful")
 
         await login(data.user)
+        localStorage.setItem("token", data.token)
+        // await useLocalStorage({ key: "token", defaultValue: data.token })
 
         await router.invalidate()
 

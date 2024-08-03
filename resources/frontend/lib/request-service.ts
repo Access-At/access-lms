@@ -5,9 +5,9 @@ import {
   isAxiosError,
 } from "axios"
 
-import { z } from "zod"
 import { axiosApi as axios } from "./axios"
 import { sleep } from "./utils"
+import { z } from "zod"
 
 interface IRequestServiceOptions {
   url: string
@@ -119,7 +119,7 @@ export class RequestService<T> {
             `Please log in again as your ${axiosError.response.data.message}`,
           )
           localStorage.removeItem("auth")
-          window.location.href = `/login?redirect=${window.location.pathname}`
+          window.location.href = `/auth?redirect=${window.location.pathname}`
         }
         throw axiosError
       } else {

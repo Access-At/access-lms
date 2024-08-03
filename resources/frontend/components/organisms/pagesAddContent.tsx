@@ -1,13 +1,9 @@
-import { cn } from "@/lib/utils"
-import { pageAddSchema, PageAddSchemaType } from "@/schemas/pageAddSchema"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Link } from "@tanstack/react-router"
-import { ArrowLeft } from "lucide-react"
-import { useForm } from "react-hook-form"
-import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
-import { LayoutComponents } from "../atoms/layoutComponents"
-import { UserNav } from "../molecules/userNav"
+
+import { error, success } from "@/lib/toast"
+import { cn, sleep } from "@/lib/utils"
+import { PageFormSchema, PageFormType } from "@/schemas/admin/pageFormSchema"
+import { Link, useNavigate } from "@tanstack/react-router"
 import { Button, buttonVariants } from "../ui/button"
 import {
   Form,
@@ -17,9 +13,19 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form"
+
+import { useAddPagesQuery } from "@/features/admin/pages"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { ArrowLeft } from "lucide-react"
+import { useForm } from "react-hook-form"
+import ReactQuill from "react-quill"
+import { LayoutComponents } from "../atoms/layoutComponents"
+import { UserNav } from "../molecules/userNav"
 import { Input } from "../ui/input"
 
 export default function PagesAddContent() {
+  const navigate = useNavigate()
+
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -39,16 +45,45 @@ export default function PagesAddContent() {
     ],
   }
 
-  const form = useForm<PageAddSchemaType>({
-    resolver: zodResolver(pageAddSchema),
+  //   const { mutate: addPages, isPending } = useAddPagesQuery({
+  //     onError: () =>
+  //   })
+
+  const { mutate: addPages, isPending } = useAddPagesQuery({
+    onSuccess: async responses => {
+      if (!responses.status) {
+        return error(responses.message)
+      }
+
+      const { data } = responses
+
+      if (data) {
+        success("Berhasil Tambah Pages")
+
+        // This is just a hack being used to wait for the auth state to update
+        // in a real app, you'd want to use a more robust solution
+        await sleep(1)
+
+        navigate({
+          to: "/dashboard/pages",
+        })
+      }
+    },
+    onError: err => {
+      error("Login failed", err.response?.data.message ?? err.message)
+    },
+  })
+
+  const form = useForm<PageFormType>({
+    resolver: zodResolver(PageFormSchema),
     defaultValues: {
       title: "",
       content: "",
     },
   })
 
-  const handleSubmit = (value: PageAddSchemaType) => {
-    console.log(value)
+  const handleSubmit = (value: PageFormType) => {
+    addPages(value)
   }
 
   return (
@@ -102,7 +137,9 @@ export default function PagesAddContent() {
                   </FormItem>
                 )}
               />
-              <Button type='submit'>Submit</Button>
+              <Button type='submit' disabled={isPending}>
+                Submit
+              </Button>
             </form>
           </Form>
         </div>
