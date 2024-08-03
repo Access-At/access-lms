@@ -14,7 +14,7 @@ import {
 
 export default function Pagescontent() {
   const { data: blogs } = useSuspenseQuery(useFetchPagesQuery())
-  // FIXME: Error data tables
+  // FIXME: Error data tables kalo bisa yang page ini di ganti syad sama nama components nya jadi blog, ini kan kalo gasalah buat postingan blog
   return (
     <LayoutComponents>
       <LayoutComponents.Header className='flex justify-between md:bg-white'>
