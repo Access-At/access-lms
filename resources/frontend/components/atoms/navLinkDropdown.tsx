@@ -1,11 +1,11 @@
-import useCheckActiveNav from "@/hooks/useCheckActiveNav"
-import { NavLinkProps } from "@/lib/types"
-import { cn } from "@/lib/utils"
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@radix-ui/react-collapsible"
+} from "@/components/ui/collapsible"
+import useCheckActiveNav from "@/hooks/useCheckActiveNav"
+import { NavLinkProps } from "@/lib/types"
+import { cn } from "@/lib/utils"
 import { ChevronDown } from "lucide-react"
 import { buttonVariants } from "../ui/button"
 import NavLink from "./navLink"
