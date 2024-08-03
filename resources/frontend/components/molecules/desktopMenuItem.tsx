@@ -1,63 +1,55 @@
-import { ChevronDown, User } from "lucide-react"
+import { Link } from "@tanstack/react-router"
+import { ChevronDown } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-import { Link, useLocation } from "@tanstack/react-router"
 
+import useCheckActiveNav from "@/hooks/useCheckActiveNav"
 import { cn } from "@/lib/utils"
-import { menu } from "@/constant/menu"
-import { useAuth } from "@/contexts"
 
-export default function DesktopMenuItem() {
-  const pathname = useLocation().pathname
-  const { user, isAuthenticated } = useAuth();
-  console.log(isAuthenticated)
+interface DesktopMenuItemProps {
+  item: {
+    path?: string
+    name: string
+    dropdown?: {
+      path: string
+      name: string
+    }[]
+  }
+}
 
-  return menu.map((item, index) =>
-    item.path ? (
+export default function DesktopMenuItem({ item }: DesktopMenuItemProps) {
+  const { checkActiveNav } = useCheckActiveNav()
+
+  return item.path ? (
+    <>
       <Link
         to={item.path ? item.path : ""}
-        key={index}
         className={cn(
           "py-3 ps-px font-medium sm:px-3",
-          pathname === item.path
+          checkActiveNav(item.path)
             ? "text-blue-600"
             : "text-gray-500 hover:text-gray-400",
-          item.name === "Login" &&
-          "flex items-center gap-x-2 py-2 sm:my-6 sm:ms-4 sm:border-s sm:border-gray-300 sm:py-0 sm:ps-6",
         )}
       >
-        {isAuthenticated && item.name === "Login" ? (
-          <>
-            Selamat Datang, {user?.username}
-          </>
-        ) : (
-          <>
-            {item.name === "Login" && <User />}
-          </>)
-        }
-
-        {isAuthenticated && item.name !== "Login" ? (
-          item.name
-        ) : item.name }
-
+        {item.name}
       </Link>
-    ) : (
-      <DropdownMenu key={index}>
-        <DropdownMenuTrigger className='flex items-center gap-x-2 py-3 ps-px font-medium text-gray-500 hover:bg-transparent hover:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 sm:px-3'>
-          {item.name} <ChevronDown />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className='w-56'>
-          {item.dropdown?.map((item, index) => (
-            <DropdownMenuItem key={index}>
-              <Link to={item.path}>{item.name}</Link>
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
+    </>
+  ) : (
+    <DropdownMenu>
+      <DropdownMenuTrigger className='flex items-center gap-x-2 py-3 ps-px font-medium text-gray-500 hover:bg-transparent hover:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 sm:px-3'>
+        {item.name} <ChevronDown />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className='w-56'>
+        {item.dropdown?.map(item => (
+          <DropdownMenuItem key={item.path}>
+            <Link to={item.path}>{item.name}</Link>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }

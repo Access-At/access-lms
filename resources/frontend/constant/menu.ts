@@ -11,5 +11,4 @@ export const menu = [
       { name: "Team account", path: "/team-account" },
     ],
   },
-  { name: "Login", path: "/auth" },
 ]
