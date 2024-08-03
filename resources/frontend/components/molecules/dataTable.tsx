@@ -1,8 +1,6 @@
 import {
   ColumnDef,
   ColumnFiltersState,
-  SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -10,10 +8,11 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
+  VisibilityState,
 } from "@tanstack/react-table"
 import * as React from "react"
-
 import {
   Table,
   TableBody,
@@ -21,9 +20,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { DataTablePagination } from "./dataTablePagination"
-import { DataTableToolbar } from "./dataTableToolbar"
+} from "../ui/table"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -66,7 +63,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className='space-y-4'>
-      <DataTableToolbar table={table} />
+      {/* <DataTableToolbar table={table} /> */}
       <div className='rounded-md border'>
         <Table>
           <TableHeader>
@@ -88,6 +85,71 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
+            {table.getRowModel().rows.length &&
+              table.getRowModel().rows.map(row => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map(cell => (
+                    <TableCell key={cell.id}>
+                      {/* Fixme: Error nya di sini syad 
+                          katanya gini sih errornya
+                        [
+                              {
+                                  "code": "invalid_type",
+                                  "expected": "string",
+                                  "received": "undefined",
+                                  "path": [
+                                      "status"
+                                  ],
+                                  "message": "Required"
+                              },
+                              {
+                                  "code": "invalid_type",
+                                  "expected": "string",
+                                  "received": "undefined",
+                                  "path": [
+                                      "label"
+                                  ],
+                                  "message": "Required"
+                              },
+                              {
+                                  "code": "invalid_type",
+                                  "expected": "string",
+                                  "received": "undefined",
+                                  "path": [
+                                      "priority"
+                                  ],
+                                  "message": "Required"
+                              }
+                        ]
+                      */}
+                      {/* Penyebab error yang flexRender ini */}
+                      {/* {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )} */}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            {/* {table.getRowModel().rows?.length &&
+              table.getRowModel().rows.map(row => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map(cell => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map(row => (
                 <TableRow
@@ -113,11 +175,11 @@ export function DataTable<TData, TValue>({
                   No results.
                 </TableCell>
               </TableRow>
-            )}
+            )} */}
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {/* <DataTablePagination table={table} /> */}
     </div>
   )
 }

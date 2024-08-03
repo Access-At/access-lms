@@ -11,3 +11,19 @@ export const taskSchema = z.object({
 })
 
 export type Task = z.infer<typeof taskSchema>
+
+export const blogSchema = z.array(
+  z.object({
+    id: z.string(),
+    title: z.string(),
+    slug: z.string(),
+    status: z.string(),
+    label: z.string(),
+    priority: z.string(),
+    content: z.string(),
+    created_at: z.string(),
+    updated_at: z.string(),
+  }),
+)
+
+export type Blog = z.infer<typeof blogSchema>
