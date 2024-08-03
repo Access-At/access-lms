@@ -39,6 +39,7 @@ function setStoredUser(user: UserType | null) {
   if (user) {
     Cookies.set(key, JSON.stringify(user), {
       expires: 7,
+      secure: true,
       sameSite: "Lax",
     }) // menyimpan cookie selama 7 hari
   } else {
