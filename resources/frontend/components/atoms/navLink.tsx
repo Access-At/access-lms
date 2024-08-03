@@ -1,6 +1,7 @@
+import useCheckActiveNav from "@/hooks/useCheckActiveNav"
 import { NavLinkProps } from "@/lib/types"
 import { cn } from "@/lib/utils"
-import { Link, useLocation } from "@tanstack/react-router"
+import { Link } from "@tanstack/react-router"
 import { buttonVariants } from "../ui/button"
 
 export default function NavLink({
@@ -11,21 +12,22 @@ export default function NavLink({
   closeNav,
   subLink = false,
 }: NavLinkProps) {
-  const { pathname } = useLocation()
+  const { checkActiveNav } = useCheckActiveNav()
   return (
     <Link
       to={href}
       onClick={closeNav}
       className={cn(
         buttonVariants({
-          variant: pathname === href ? "default" : "ghost",
+          variant: checkActiveNav(href) ? "default" : "ghost",
           size: "sm",
         }),
         "h-12 justify-start text-wrap px-6",
         subLink && "h-10 w-full border-l border-l-slate-500 px-2",
-        pathname === href && "md:transition-all md:duration-300 md:ease-in-out",
+        checkActiveNav(href) &&
+          "md:transition-all md:duration-300 md:ease-in-out",
       )}
-      aria-current={pathname === href ? "page" : undefined}
+      aria-current={checkActiveNav(href) ? "page" : undefined}
     >
       <div className='mr-2'>
         <Icon />
