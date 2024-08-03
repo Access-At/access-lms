@@ -61,9 +61,9 @@ export const sidelinks: SideLink[] = [
     icon: MessageCircleWarning,
   },
   {
-    title: "Subscription",
+    title: "Subscriptions",
     label: "",
-    href: "/dashboard/subscription",
+    href: "/dashboard/subscriptions",
     icon: Podcast,
   },
 ]

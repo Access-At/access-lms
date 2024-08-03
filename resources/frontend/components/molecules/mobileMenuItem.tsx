@@ -2,7 +2,7 @@ import { menu } from "@/constant/menu"
 import { useLocation } from "@tanstack/react-router"
 import { User } from "lucide-react"
 import MenuLink from "../atoms/menuLink"
-import Submenu from "../molecules/submenu"
+import Submenu from "./submenu"
 
 export default function MobileMenuItem() {
   const pathname = useLocation().pathname

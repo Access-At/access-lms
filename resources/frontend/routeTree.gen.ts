@@ -16,7 +16,14 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as AuthImport } from './routes/auth'
 import { Route as IndexImport } from './routes/_index'
+import { Route as DashboardUsersImport } from './routes/dashboard/users'
+import { Route as DashboardSubscriptionsImport } from './routes/dashboard/subscriptions'
+import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
+import { Route as DashboardReportsImport } from './routes/dashboard/reports'
 import { Route as DashboardPagesImport } from './routes/dashboard/pages'
+import { Route as DashboardCoursesImport } from './routes/dashboard/courses'
+import { Route as DashboardCategoriesImport } from './routes/dashboard/categories'
+import { Route as DashboardBatchesImport } from './routes/dashboard/batches'
 
 // Create Virtual Routes
 
@@ -52,8 +59,43 @@ const IndexIndexLazyRoute = IndexIndexLazyImport.update({
   getParentRoute: () => IndexRoute,
 } as any).lazy(() => import('./routes/_index/index.lazy').then((d) => d.Route))
 
+const DashboardUsersRoute = DashboardUsersImport.update({
+  path: '/users',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardSubscriptionsRoute = DashboardSubscriptionsImport.update({
+  path: '/subscriptions',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardSettingsRoute = DashboardSettingsImport.update({
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardReportsRoute = DashboardReportsImport.update({
+  path: '/reports',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
 const DashboardPagesRoute = DashboardPagesImport.update({
   path: '/pages',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardCoursesRoute = DashboardCoursesImport.update({
+  path: '/courses',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardCategoriesRoute = DashboardCategoriesImport.update({
+  path: '/categories',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardBatchesRoute = DashboardBatchesImport.update({
+  path: '/batches',
   getParentRoute: () => DashboardRoute,
 } as any)
 
@@ -82,11 +124,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard/batches': {
+      id: '/dashboard/batches'
+      path: '/batches'
+      fullPath: '/dashboard/batches'
+      preLoaderRoute: typeof DashboardBatchesImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/categories': {
+      id: '/dashboard/categories'
+      path: '/categories'
+      fullPath: '/dashboard/categories'
+      preLoaderRoute: typeof DashboardCategoriesImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/courses': {
+      id: '/dashboard/courses'
+      path: '/courses'
+      fullPath: '/dashboard/courses'
+      preLoaderRoute: typeof DashboardCoursesImport
+      parentRoute: typeof DashboardImport
+    }
     '/dashboard/pages': {
       id: '/dashboard/pages'
       path: '/pages'
       fullPath: '/dashboard/pages'
       preLoaderRoute: typeof DashboardPagesImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/reports': {
+      id: '/dashboard/reports'
+      path: '/reports'
+      fullPath: '/dashboard/reports'
+      preLoaderRoute: typeof DashboardReportsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/subscriptions': {
+      id: '/dashboard/subscriptions'
+      path: '/subscriptions'
+      fullPath: '/dashboard/subscriptions'
+      preLoaderRoute: typeof DashboardSubscriptionsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/users': {
+      id: '/dashboard/users'
+      path: '/users'
+      fullPath: '/dashboard/users'
+      preLoaderRoute: typeof DashboardUsersImport
       parentRoute: typeof DashboardImport
     }
     '/_index/': {
@@ -112,7 +203,14 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute: IndexRoute.addChildren({ IndexIndexLazyRoute }),
   AuthRoute,
   DashboardRoute: DashboardRoute.addChildren({
+    DashboardBatchesRoute,
+    DashboardCategoriesRoute,
+    DashboardCoursesRoute,
     DashboardPagesRoute,
+    DashboardReportsRoute,
+    DashboardSettingsRoute,
+    DashboardSubscriptionsRoute,
+    DashboardUsersRoute,
     DashboardIndexLazyRoute,
   }),
 })
@@ -142,12 +240,47 @@ export const routeTree = rootRoute.addChildren({
     "/dashboard": {
       "filePath": "dashboard.tsx",
       "children": [
+        "/dashboard/batches",
+        "/dashboard/categories",
+        "/dashboard/courses",
         "/dashboard/pages",
+        "/dashboard/reports",
+        "/dashboard/settings",
+        "/dashboard/subscriptions",
+        "/dashboard/users",
         "/dashboard/"
       ]
     },
+    "/dashboard/batches": {
+      "filePath": "dashboard/batches.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/categories": {
+      "filePath": "dashboard/categories.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/courses": {
+      "filePath": "dashboard/courses.tsx",
+      "parent": "/dashboard"
+    },
     "/dashboard/pages": {
       "filePath": "dashboard/pages.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/reports": {
+      "filePath": "dashboard/reports.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/settings": {
+      "filePath": "dashboard/settings.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/subscriptions": {
+      "filePath": "dashboard/subscriptions.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/users": {
+      "filePath": "dashboard/users.tsx",
       "parent": "/dashboard"
     },
     "/_index/": {

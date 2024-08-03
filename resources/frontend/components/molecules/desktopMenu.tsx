@@ -1,4 +1,4 @@
-import DesktopMenuItem from "../organisms/desktopMenuItem"
+import DesktopMenuItem from "./desktopMenuItem"
 
 export default function DesktopMenu() {
   return (

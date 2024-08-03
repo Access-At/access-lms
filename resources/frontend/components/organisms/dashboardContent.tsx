@@ -1,6 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { topNav } from "@/constant/topNav"
 import { LayoutComponents } from "../atoms/layoutComponents"
+import { TopNav } from "../molecules/topNav"
+import { UserNav } from "../molecules/userNav"
 import { Button } from "../ui/button"
 import {
   Card,
@@ -9,8 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card"
-import { TopNav } from "./topNav"
-import { UserNav } from "./userNav"
 
 export default function DashboardContent() {
   return (

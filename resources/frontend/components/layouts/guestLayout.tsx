@@ -1,5 +1,5 @@
-import Footer from "../organisms/footer"
-import Header from "../organisms/header"
+import Footer from "../molecules/footer"
+import Header from "../molecules/header"
 
 interface GuestLayoutProps {
   children: React.ReactNode
