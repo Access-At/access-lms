@@ -1,0 +1,15 @@
+meta {
+  name: TRASH
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{BASE_URL}}/admin/courses/9cacd274-6a57-465f-9ccd-12ee1edf6638/trash
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  _method: PUT
+}

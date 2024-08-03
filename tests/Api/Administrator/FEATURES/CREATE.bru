@@ -1,0 +1,16 @@
+meta {
+  name: CREATE
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/admin/feature-section
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  title: Kurikulum Berbasis Proyek
+  desc: Mendorong pembelajaran praktis dengan proyek nyata dalam pemrograman
+}

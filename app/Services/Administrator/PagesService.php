@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PagesService
 {
-    public static function getPages()
+    public static function getAllPages()
     {
         try {
             $data = PagesRepository::getPages();
@@ -21,11 +21,22 @@ class PagesService
         }
     }
 
+    public static function getPages($id)
+    {
+        try {
+            $data = PagesRepository::findById($id);
+            return ResponseHelper::success($data);
+        } catch (ModelNotFoundException $e) {
+            throw CustomException::notFound('Pages');
+        } catch (Throwable $th) {
+            return self::handleError($th);
+        }
+    }
+
     public static function storePage($request)
     {
         try {
             $data = PagesRepository::storePage($request);
-
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -35,8 +46,7 @@ class PagesService
     public static function updatePage(string $pageId, $request)
     {
         try {
-            PagesRepository::updatePage($pageId, $request);
-
+            PagesRepository::updatePage($pageId, $request->validated());
             return ResponseHelper::success(null, 'Pages successfully updated');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Pages');
@@ -49,7 +59,6 @@ class PagesService
     {
         try {
             PagesRepository::deletePage($pageId);
-
             return ResponseHelper::success(null, 'Pages successfully deleted');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Pages');

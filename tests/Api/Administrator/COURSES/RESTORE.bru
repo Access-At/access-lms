@@ -1,0 +1,15 @@
+meta {
+  name: RESTORE
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{BASE_URL}}/admin/courses/9cacd274-6a57-465f-9ccd-12ee1edf6638/restore
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  _method: PUT
+}

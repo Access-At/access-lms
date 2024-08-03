@@ -1,0 +1,15 @@
+meta {
+  name: DUPLICATE
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BASE_URL}}/admin/courses/9cacdd09-66e6-4224-bd1a-2b8d64bbd1c3/duplicate
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  _method: PUT
+}

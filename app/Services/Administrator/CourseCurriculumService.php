@@ -32,12 +32,12 @@ class CourseCurriculumService
         }
     }
 
-    public static function updateCurriculumWithCourse(string $courseId, string $curriculumId, array $request)
+    public static function updateCurriculumWithCourse(string $courseId, string $curriculumId, $request)
     {
         try {
             CoursesCurriculumRepository::updateCurriculum($courseId, $curriculumId, $request);
 
-            return ResponseHelper::success(null, 'Course Curriculum successfully updated', 200);
+            return ResponseHelper::success(null, 'Course Curriculum successfully updated');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Course Curriculum');
         } catch (Throwable $th) {

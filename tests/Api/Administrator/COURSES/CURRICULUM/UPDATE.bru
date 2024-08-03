@@ -1,0 +1,17 @@
+meta {
+  name: UPDATE
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{BASE_URL}}/admin/courses/9cacd2af-dba6-42df-b2b2-385b8a437fc8/curriculum/9cace2b7-90d3-4d20-bc7b-df417d393e68/update
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title" : "Curriculum A updated"
+  }
+}

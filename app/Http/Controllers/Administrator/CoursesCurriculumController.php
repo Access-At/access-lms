@@ -20,9 +20,7 @@ class CoursesCurriculumController extends Controller
 
     public function updateCurriculum(string $courseId, string $id, CoursesCurriculumRequest $request)
     {
-        $req = $request->all();
-
-        return CourseCurriculumService::updateCurriculumWithCourse($courseId, $id, $req);
+        return CourseCurriculumService::updateCurriculumWithCourse($courseId, $id, $request);
     }
 
     public function deleteCurriculum($courseId, string $id)

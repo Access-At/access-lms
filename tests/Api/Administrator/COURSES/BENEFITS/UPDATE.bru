@@ -1,0 +1,22 @@
+meta {
+  name: UPDATE
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{BASE_URL}}/admin/courses/9ca9a235-fd56-4832-a972-9b28cb14b52d/benefit/9cab52f0-3598-4a91-ac08-2cb1b9c33890/update
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTk2Mzg3LCJleHAiOjE3MjI1OTk5ODcsIm5iZiI6MTcyMjU5NjM4NywianRpIjoiUU56bGh2cG4wNDJ6b1JPMyIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.eZjVRCyRain5KfvQdLW1ZK8HDkfqd8cY5HPc2Kf0WCc
+}
+
+body:json {
+  {
+    "title" : "Benefit A updated",
+    "desc": "Mengubah Updatedan"
+  }
+}

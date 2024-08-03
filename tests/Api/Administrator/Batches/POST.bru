@@ -5,13 +5,9 @@ meta {
 }
 
 post {
-  url: http://localhost:8000/api/v1/admin/batches
+  url: {{BASE_URL}}/admin/batches
   body: multipartForm
-  auth: bearer
-}
-
-auth:bearer {
-  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNjA4OTc3LCJleHAiOjE3MjI2MTI1NzcsIm5iZiI6MTcyMjYwODk3NywianRpIjoiZTNhTWJzcFo2VUljYzk4cyIsInN1YiI6IjljYWI5NTBlLWQwZmMtNGJlOC04MjFiLTBmOGZkNGNmYmVlMCIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.Ej8RboZ2WvzxbqhaUkDC0tgbUchfW-D0ZMgJMteNtXg
+  auth: inherit
 }
 
 body:multipart-form {

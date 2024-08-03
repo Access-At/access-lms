@@ -19,15 +19,12 @@ class CoursesCurriculumRepository
         ]);
     }
 
-    public static function updateCurriculum($courseId, $curriculumId, array $request)
+    public static function updateCurriculum($courseId, $curriculumId, $request)
     {
         $curriculum = CoursesCurriculum::courseId($courseId)->findOrFail($curriculumId);
-        if (!$curriculumId) {
-            return false;
-        }
 
         return $curriculum->update([
-            'title' => $request['title'],
+            'title' =>  $request->title,
             'course_id' => $courseId,
         ]);
     }

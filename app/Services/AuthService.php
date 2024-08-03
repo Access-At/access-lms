@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Administrator;
+namespace App\Services;
 
 use App\Helpers\ResponseHelper;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -10,7 +10,7 @@ class AuthService
 {
     public static function login($data)
     {
-        if (!$token = auth()->guard('admin')->attempt($data->validated())) {
+        if (!$token = self::userLogin($data)) {
             return ResponseHelper::unAuthenticated(null, 'Email atau password anda salah!');
         }
 
@@ -47,9 +47,29 @@ class AuthService
 
     protected static function userDetail()
     {
-        $user = auth()->guard('admin')->user();
+        $user = auth()->guard('admin')->user() ?? auth()->guard('user')->user() ?? auth()->guard('trainer')->user();
         $userResourceArray = (new UserResource($user))->toArray(request());
+        
+        $role =  auth()->guard('admin')->user() !== null ? "admin" : 
+                 (auth()->guard('trainer')->user() !== null ? "trainer" : "user");
 
-        return array_merge($userResourceArray, ['role' => 'admin']);
+        return array_merge($userResourceArray, ['role' => $role]);
+    }
+
+    protected static function userLogin($data)
+    {
+        if ($token = auth()->guard('admin')->attempt($data->validated())) {
+            return $token;
+        }
+
+        if ($token = auth()->guard('user')->attempt($data->validated())) {
+            return $token;
+        }
+
+        if ($token = auth()->guard('trainer')->attempt($data->validated())) {
+            return $token;
+        }
+
+        return false;
     }
 }

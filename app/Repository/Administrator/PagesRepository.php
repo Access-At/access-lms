@@ -14,33 +14,23 @@ class PagesRepository
 
     public static function storePage($request)
     {
-        return Pages::create([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'content' => $request->content]);
+        return Pages::create($request);
+    }
+
+    public static function findById($id)
+    {
+        return Pages::findOrFail($id);
     }
 
     public static function updatePage($pageId, $request)
     {
-        $page = Pages::find($pageId);
-        if (!$page) {
-            return false;
-        }
-
-        return $page->update([
-            'title' => $request['title'],
-            'slug' => Str::slug($request['title']),
-            'content' => $request['content'],
-        ]);
+        $page = self::findById($pageId);
+        return $page->update($request);
     }
 
     public static function deletePage($pageId)
     {
-        $page = Pages::findOrFail($pageId);
-        if (!$page) {
-            return false;
-        }
-
+        $page = self::findById($pageId);
         return $page->delete();
 
     }

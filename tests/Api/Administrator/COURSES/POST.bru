@@ -1,0 +1,24 @@
+meta {
+  name: POST
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/admin/courses
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  title: Test lagi
+  start_date: 2024-08-04
+  end_date: 2024-08-04
+  level: mudah
+  status: draft
+  price: 1000000
+  isPaid: 1
+  batch_id: 374ba6eb-3490-4815-a50c-e657f4b3f169
+  image: @file(/Users/rizsyadabiyandrariadi/Documents/2602783-1361926579.jpeg)
+  category_id: 9cacd249-0d78-4860-91b2-1a7e057dae5d
+}

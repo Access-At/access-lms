@@ -14,7 +14,7 @@ const featureResponseSchema = apiResponseSchema.extend({
 export type FeatureResponseType = z.infer<typeof featureResponseSchema>
 export const fetchFeature = async (): Promise<FeatureResponseType> => {
   const requestService = new RequestService({
-    url: "/publik/feature-section",
+    url: "/public/feature-section",
     method: "GET",
     schema: featureResponseSchema,
   })

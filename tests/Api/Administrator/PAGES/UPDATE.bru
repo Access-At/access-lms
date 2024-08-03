@@ -1,0 +1,18 @@
+meta {
+  name: UPDATE
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{BASE_URL}}/admin/pages/9cacebe9-d510-4cf6-b5f5-0960bfd4be80
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Test Update",
+    "content" : "Test content update"
+  }
+}

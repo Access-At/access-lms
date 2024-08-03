@@ -1,0 +1,21 @@
+meta {
+  name: DELETE
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{BASE_URL}}/admin/courses/9ca9a235-fd56-4832-a972-9b28cb14b52d/curriculum/9cab28e1-9f09-45f3-b115-11472e80efd5/delete
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2FkbWluL2xvZ2luIiwiaWF0IjoxNzIyNTg4NjQ1LCJleHAiOjE3MjI1OTIyNDUsIm5iZiI6MTcyMjU4ODY0NSwianRpIjoiVHc0NjdIdmE2QVBycmx2UCIsInN1YiI6IjljYTkyNDA4LTZhYzktNDdiMy05ZDAxLWMxMmEwOWVjZjYyNSIsInBydiI6IjkyZDVlOGViMWIzOGNjZDExNDc2ODk2YzE5YjBlNDQ1MTJiMmFhY2QifQ.rNpP4jkNM5IBsrZ11nd-LnI8isk5FukjdKXwM_T5mrU
+}
+
+body:json {
+  {
+    "title" : "Curriculum A updated"
+  }
+}

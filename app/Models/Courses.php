@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -20,6 +21,30 @@ class Courses extends Model
     protected $table = 'courses';
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
+    public static function boot()
+    {
+       parent::boot();
+       
+       static::creating(function($model)
+       {
+           $user = auth()->guard('admin')->user();
+           $model->created_by = $user->id;
+       });
+
+       static::updating(function($model)
+       {
+           $user = auth()->guard('admin')->user();
+        //    $model->updated_by = $user->id;
+       });
+    }
+
+
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
 
     public function getRouteKeyName()
     {

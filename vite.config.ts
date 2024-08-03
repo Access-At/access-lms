@@ -4,6 +4,7 @@ import { VitePWA } from "vite-plugin-pwa"
 // import { compression } from "vite-plugin-compression2"
 import { defineConfig } from "vite"
 import laravel from "laravel-vite-plugin"
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import path from "path"
 import react from "@vitejs/plugin-react"
 
@@ -88,6 +89,7 @@ export default defineConfig({
       },
     }),
     TanStackRouterVite(),
+    nodePolyfills(),
     react(),
     // compression()
   ],

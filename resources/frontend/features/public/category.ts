@@ -15,7 +15,7 @@ const categoryresponseSchema = apiResponseSchema.extend({
 export type CategoryResponseType = z.infer<typeof categoryresponseSchema>
 export const fetchCategory = async (): Promise<CategoryResponseType> => {
   const requestService = new RequestService({
-    url: "/publik/category",
+    url: "/public/category",
     method: "GET",
     schema: categoryresponseSchema,
   })
@@ -23,7 +23,7 @@ export const fetchCategory = async (): Promise<CategoryResponseType> => {
   return response as CategoryResponseType
 }
 
-export const useCategoryQuery = () => {
+export const useCategoryQuery  = () => {
   return queryOptions({
     queryKey: ["category"],
     queryFn: () => fetchCategory(),

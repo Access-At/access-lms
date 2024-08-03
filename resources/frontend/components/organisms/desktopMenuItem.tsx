@@ -1,4 +1,3 @@
-import { Link, useLocation } from "@tanstack/react-router"
 import { ChevronDown, User } from "lucide-react"
 import {
   DropdownMenu,
@@ -6,12 +5,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
+import { Link, useLocation } from "@tanstack/react-router"
 
-import { menu } from "@/constant/menu"
 import { cn } from "@/lib/utils"
+import { menu } from "@/constant/menu"
+import { useAuth } from "@/contexts"
 
 export default function DesktopMenuItem() {
   const pathname = useLocation().pathname
+  const { user, isAuthenticated } = useAuth();
+  console.log(isAuthenticated)
+
   return menu.map((item, index) =>
     item.path ? (
       <Link
@@ -23,11 +27,23 @@ export default function DesktopMenuItem() {
             ? "text-blue-600"
             : "text-gray-500 hover:text-gray-400",
           item.name === "Login" &&
-            "flex items-center gap-x-2 py-2 sm:my-6 sm:ms-4 sm:border-s sm:border-gray-300 sm:py-0 sm:ps-6",
+          "flex items-center gap-x-2 py-2 sm:my-6 sm:ms-4 sm:border-s sm:border-gray-300 sm:py-0 sm:ps-6",
         )}
       >
-        {item.name === "Login" && <User />}
-        {item.name}
+        {isAuthenticated && item.name === "Login" ? (
+          <>
+            Selamat Datang, {user?.username}
+          </>
+        ) : (
+          <>
+            {item.name === "Login" && <User />}
+          </>)
+        }
+
+        {isAuthenticated && item.name !== "Login" ? (
+          item.name
+        ) : item.name }
+
       </Link>
     ) : (
       <DropdownMenu key={index}>

@@ -6,6 +6,11 @@ use App\Models\FeatureSection;
 
 class FeatureSectionRepository
 {
+    public static function findByid($id)
+    {
+        return FeatureSection::findOrFail($id);
+    }
+
     public static function getFeatures()
     {
         return FeatureSection::orderBy('created_at', 'asc')->get();
@@ -13,32 +18,18 @@ class FeatureSectionRepository
 
     public static function storeFeature($request)
     {
-        return FeatureSection::create([
-            'title' => $request->title,
-            'desc' => $request->desc]);
+        return FeatureSection::create($request);
     }
 
     public static function updateFeature($featureId, $request)
     {
-        $feature = FeatureSection::find($featureId);
-        if (!$feature) {
-            return false;
-        }
-
-        return $feature->update([
-            'title' => $request['title'],
-            'desc' => $request['desc'],
-        ]);
+        $feature = self::findByid($featureId);
+        return $feature->update($request);
     }
 
     public static function deleteFeature($featureId)
     {
-        $page = FeatureSection::findOrFail($featureId);
-        if (!$page) {
-            return false;
-        }
-
+        $page = self::findByid($featureId);
         return $page->delete();
-
     }
 }

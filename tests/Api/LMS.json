@@ -285,7 +285,7 @@
           "name": "DELETE",
           "seq": 7,
           "request": {
-            "url": "http://localhost:8000/api/v1/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2/restore",
+            "url": "{{BASE_URL}}/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2/restore",
             "method": "PUT",
             "headers": [],
             "params": [],
@@ -368,7 +368,7 @@
           "name": "DUPLICATE",
           "seq": 3,
           "request": {
-            "url": "http://localhost:8000/api/v1/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2/duplicate",
+            "url": "{{BASE_URL}}/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2/duplicate",
             "method": "POST",
             "headers": [],
             "params": [],
@@ -477,7 +477,7 @@
           "name": "LIST TRASH",
           "seq": 8,
           "request": {
-            "url": "http://localhost:8000/api/v1/admin/courses/arsip",
+            "url": "{{BASE_URL}}/admin/courses/arsip",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -586,7 +586,7 @@
           "name": "RESTORE",
           "seq": 6,
           "request": {
-            "url": "http://localhost:8000/api/v1/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2/restore",
+            "url": "{{BASE_URL}}/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2/restore",
             "method": "PUT",
             "headers": [],
             "params": [],
@@ -669,7 +669,7 @@
           "name": "SHOW",
           "seq": 4,
           "request": {
-            "url": "http://localhost:8000/api/v1/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2",
+            "url": "{{BASE_URL}}/admin/courses/9ca99b44-0e6f-45a7-b9e8-7706cd6b0ac2",
             "method": "GET",
             "headers": [],
             "params": [],
@@ -752,7 +752,7 @@
           "name": "TRASH",
           "seq": 5,
           "request": {
-            "url": "http://localhost:8000/api/v1/admin/courses/9ca9a922-ccc0-45b4-82e2-e534d8d402c5/trash",
+            "url": "{{BASE_URL}}/admin/courses/9ca9a922-ccc0-45b4-82e2-e534d8d402c5/trash",
             "method": "PUT",
             "headers": [],
             "params": [],

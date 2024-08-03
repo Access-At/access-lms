@@ -39,7 +39,6 @@ export default function LoginForm() {
   })
 
   const { mutate: loginMutate, isPending } = useLoginQuery({
-    role: "admin",
     onSuccess: async responses => {
       if (!responses.status) {
         return error(responses.message)

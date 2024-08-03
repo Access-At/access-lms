@@ -1,0 +1,18 @@
+meta {
+  name: DELETE
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{BASE_URL}}/admin/feature-section/9cacef79-4abd-44fd-82e3-0d56e0ff064e
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Test Update",
+    "content" : "Test content update"
+  }
+}

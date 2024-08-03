@@ -12,10 +12,7 @@ const loginResponseSchema = apiResponseSchema.extend({
       id: z.string(),
       username: z.string(),
       email: z.string(),
-      imageUrl: z.null(),
       role: z.string(),
-      created_at: z.string(),
-      updated_at: z.string(),
     }),
     token: z.string(),
   }),
@@ -26,13 +23,11 @@ export type LoginResponse = z.infer<typeof loginResponseSchema>
 interface Props {
   onSuccess: (responses: LoginResponse) => void
   onError: (error: AxiosError<LoginResponse>) => void
-  role: string
 }
 
 export const useLoginQuery = ({
   onSuccess,
-  onError,
-  role
+  onError
 }: Props): UseMutationResult<
   LoginResponse,
   AxiosError<LoginResponse>,
@@ -40,15 +35,15 @@ export const useLoginQuery = ({
 > => {
   return useMutation<LoginResponse, AxiosError<LoginResponse>, LoginFormType>({
     mutationKey: ["login"],
-    mutationFn: (data: LoginFormType) => fetchLogin(data, role),
+    mutationFn: (data: LoginFormType) => fetchLogin(data),
     onSuccess,
     onError,
   })
 }
 
-const fetchLogin = async (data: LoginFormType, role: string): Promise<LoginResponse> => {
+const fetchLogin = async (data: LoginFormType): Promise<LoginResponse> => {
   const requestService = new RequestService({
-    url: `/${role}/login`,
+    url: `/login`,
     data,
     method: "POST",
     schema: loginResponseSchema,

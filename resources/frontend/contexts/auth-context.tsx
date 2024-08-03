@@ -1,5 +1,3 @@
-import { axios, axiosApi } from "@/lib/axios"
-import Cookies from "js-cookie" // import js-cookie
 import {
   ReactNode,
   createContext,
@@ -8,16 +6,15 @@ import {
   useEffect,
   useState,
 } from "react"
+import { axios, axiosApi } from "@/lib/axios"
 
+import Cookies from "js-cookie" // import js-cookie
 import { sleep } from "@/lib/utils"
 
 interface UserType {
   id: string
   email: string
   username: string
-  imageUrl: null
-  created_at: string
-  updated_at: string
   role: string
 }
 
@@ -40,7 +37,7 @@ function getStoredUser(): UserType | null {
 
 function setStoredUser(user: UserType | null) {
   if (user) {
-    Cookies.set(key, JSON.stringify(user), { expires: 7 }) // menyimpan cookie selama 7 hari
+    Cookies.set(key, JSON.stringify(user), { expires: 7, secure: true, sameSite: 'Lax', path: '/' }) // menyimpan cookie selama 7 hari
   } else {
     Cookies.remove(key)
   }
