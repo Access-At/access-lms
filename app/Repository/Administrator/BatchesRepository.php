@@ -9,7 +9,7 @@ class BatchesRepository
 {
     public static function getAll()
     {
-        return new BatchesCollection(Batch::withoutTrashed()->latest()->paginate(10));
+        return new BatchesCollection(Batch::with('courses')->withoutTrashed()->latest()->paginate(10));
     }
 
     public static function getAllTrashed()

@@ -20,6 +20,7 @@ class BatchesCollection extends ResourceCollection
                     'id' => $batch->id,
                     'title' => mb_substr($batch->title, 0, 20),
                     'slug' => $batch->slug,
+                    'courses' => $batch->courses,
                 ];
             }),
             'pagination' => [

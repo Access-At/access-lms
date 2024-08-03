@@ -25,6 +25,7 @@ class PagesService
     {
         try {
             $data = PagesRepository::findById($id);
+
             return ResponseHelper::success($data);
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Pages');
@@ -37,6 +38,7 @@ class PagesService
     {
         try {
             $data = PagesRepository::storePage($request);
+
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -47,6 +49,7 @@ class PagesService
     {
         try {
             PagesRepository::updatePage($pageId, $request->validated());
+
             return ResponseHelper::success(null, 'Pages successfully updated');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Pages');
@@ -59,6 +62,7 @@ class PagesService
     {
         try {
             PagesRepository::deletePage($pageId);
+
             return ResponseHelper::success(null, 'Pages successfully deleted');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Pages');

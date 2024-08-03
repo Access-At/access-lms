@@ -14,6 +14,7 @@ class FeatureSectionService
     {
         try {
             $data = FeatureSectionRepository::getFeatures();
+
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -24,6 +25,7 @@ class FeatureSectionService
     {
         try {
             $data = FeatureSectionRepository::storeFeature($request);
+
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -34,6 +36,7 @@ class FeatureSectionService
     {
         try {
             FeatureSectionRepository::updateFeature($pageId, $request);
+
             return ResponseHelper::success(null, 'Feature successfully updated');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Feature');

@@ -1,22 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Public\PublicController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Administrator\PagesController;
 use App\Http\Controllers\Administrator\BatchesController;
 use App\Http\Controllers\Administrator\CoursesController;
 use App\Http\Controllers\Administrator\CategoriesController;
 use App\Http\Controllers\Administrator\CoursesBenefitController;
-use App\Http\Controllers\Administrator\CoursesCurriculumController;
 use App\Http\Controllers\Administrator\FeatureSectionController;
+use App\Http\Controllers\Administrator\CoursesCurriculumController;
 
 Route::prefix('v1')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
-    
+
     Route::prefix('admin')->group(function () {
-        
+
         Route::group(['middleware' => 'auth:admin'], function () {
             Route::get('/user', [AuthController::class, 'getUser']);
             Route::get('/refresh', [AuthController::class, 'refreshToken']);
@@ -41,6 +41,7 @@ Route::prefix('v1')->group(function () {
                 Route::get('/arsip', [CoursesController::class, 'listTrash']);
                 Route::post('/', [CoursesController::class, 'store']);
                 Route::get('/{course}', [CoursesController::class, 'show']);
+                Route::post('/{course}/status', [CoursesController::class, 'statusCourse']);
                 Route::put('/{course}/duplicate', [CoursesController::class, 'duplicate']);
                 Route::put('/{course}', [CoursesController::class, 'update']);
                 Route::put('/{course}/trash', [CoursesController::class, 'trash']);
@@ -61,7 +62,6 @@ Route::prefix('v1')->group(function () {
 
             Route::apiResource('pages', PagesController::class);
             Route::apiResource('feature-section', FeatureSectionController::class);
-
         });
     });
 

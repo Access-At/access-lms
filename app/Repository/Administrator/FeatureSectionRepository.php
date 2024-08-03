@@ -24,12 +24,14 @@ class FeatureSectionRepository
     public static function updateFeature($featureId, $request)
     {
         $feature = self::findByid($featureId);
+
         return $feature->update($request);
     }
 
     public static function deleteFeature($featureId)
     {
         $page = self::findByid($featureId);
+
         return $page->delete();
     }
 }

@@ -3,12 +3,10 @@
 namespace App\Services\Administrator;
 
 use Throwable;
-use Illuminate\Support\Str;
 use App\Helpers\ResponseHelper;
-use App\Exceptions\CustomException;
 use App\Helpers\UploadFileHelper;
+use App\Exceptions\CustomException;
 use App\Http\Requests\Administrator\CoursesRequest;
-use App\Models\Courses;
 use App\Repository\Administrator\CoursesRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -40,6 +38,7 @@ class CoursesService
     {
         try {
             $data = CoursesRepository::getById($id);
+
             return ResponseHelper::success($data);
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Batch');
@@ -53,7 +52,19 @@ class CoursesService
         try {
             $data = UploadFileHelper::uploadFile($request);
             $batch = CoursesRepository::insert($data);
+
             return ResponseHelper::created($batch, 'Course berhasil dibuat', 201);
+        } catch (Throwable $th) {
+            return self::handleError($th);
+        }
+    }
+
+    public static function statusCourse($id)
+    {
+        try {
+            $data = CoursesRepository::statusCourse($id);
+
+            return ResponseHelper::success($data);
         } catch (Throwable $th) {
             return self::handleError($th);
         }
@@ -69,6 +80,7 @@ class CoursesService
         try {
             $data = UploadFileHelper::uploadFile($request, $id, CoursesRepository::class);
             CoursesRepository::update($id, $data);
+
             return ResponseHelper::success(null, 'Course berhasil diperbarui');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Course');
@@ -79,10 +91,13 @@ class CoursesService
 
     public static function deleteSoft($id)
     {
-        if (!CoursesRepository::getById($id)) throw CustomException::notFound('Course');
+        if (!CoursesRepository::getById($id)) {
+            throw CustomException::notFound('Course');
+        }
 
         try {
             CoursesRepository::deleteSoft($id);
+
             return ResponseHelper::success(null, 'Course di hapus, dan tersedia di trash');
         } catch (ModelNotFoundException $e) {
             throw CustomException::notFound('Course');
@@ -93,10 +108,13 @@ class CoursesService
 
     public static function restoreSoft($id)
     {
-        if (!CoursesRepository::getByIdOnlyTrashed($id)) throw CustomException::notFound('Course');
+        if (!CoursesRepository::getByIdOnlyTrashed($id)) {
+            throw CustomException::notFound('Course');
+        }
 
         try {
             CoursesRepository::restoreSoft($id);
+
             return ResponseHelper::success(null, 'Course di restore');
         } catch (Throwable $th) {
             return self::handleError($th);
@@ -105,10 +123,13 @@ class CoursesService
 
     public static function delete($id)
     {
-        if (!CoursesRepository::getByIdOnlyTrashed($id)) throw CustomException::notFound('Course');
+        if (!CoursesRepository::getByIdOnlyTrashed($id)) {
+            throw CustomException::notFound('Course');
+        }
 
         try {
             CoursesRepository::delete($id);
+
             return ResponseHelper::success(null, 'Course di hapus permanen');
         } catch (Throwable $th) {
             return self::handleError($th);
