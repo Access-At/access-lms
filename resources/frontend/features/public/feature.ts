@@ -1,6 +1,7 @@
+import { UseQueryOptions, UseQueryResult, useQuery } from "@tanstack/react-query"
+
 import { RequestService } from "@/lib/request-service"
 import { apiResponseSchema } from "@/schemas/api-response-schema"
-import { queryOptions } from "@tanstack/react-query"
 import { z } from "zod"
 
 const featureResponseSchema = apiResponseSchema.extend({
@@ -22,9 +23,14 @@ export const fetchFeature = async (): Promise<FeatureResponseType> => {
   return response as FeatureResponseType
 }
 
-export const useFeatureQuery = () => {
-  return queryOptions({
+export function useFeatureQuery(): UseQueryOptions<FeatureResponseType, unknown> {
+  return {
     queryKey: ["feature"],
-    queryFn: () => fetchFeature(),
-  })
+    queryFn: fetchFeature,
+  }
+}
+
+export function useFetchCategory(): UseQueryResult<FeatureResponseType, unknown> {
+  const options = useFeatureQuery()
+  return useQuery<FeatureResponseType, unknown>(options)
 }

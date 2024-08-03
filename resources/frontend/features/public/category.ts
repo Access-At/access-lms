@@ -1,13 +1,13 @@
+import { UseQueryOptions, UseQueryResult, useQuery } from "@tanstack/react-query"
+
 import { RequestService } from "@/lib/request-service"
 import { apiResponseSchema } from "@/schemas/api-response-schema"
-import { queryOptions } from "@tanstack/react-query"
 import { z } from "zod"
 
 const categoryresponseSchema = apiResponseSchema.extend({
   data: z.array(
     z.object({
       title: z.string(),
-      desc: z.string(),
       courses_total: z.number(),
     }),
   ),
@@ -23,9 +23,14 @@ export const fetchCategory = async (): Promise<CategoryResponseType> => {
   return response as CategoryResponseType
 }
 
-export const useCategoryQuery  = () => {
-  return queryOptions({
+export function useCategoryQuery(): UseQueryOptions<CategoryResponseType, unknown> {
+  return {
     queryKey: ["category"],
-    queryFn: () => fetchCategory(),
-  })
+    queryFn: fetchCategory,
+  }
+}
+
+export function useFetchCategory(): UseQueryResult<CategoryResponseType, unknown> {
+  const options = useCategoryQuery()
+  return useQuery<CategoryResponseType, unknown>(options)
 }

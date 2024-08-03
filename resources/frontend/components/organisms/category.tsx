@@ -3,13 +3,13 @@ import * as React from "react"
 import { Card, CardDescription, CardTitle } from "../ui/card"
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel"
 
-import { useCategoryQuery } from "@/features/public/category"
-import { useMediaQuery } from "@/hooks/useMediaQuery"
-import { cn } from "@/lib/utils"
-import { useSuspenseQuery } from "@tanstack/react-query"
-import { Link } from "@tanstack/react-router"
 import Autoscroll from "embla-carousel-auto-scroll"
 import { ChevronRight } from "lucide-react"
+import { Link } from "@tanstack/react-router"
+import { cn } from "@/lib/utils"
+import { useCategoryQuery } from "@/features/public/category"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
+import { useSuspenseQuery } from "@tanstack/react-query"
 
 export default function Category() {
   const { data: category } = useSuspenseQuery(useCategoryQuery())
