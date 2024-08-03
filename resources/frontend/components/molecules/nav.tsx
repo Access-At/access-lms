@@ -68,7 +68,7 @@ export default function Nav({
     >
       <div className='flex h-full flex-col justify-between'>
         <TooltipProvider delayDuration={0}>
-          <nav className='grid gap-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2'>
+          <nav className='grid gap-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-0'>
             {links.map(renderLink)}
           </nav>
         </TooltipProvider>
