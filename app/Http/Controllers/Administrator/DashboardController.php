@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Services\Administrator\DashboardService;
 
 class DashboardController extends Controller
 {
-    // TODO
+    public function getData()
+    {
+        return DashboardService::getCountData();
+    }
 }

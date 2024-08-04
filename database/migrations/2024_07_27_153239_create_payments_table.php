@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->integer('amount')->default(0);
-            $table->enum('status', ['pending', 'completed', 'failed']);
+            $table->string('order_id');
+            $table->string('transaction_id');
+            $table->double('price');
+            $table->string('status');
             $table->string('payment_type');
+            $table->string('payment_url');
             $table->foreignUuid('course_id')->constrained('courses')->cascadeOnDelete();
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();

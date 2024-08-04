@@ -5,8 +5,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Public\PublicController;
 use App\Http\Controllers\Administrator\PagesController;
+use App\Http\Controllers\Administrator\GradesController;
 use App\Http\Controllers\Administrator\BatchesController;
 use App\Http\Controllers\Administrator\CoursesController;
+use App\Http\Controllers\Administrator\DashboardController;
 use App\Http\Controllers\Administrator\CategoriesController;
 use App\Http\Controllers\Administrator\CoursesTopicController;
 use App\Http\Controllers\Administrator\CoursesBenefitController;
@@ -23,7 +25,10 @@ Route::prefix('v1')->group(function () {
             Route::get('/refresh', [AuthController::class, 'refreshToken']);
             Route::post('/logout', [AuthController::class, 'logout']);
 
+            Route::get('/dashboard/get-data', [DashboardController::class, 'getData']);
+
             Route::apiResource('categories', CategoriesController::class);
+            Route::apiResource('grades', GradesController::class)->only(['index', 'store', 'update', 'destroy']);
 
             Route::prefix('batches')->group(function () {
                 Route::get('/', [BatchesController::class, 'index']);

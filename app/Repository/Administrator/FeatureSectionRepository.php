@@ -2,6 +2,7 @@
 
 namespace App\Repository\Administrator;
 
+use App\Helpers\QueryHelper;
 use App\Models\FeatureSection;
 
 class FeatureSectionRepository
@@ -13,7 +14,14 @@ class FeatureSectionRepository
 
     public static function getFeatures()
     {
-        return FeatureSection::orderBy('created_at', 'asc')->get();
+        $filters = [
+            'title' => ['operator' => 'like', 'value' => request()->input('title')],
+        ];
+
+        $feature = FeatureSection::query();
+        $feature = QueryHelper::applyFilter($feature, $filters);
+
+        return $feature->oldest()->get();
     }
 
     public static function storeFeature($request)

@@ -3,20 +3,21 @@
 namespace App\Repository\Administrator;
 
 use App\Models\Category;
+use App\Helpers\QueryHelper;
 use App\Http\Resources\Administrator\Categories\CategoriesResource;
 use App\Http\Resources\Administrator\Categories\CategoriesCollection;
 
 class CategoriesRepository
 {
-    public static function getAll(): CategoriesCollection
+    public static function getAll()
     {
-        $category = Category::query();
-        $title = request()->query('title');
-        $page = request()->query('page', 1);
+        $filters = [
+            'title' => ['operator' => 'like', 'value' => request()->input('title')],
+        ];
 
-        if ($title) {
-            $category->where('title', 'like', "%{$title}%");
-        }
+        $category = Category::query();
+        $category = QueryHelper::applyFilter($category, $filters);
+        $page = request()->query('page', 1);
 
         return new CategoriesCollection($category->paginate(10, ['*'], 'page', $page));
     }

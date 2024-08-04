@@ -8,6 +8,7 @@ class PagesRepository
 {
     public static function getPages()
     {
+
         return Pages::get();
     }
 
@@ -33,6 +34,5 @@ class PagesRepository
         $page = self::findById($pageId);
 
         return $page->delete();
-
     }
 }

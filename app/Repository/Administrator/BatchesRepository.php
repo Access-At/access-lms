@@ -3,13 +3,22 @@
 namespace App\Repository\Administrator;
 
 use App\Models\Batch;
+use App\Helpers\QueryHelper;
 use App\Http\Resources\Administrator\Batches\BatchesCollection;
 
 class BatchesRepository
 {
     public static function getAll()
     {
-        return new BatchesCollection(Batch::with('courses')->withoutTrashed()->latest()->paginate(10));
+        $filters = [
+            'title' => ['operator' => 'like', 'value' => request()->input('title')],
+        ];
+
+        $batch = Batch::query();
+        $batch = QueryHelper::applyFilter($batch, $filters);
+        $page = request()->query('page', 1);
+
+        return new BatchesCollection($batch->with('courses')->withoutTrashed()->paginate(10, ['*'], 'page', $page));
     }
 
     public static function getAllTrashed()
