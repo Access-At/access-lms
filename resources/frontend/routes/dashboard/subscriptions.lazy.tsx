@@ -1,7 +1,7 @@
 import SubscriptionsPages from "@/pages/admin/subscriptions"
-import { createFileRoute } from "@tanstack/react-router"
+import { createLazyFileRoute } from "@tanstack/react-router"
 import * as React from "react"
 
-export const Route = createFileRoute("/dashboard/subscriptions")({
+export const Route = createLazyFileRoute("/dashboard/subscriptions")({
   component: React.memo(SubscriptionsPages),
 })

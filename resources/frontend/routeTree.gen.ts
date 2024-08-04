@@ -16,20 +16,22 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as AuthImport } from './routes/auth'
 import { Route as IndexImport } from './routes/_index'
-import { Route as DashboardUsersImport } from './routes/dashboard/users'
-import { Route as DashboardSubscriptionsImport } from './routes/dashboard/subscriptions'
-import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
-import { Route as DashboardReportsImport } from './routes/dashboard/reports'
-import { Route as DashboardCoursesImport } from './routes/dashboard/courses'
-import { Route as DashboardCategoriesImport } from './routes/dashboard/categories'
-import { Route as DashboardBatchesImport } from './routes/dashboard/batches'
 import { Route as DashboardPagesIndexImport } from './routes/dashboard/pages/index'
-import { Route as DashboardPagesAddImport } from './routes/dashboard/pages/add'
 
 // Create Virtual Routes
 
 const DashboardIndexLazyImport = createFileRoute('/dashboard/')()
 const IndexIndexLazyImport = createFileRoute('/_index/')()
+const DashboardUsersLazyImport = createFileRoute('/dashboard/users')()
+const DashboardSubscriptionsLazyImport = createFileRoute(
+  '/dashboard/subscriptions',
+)()
+const DashboardSettingsLazyImport = createFileRoute('/dashboard/settings')()
+const DashboardReportsLazyImport = createFileRoute('/dashboard/reports')()
+const DashboardCoursesLazyImport = createFileRoute('/dashboard/courses')()
+const DashboardCategoriesLazyImport = createFileRoute('/dashboard/categories')()
+const DashboardBatchesLazyImport = createFileRoute('/dashboard/batches')()
+const DashboardPagesAddLazyImport = createFileRoute('/dashboard/pages/add')()
 
 // Create/Update Routes
 
@@ -60,50 +62,68 @@ const IndexIndexLazyRoute = IndexIndexLazyImport.update({
   getParentRoute: () => IndexRoute,
 } as any).lazy(() => import('./routes/_index/index.lazy').then((d) => d.Route))
 
-const DashboardUsersRoute = DashboardUsersImport.update({
+const DashboardUsersLazyRoute = DashboardUsersLazyImport.update({
   path: '/users',
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/dashboard/users.lazy').then((d) => d.Route),
+)
 
-const DashboardSubscriptionsRoute = DashboardSubscriptionsImport.update({
-  path: '/subscriptions',
-  getParentRoute: () => DashboardRoute,
-} as any)
+const DashboardSubscriptionsLazyRoute = DashboardSubscriptionsLazyImport.update(
+  {
+    path: '/subscriptions',
+    getParentRoute: () => DashboardRoute,
+  } as any,
+).lazy(() =>
+  import('./routes/dashboard/subscriptions.lazy').then((d) => d.Route),
+)
 
-const DashboardSettingsRoute = DashboardSettingsImport.update({
+const DashboardSettingsLazyRoute = DashboardSettingsLazyImport.update({
   path: '/settings',
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/dashboard/settings.lazy').then((d) => d.Route),
+)
 
-const DashboardReportsRoute = DashboardReportsImport.update({
+const DashboardReportsLazyRoute = DashboardReportsLazyImport.update({
   path: '/reports',
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/dashboard/reports.lazy').then((d) => d.Route),
+)
 
-const DashboardCoursesRoute = DashboardCoursesImport.update({
+const DashboardCoursesLazyRoute = DashboardCoursesLazyImport.update({
   path: '/courses',
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/dashboard/courses.lazy').then((d) => d.Route),
+)
 
-const DashboardCategoriesRoute = DashboardCategoriesImport.update({
+const DashboardCategoriesLazyRoute = DashboardCategoriesLazyImport.update({
   path: '/categories',
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/dashboard/categories.lazy').then((d) => d.Route),
+)
 
-const DashboardBatchesRoute = DashboardBatchesImport.update({
+const DashboardBatchesLazyRoute = DashboardBatchesLazyImport.update({
   path: '/batches',
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/dashboard/batches.lazy').then((d) => d.Route),
+)
 
 const DashboardPagesIndexRoute = DashboardPagesIndexImport.update({
   path: '/pages/',
   getParentRoute: () => DashboardRoute,
 } as any)
 
-const DashboardPagesAddRoute = DashboardPagesAddImport.update({
+const DashboardPagesAddLazyRoute = DashboardPagesAddLazyImport.update({
   path: '/pages/add',
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/dashboard/pages/add.lazy').then((d) => d.Route),
+)
 
 // Populate the FileRoutesByPath interface
 
@@ -134,49 +154,49 @@ declare module '@tanstack/react-router' {
       id: '/dashboard/batches'
       path: '/batches'
       fullPath: '/dashboard/batches'
-      preLoaderRoute: typeof DashboardBatchesImport
+      preLoaderRoute: typeof DashboardBatchesLazyImport
       parentRoute: typeof DashboardImport
     }
     '/dashboard/categories': {
       id: '/dashboard/categories'
       path: '/categories'
       fullPath: '/dashboard/categories'
-      preLoaderRoute: typeof DashboardCategoriesImport
+      preLoaderRoute: typeof DashboardCategoriesLazyImport
       parentRoute: typeof DashboardImport
     }
     '/dashboard/courses': {
       id: '/dashboard/courses'
       path: '/courses'
       fullPath: '/dashboard/courses'
-      preLoaderRoute: typeof DashboardCoursesImport
+      preLoaderRoute: typeof DashboardCoursesLazyImport
       parentRoute: typeof DashboardImport
     }
     '/dashboard/reports': {
       id: '/dashboard/reports'
       path: '/reports'
       fullPath: '/dashboard/reports'
-      preLoaderRoute: typeof DashboardReportsImport
+      preLoaderRoute: typeof DashboardReportsLazyImport
       parentRoute: typeof DashboardImport
     }
     '/dashboard/settings': {
       id: '/dashboard/settings'
       path: '/settings'
       fullPath: '/dashboard/settings'
-      preLoaderRoute: typeof DashboardSettingsImport
+      preLoaderRoute: typeof DashboardSettingsLazyImport
       parentRoute: typeof DashboardImport
     }
     '/dashboard/subscriptions': {
       id: '/dashboard/subscriptions'
       path: '/subscriptions'
       fullPath: '/dashboard/subscriptions'
-      preLoaderRoute: typeof DashboardSubscriptionsImport
+      preLoaderRoute: typeof DashboardSubscriptionsLazyImport
       parentRoute: typeof DashboardImport
     }
     '/dashboard/users': {
       id: '/dashboard/users'
       path: '/users'
       fullPath: '/dashboard/users'
-      preLoaderRoute: typeof DashboardUsersImport
+      preLoaderRoute: typeof DashboardUsersLazyImport
       parentRoute: typeof DashboardImport
     }
     '/_index/': {
@@ -197,7 +217,7 @@ declare module '@tanstack/react-router' {
       id: '/dashboard/pages/add'
       path: '/pages/add'
       fullPath: '/dashboard/pages/add'
-      preLoaderRoute: typeof DashboardPagesAddImport
+      preLoaderRoute: typeof DashboardPagesAddLazyImport
       parentRoute: typeof DashboardImport
     }
     '/dashboard/pages/': {
@@ -216,15 +236,15 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute: IndexRoute.addChildren({ IndexIndexLazyRoute }),
   AuthRoute,
   DashboardRoute: DashboardRoute.addChildren({
-    DashboardBatchesRoute,
-    DashboardCategoriesRoute,
-    DashboardCoursesRoute,
-    DashboardReportsRoute,
-    DashboardSettingsRoute,
-    DashboardSubscriptionsRoute,
-    DashboardUsersRoute,
+    DashboardBatchesLazyRoute,
+    DashboardCategoriesLazyRoute,
+    DashboardCoursesLazyRoute,
+    DashboardReportsLazyRoute,
+    DashboardSettingsLazyRoute,
+    DashboardSubscriptionsLazyRoute,
+    DashboardUsersLazyRoute,
     DashboardIndexLazyRoute,
-    DashboardPagesAddRoute,
+    DashboardPagesAddLazyRoute,
     DashboardPagesIndexRoute,
   }),
 })
@@ -267,31 +287,31 @@ export const routeTree = rootRoute.addChildren({
       ]
     },
     "/dashboard/batches": {
-      "filePath": "dashboard/batches.tsx",
+      "filePath": "dashboard/batches.lazy.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/categories": {
-      "filePath": "dashboard/categories.tsx",
+      "filePath": "dashboard/categories.lazy.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/courses": {
-      "filePath": "dashboard/courses.tsx",
+      "filePath": "dashboard/courses.lazy.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/reports": {
-      "filePath": "dashboard/reports.tsx",
+      "filePath": "dashboard/reports.lazy.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/settings": {
-      "filePath": "dashboard/settings.tsx",
+      "filePath": "dashboard/settings.lazy.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/subscriptions": {
-      "filePath": "dashboard/subscriptions.tsx",
+      "filePath": "dashboard/subscriptions.lazy.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/users": {
-      "filePath": "dashboard/users.tsx",
+      "filePath": "dashboard/users.lazy.tsx",
       "parent": "/dashboard"
     },
     "/_index/": {
@@ -303,7 +323,7 @@ export const routeTree = rootRoute.addChildren({
       "parent": "/dashboard"
     },
     "/dashboard/pages/add": {
-      "filePath": "dashboard/pages/add.tsx",
+      "filePath": "dashboard/pages/add.lazy.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/pages/": {

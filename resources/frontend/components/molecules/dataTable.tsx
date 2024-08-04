@@ -1,6 +1,10 @@
+import * as React from "react"
+
 import {
   ColumnDef,
   ColumnFiltersState,
+  SortingState,
+  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -8,11 +12,8 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  SortingState,
   useReactTable,
-  VisibilityState,
 } from "@tanstack/react-table"
-import * as React from "react"
 import {
   Table,
   TableBody,
@@ -21,6 +22,9 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table"
+
+import { DataTablePagination } from "./dataTablePagination"
+import { DataTableToolbar } from "./dataTableToolbar"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -63,7 +67,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className='space-y-4'>
-      {/* <DataTableToolbar table={table} /> */}
+      <DataTableToolbar table={table} />
       <div className='rounded-md border'>
         <Table>
           <TableHeader>
@@ -93,48 +97,15 @@ export function DataTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>
-                      {/* Fixme: Error nya di sini syad 
-                          katanya gini sih errornya
-                        [
-                              {
-                                  "code": "invalid_type",
-                                  "expected": "string",
-                                  "received": "undefined",
-                                  "path": [
-                                      "status"
-                                  ],
-                                  "message": "Required"
-                              },
-                              {
-                                  "code": "invalid_type",
-                                  "expected": "string",
-                                  "received": "undefined",
-                                  "path": [
-                                      "label"
-                                  ],
-                                  "message": "Required"
-                              },
-                              {
-                                  "code": "invalid_type",
-                                  "expected": "string",
-                                  "received": "undefined",
-                                  "path": [
-                                      "priority"
-                                  ],
-                                  "message": "Required"
-                              }
-                        ]
-                      */}
-                      {/* Penyebab error yang flexRender ini */}
-                      {/* {flexRender(
+                      {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),
-                      )} */}
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))}
-            {/* {table.getRowModel().rows?.length &&
+            {table.getRowModel().rows?.length &&
               table.getRowModel().rows.map(row => (
                 <TableRow
                   key={row.id}
@@ -175,11 +146,11 @@ export function DataTable<TData, TValue>({
                   No results.
                 </TableCell>
               </TableRow>
-            )} */}
+            )}
           </TableBody>
         </Table>
       </div>
-      {/* <DataTablePagination table={table} /> */}
+      <DataTablePagination table={table} />
     </div>
   )
 }

@@ -1,13 +1,10 @@
-import { Table } from "@tanstack/react-table"
-
 import { Button, buttonVariants } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { PlusIcon, X } from "lucide-react"
 
-import { priorities, statuses } from "@/constant/tableToolbar"
+import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { Link } from "@tanstack/react-router"
-import { PlusIcon, X } from "lucide-react"
-import { DataTableFacetedFilter } from "./dataTableFacetedFilter"
+import { Table } from "@tanstack/react-table"
 import { DataTableViewOptions } from "./dataTableViewOptions"
 
 interface DataTableToolbarProps<TData> {
@@ -31,7 +28,8 @@ export function DataTableToolbar<TData>({
           className='h-8 w-[150px] lg:w-[250px]'
         />
         <div className='flex gap-x-2'>
-          {table.getColumn("status") && (
+          {/* ini jika mau ada filter */}
+          {/* {table.getColumn("status") && (
             <DataTableFacetedFilter
               column={table.getColumn("status")}
               title='Status'
@@ -44,7 +42,7 @@ export function DataTableToolbar<TData>({
               title='Priority'
               options={priorities}
             />
-          )}
+          )} */}
         </div>
         {isFiltered && (
           <Button

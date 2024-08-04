@@ -1,9 +1,10 @@
+import { FaGithub, FaSlack } from "react-icons/fa"
+
+import { LazyImage } from "@/components/shared/lazyImage"
 import { team } from "@/constant/team"
 import { TransitionType } from "@/lib/types"
 import { Link } from "@tanstack/react-router"
-import { FaGithub, FaSlack } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
-import { LazyImage } from "../shared/lazy-image"
 
 export default function Team() {
   return (

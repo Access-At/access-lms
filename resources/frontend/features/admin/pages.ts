@@ -4,24 +4,27 @@ import {
   useMutation,
 } from "@tanstack/react-query"
 
-import { RequestService } from "@/lib/request-service"
-import { PageFormType } from "@/schemas/admin/pageFormSchema"
-import { apiResponseSchema } from "@/schemas/api-response-schema"
 import { AxiosError } from "axios"
+import { PageFormType } from "@/schemas/admin/pageFormSchema"
+import { RequestService } from "@/lib/requestService"
+import { apiResponseSchema } from "@/schemas/apiResponseSchema"
 import { z } from "zod"
 
-const PagesResponseShema = apiResponseSchema.extend({
-  data: z.object({
+const ResponsePageSchema = z.object({
     id: z.string(),
     title: z.string(),
     slug: z.string(),
     content: z.string(),
     created_at: z.string(),
     updated_at: z.string(),
-  }),
+  });
+
+const PagesResponseShema = apiResponseSchema.extend({
+  data: ResponsePageSchema,
 })
 
 export type PagesResponse = z.infer<typeof PagesResponseShema>
+export type ResponsePage = z.infer<typeof ResponsePageSchema>
 
 interface Props {
   onSuccess: (responses: PagesResponse) => void
@@ -124,7 +127,7 @@ const FetchPagesResponseSchema = apiResponseSchema.extend({
       created_at: z.string(),
       updated_at: z.string(),
     }),
-  ),
+  )
 })
 
 export type FetchPagesResponse = z.infer<typeof FetchPagesResponseSchema>

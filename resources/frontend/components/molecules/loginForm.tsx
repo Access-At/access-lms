@@ -1,4 +1,3 @@
-import { Card, CardContent } from "../ui/card"
 import {
   Form,
   FormControl,
@@ -7,22 +6,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import {
-  LoginFormType,
-  loginFormSchema,
-} from "@/schemas/admin/login-form-schema"
 import { error, success } from "@/lib/toast"
-import { useNavigate, useRouter } from "@tanstack/react-router"
+import { LoginFormType, loginFormSchema } from "@/schemas/loginFormSchema"
+import { useNavigate, useRouter, useSearch } from "@tanstack/react-router"
+import { Card, CardContent } from "../ui/card"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Loader2 } from "lucide-react"
-import { sleep } from "@/lib/utils"
 import { useAuth } from "@/contexts"
-import { useForm } from "react-hook-form"
-import useLocalStorage from "@/hooks/useLocalStorage"
-import { useLoginQuery } from "@/features/login-feature"
+import { useLoginQuery } from "@/features/loginFeature"
+import { sleep } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Loader2 } from "lucide-react"
+import { useForm } from "react-hook-form"
 
 const fallback = "/dashboard" as const
 
@@ -30,7 +26,7 @@ export default function LoginForm() {
   const navigate = useNavigate()
   const router = useRouter()
   const { login } = useAuth()
-  //   const useLocalStorage = useLocalStorage()
+  const search = useSearch({ from: "/auth" })
 
   const form = useForm<LoginFormType>({
     resolver: zodResolver(loginFormSchema),
@@ -53,7 +49,6 @@ export default function LoginForm() {
 
         await login(data.user)
         localStorage.setItem("token", data.token)
-        // await useLocalStorage({ key: "token", defaultValue: data.token })
 
         await router.invalidate()
 
@@ -62,7 +57,7 @@ export default function LoginForm() {
         await sleep(1)
 
         navigate({
-          to: fallback,
+          to: search?.redirect || fallback,
         })
       }
     },

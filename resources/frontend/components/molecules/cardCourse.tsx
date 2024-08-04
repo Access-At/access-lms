@@ -6,9 +6,9 @@ import {
   CardTitle,
 } from "../ui/card"
 
+import { LazyImage } from "@/components/shared/lazyImage"
 import { TransitionType } from "@/lib/types"
 import { Link } from "@tanstack/react-router"
-import { LazyImage } from "../shared/lazy-image"
 
 interface CourseCardProps {
   title: string

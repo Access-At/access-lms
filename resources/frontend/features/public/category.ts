@@ -1,7 +1,7 @@
 import { UseQueryOptions, UseQueryResult, useQuery } from "@tanstack/react-query"
 
-import { RequestService } from "@/lib/request-service"
-import { apiResponseSchema } from "@/schemas/api-response-schema"
+import { RequestService } from "@/lib/requestService"
+import { apiResponseSchema } from "@/schemas/apiResponseSchema"
 import { z } from "zod"
 
 const categoryresponseSchema = apiResponseSchema.extend({
