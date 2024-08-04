@@ -4,20 +4,20 @@ import {
   useMutation,
 } from "@tanstack/react-query"
 
-import { AxiosError } from "axios"
-import { PageFormType } from "@/schemas/admin/pageFormSchema"
 import { RequestService } from "@/lib/requestService"
+import { PageFormType } from "@/schemas/admin/pageFormSchema"
 import { apiResponseSchema } from "@/schemas/apiResponseSchema"
+import { AxiosError } from "axios"
 import { z } from "zod"
 
 const ResponsePageSchema = z.object({
-    id: z.string(),
-    title: z.string(),
-    slug: z.string(),
-    content: z.string(),
-    created_at: z.string(),
-    updated_at: z.string(),
-  });
+  id: z.string(),
+  title: z.string(),
+  slug: z.string(),
+  content: z.string(),
+  created_at: z.string(),
+  updated_at: z.string(),
+})
 
 const PagesResponseShema = apiResponseSchema.extend({
   data: ResponsePageSchema,
@@ -118,16 +118,7 @@ const deletePages = async (id: string): Promise<PagesResponse> => {
 }
 
 const FetchPagesResponseSchema = apiResponseSchema.extend({
-  data: z.array(
-    z.object({
-      id: z.string(),
-      title: z.string(),
-      slug: z.string(),
-      content: z.string(),
-      created_at: z.string(),
-      updated_at: z.string(),
-    }),
-  )
+  data: z.array(ResponsePageSchema),
 })
 
 export type FetchPagesResponse = z.infer<typeof FetchPagesResponseSchema>
