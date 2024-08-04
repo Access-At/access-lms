@@ -37,6 +37,11 @@ class Courses extends Model
         });
     }
 
+    public function scopeIsPublish($value)
+    {
+        return $value->where('status', 'publish');
+    }
+
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;
@@ -50,12 +55,12 @@ class Courses extends Model
 
     public function scopeRelation($value)
     {
-        $value->with(['curriculums', 'benefits', 'batches', 'category']);
+        $value->with(['curriculums', 'benefits', 'batches', 'category', 'topics', 'administrator']);
     }
 
     public function administrator(): BelongsTo
     {
-        return $this->belongsTo(Administrator::class);
+        return $this->belongsTo(Administrator::class, 'created_by', 'id');
     }
 
     // batches
@@ -74,8 +79,30 @@ class Courses extends Model
         return $this->hasMany(CoursesBenefits::class, 'course_id', 'id');
     }
 
+    public function topics(): HasMany
+    {
+        return $this->hasMany(CoursesTopics::class, 'course_id', 'id');
+    }
+
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function trainer()
+    {
+
+        return $this->belongsTo(Trainer::class, 'trainer_by', 'id');
+    }
+
+    // get image with url
+
+    public function getImageUrlAttribute($value)
+    {
+        return [
+            'original' => $value,
+            'url' => url($value),
+            'alt' => $this->title,
+        ];
     }
 }

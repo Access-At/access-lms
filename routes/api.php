@@ -8,6 +8,7 @@ use App\Http\Controllers\Administrator\PagesController;
 use App\Http\Controllers\Administrator\BatchesController;
 use App\Http\Controllers\Administrator\CoursesController;
 use App\Http\Controllers\Administrator\CategoriesController;
+use App\Http\Controllers\Administrator\CoursesTopicController;
 use App\Http\Controllers\Administrator\CoursesBenefitController;
 use App\Http\Controllers\Administrator\FeatureSectionController;
 use App\Http\Controllers\Administrator\CoursesCurriculumController;
@@ -42,11 +43,15 @@ Route::prefix('v1')->group(function () {
                 Route::post('/', [CoursesController::class, 'store']);
                 Route::get('/{course}', [CoursesController::class, 'show']);
                 Route::post('/{course}/status', [CoursesController::class, 'statusCourse']);
-                Route::put('/{course}/duplicate', [CoursesController::class, 'duplicate']);
+                Route::post('/{course}/duplicate', [CoursesController::class, 'duplicate']);
                 Route::put('/{course}', [CoursesController::class, 'update']);
                 Route::put('/{course}/trash', [CoursesController::class, 'trash']);
                 Route::put('/{course}/restore', [CoursesController::class, 'restore']);
                 Route::delete('/{course}', [CoursesController::class, 'destroy']);
+
+                // assign trainer
+
+                Route::put('/{course}/assign-trainer', [CoursesController::class, 'assignTrainer']);
 
                 // curriculum
                 Route::get('/{course}/curriculum', [CoursesCurriculumController::class, 'listCurriculum']);
@@ -58,6 +63,13 @@ Route::prefix('v1')->group(function () {
                 Route::post('/{course}/benefit/create', [CoursesBenefitController::class, 'store']);
                 Route::put('/{course}/benefit/{benefit}/update', [CoursesBenefitController::class, 'update']);
                 Route::delete('/{course}/benefit/{benefit}/delete', [CoursesBenefitController::class, 'delete']);
+
+                // course topic
+
+                Route::get('/{course}/topics', [CoursesTopicController::class, 'list']);
+                Route::post('/{course}/topics/create', [CoursesTopicController::class, 'store']);
+                Route::put('/{course}/topics/{topic}/update', [CoursesTopicController::class, 'update']);
+                Route::delete('/{course}/topics/{topic}/delete', [CoursesTopicController::class, 'destroy']);
             });
 
             Route::apiResource('pages', PagesController::class);

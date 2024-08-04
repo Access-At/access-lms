@@ -13,7 +13,12 @@ class Trainer extends Model implements JWTSubject
 
     public $incrementing = false;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
+
+    public function courses()
+    {
+        return $this->hasMany(Courses::class, 'trainer_by', 'id');
+    }
 
     public function getJWTIdentifier()
     {

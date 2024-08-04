@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreignUuid('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignUuid('batch_id')->constrained('batches')->cascadeOnDelete();
             $table->foreignUuid('created_by')->constrained('administrators')->cascadeOnDelete();
+            $table->foreignUuid('trainer_by')->nullable()->constrained('trainers')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

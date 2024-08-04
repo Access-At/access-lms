@@ -136,6 +136,21 @@ class CoursesService
         }
     }
 
+    public static function assignTrainer($id, $data)
+    {
+        if (!CoursesRepository::getById($id)) {
+            throw CustomException::notFound('Course');
+        }
+        try {
+
+            CoursesRepository::assignTrainer($id, $data);
+
+            return ResponseHelper::success(null, 'Trainer ditambahkan ke course');
+        } catch (Throwable $th) {
+            return self::handleError($th);
+        }
+    }
+
     /**
      * Handle errors uniformly.
      */

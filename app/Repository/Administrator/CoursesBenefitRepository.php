@@ -36,6 +36,5 @@ class CoursesBenefitRepository
         $curriculum = CoursesBenefits::courseId($courseId)->findOrFail($curriculumId);
 
         return $curriculum->delete();
-
     }
 }

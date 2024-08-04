@@ -80,12 +80,13 @@
 namespace App\Repository\Administrator;
 
 use App\Models\Courses;
+use App\Http\Resources\Administrator\Courses\CoursesResource;
 
 class CoursesRepository
 {
     public static function getAll()
     {
-        return Courses::relation()->withoutTrashed()->get();
+        return CoursesResource::collection(Courses::relation()->withoutTrashed()->paginate(10));
     }
 
     public static function statusCourse($id)
@@ -104,7 +105,7 @@ class CoursesRepository
 
     public static function getById($id)
     {
-        return Courses::withoutTrashed()->find($id);
+        return Courses::relation()->withoutTrashed()->find($id);
     }
 
     public static function getByIdOnlyTrashed($id)
@@ -131,6 +132,7 @@ class CoursesRepository
         if ($original) {
             $newCourse = $original->replicate();
             $newCourse->title = $original->title . ' Copy';
+            $newCourse->trainer_by = null;
             $newCourse->save();
 
             return $newCourse;
@@ -158,5 +160,13 @@ class CoursesRepository
         $course = Courses::onlyTrashed()->find($id);
 
         return $course ? $course->forceDelete() : false;
+    }
+
+    public static function assignTrainer($id, $request)
+    {
+        $course = self::getById($id);
+        $data['trainer_by'] = $request->trainer_by;
+
+        return $course ? $course->update($data) : false;
     }
 }

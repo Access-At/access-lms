@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Administrator;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Administrator\CoursesService;
 use App\Http\Requests\Administrator\CoursesRequest;
@@ -65,5 +66,12 @@ class CoursesController extends Controller
     public function destroy(string $id)
     {
         return CoursesService::delete($id);
+    }
+
+    // assign trainer
+
+    public function assignTrainer($id, Request $request)
+    {
+        return CoursesService::assignTrainer($id, $request);
     }
 }

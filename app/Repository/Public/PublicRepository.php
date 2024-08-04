@@ -9,6 +9,7 @@ use App\Models\FeatureSection;
 use App\Helpers\ResponseHelper;
 use App\Exceptions\CustomException;
 use App\Http\Resources\Public\CoursesCollection;
+use App\Http\Resources\Public\CourseSlugResource;
 use App\Http\Resources\Public\CategoriesCollection;
 
 class PublicRepository
@@ -38,7 +39,7 @@ class PublicRepository
     public static function getCourses()
     {
         try {
-            $data = new CoursesCollection(Courses::with('category')->where('status', 'publish')->orderBy('created_at', 'desc')->take(4)->get());
+            $data = new CoursesCollection(Courses::with('category')->isPublish()->orderBy('created_at', 'desc')->take(4)->get());
 
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
@@ -50,10 +51,12 @@ class PublicRepository
     {
 
         try {
-            $data = Courses::relation()->where('id', $slug)->first();
-            if (!$data) {
+            $course = Courses::isPublish()->where('slug', $slug)->first();
+            if (!$course) {
                 throw CustomException::notFound('Course');
             }
+
+            $data = new CourseSlugResource($course);
 
             return ResponseHelper::success($data);
         } catch (Throwable $th) {
