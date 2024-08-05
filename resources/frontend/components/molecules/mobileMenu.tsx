@@ -10,12 +10,12 @@ import MobileMenuItem from "./mobileMenuItem"
 
 export default function MobileMenu() {
   return (
-    <Menubar className='sm:hidden'>
+    <Menubar className='md:hidden'>
       <MenubarMenu>
         <MenubarTrigger aria-label='Open menu'>
           <Menu className='h-5 w-5' />
         </MenubarTrigger>
-        <MenubarContent className='sm:hidden'>
+        <MenubarContent className='md:hidden'>
           <MobileMenuItem />
         </MenubarContent>
       </MenubarMenu>

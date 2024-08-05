@@ -1,9 +1,8 @@
-import { useNavigate, useRouter } from "@tanstack/react-router"
+import { useRouter } from "@tanstack/react-router"
 
 import { Button } from "@/components/ui/button"
 
 export default function NotFoundError() {
-  const navigate = useNavigate()
   const router = useRouter()
 
   return (
@@ -18,9 +17,6 @@ export default function NotFoundError() {
         <div className='mt-6 flex gap-4'>
           <Button variant='outline' onClick={() => router.history.back()}>
             Go Back
-          </Button>
-          <Button onClick={() => navigate({ to: "/dashboard" })}>
-            Back to Dashboard
           </Button>
         </div>
       </div>

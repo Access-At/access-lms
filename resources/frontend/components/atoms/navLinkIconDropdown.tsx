@@ -20,7 +20,6 @@ export default function NavLinkIconDropdown({
   sub,
 }: NavLinkProps) {
   const { checkActiveNav } = useCheckActiveNav()
-
   /* Open collapsible by default
    * if one of child element is active */
   const isChildActive = !!sub?.find(s => checkActiveNav(s.href))
@@ -54,10 +53,7 @@ export default function NavLinkIconDropdown({
         <DropdownMenuSeparator />
         {sub!.map(({ title, icon: Icon, label, href }) => (
           <DropdownMenuItem key={`${title}-${href}`} asChild>
-            <Link
-              to={href}
-              className={`${checkActiveNav(href) ? "bg-secondary" : ""}`}
-            >
+            <Link to={href} activeProps={{ className: "bg-secondary" }}>
               <Icon /> <span className='ml-2 max-w-52 text-wrap'>{title}</span>
               {label && <span className='ml-auto text-xs'>{label}</span>}
             </Link>

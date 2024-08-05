@@ -8,7 +8,12 @@ export const Route = createFileRoute("/auth")({
   beforeLoad: ({ context }) => {
     if (context.auth.isAuthenticated) {
       throw redirect({
-        to: "/dashboard",
+        to:
+          context.auth.user!.role === "admin"
+            ? "/dashboard/overview"
+            : context.auth.user!.role === "trainer"
+              ? "/trainer"
+              : "/user",
       })
     }
   },

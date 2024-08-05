@@ -1,15 +1,11 @@
+import { Outlet } from "@tanstack/react-router"
 import Footer from "../molecules/footer"
 import Header from "../molecules/header"
-
-interface AuthLayoutProps {
-  children: React.ReactNode
-}
-
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default function Layout() {
   return (
     <div className='min-h-screen w-full max-w-full'>
       <Header />
-      {children}
+      <Outlet />
       <Footer />
     </div>
   )

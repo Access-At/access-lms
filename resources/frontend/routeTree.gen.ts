@@ -13,127 +13,176 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as DashboardImport } from './routes/dashboard'
 import { Route as AuthImport } from './routes/auth'
-import { Route as IndexImport } from './routes/_index'
-import { Route as DashboardPagesIndexImport } from './routes/dashboard/pages/index'
+import { Route as LayoutDashboardImport } from './routes/_layout-dashboard'
+import { Route as LayoutImport } from './routes/_layout'
+import { Route as LayoutDashboardDashboardPagesIndexImport } from './routes/_layout-dashboard/dashboard/pages/index'
 
 // Create Virtual Routes
 
-const DashboardIndexLazyImport = createFileRoute('/dashboard/')()
-const IndexIndexLazyImport = createFileRoute('/_index/')()
-const DashboardUsersLazyImport = createFileRoute('/dashboard/users')()
-const DashboardSubscriptionsLazyImport = createFileRoute(
-  '/dashboard/subscriptions',
+const LayoutIndexLazyImport = createFileRoute('/_layout/')()
+const LayoutDashboardDashboardUsersLazyImport = createFileRoute(
+  '/_layout-dashboard/dashboard/users',
 )()
-const DashboardSettingsLazyImport = createFileRoute('/dashboard/settings')()
-const DashboardReportsLazyImport = createFileRoute('/dashboard/reports')()
-const DashboardCoursesLazyImport = createFileRoute('/dashboard/courses')()
-const DashboardCategoriesLazyImport = createFileRoute('/dashboard/categories')()
-const DashboardBatchesLazyImport = createFileRoute('/dashboard/batches')()
-const DashboardPagesAddLazyImport = createFileRoute('/dashboard/pages/add')()
+const LayoutDashboardDashboardSubscriptionsLazyImport = createFileRoute(
+  '/_layout-dashboard/dashboard/subscriptions',
+)()
+const LayoutDashboardDashboardSettingsLazyImport = createFileRoute(
+  '/_layout-dashboard/dashboard/settings',
+)()
+const LayoutDashboardDashboardReportsLazyImport = createFileRoute(
+  '/_layout-dashboard/dashboard/reports',
+)()
+const LayoutDashboardDashboardOverviewLazyImport = createFileRoute(
+  '/_layout-dashboard/dashboard/overview',
+)()
+const LayoutDashboardDashboardCoursesLazyImport = createFileRoute(
+  '/_layout-dashboard/dashboard/courses',
+)()
+const LayoutDashboardDashboardCategoriesLazyImport = createFileRoute(
+  '/_layout-dashboard/dashboard/categories',
+)()
+const LayoutDashboardDashboardBatchesLazyImport = createFileRoute(
+  '/_layout-dashboard/dashboard/batches',
+)()
+const LayoutDashboardDashboardPagesAddLazyImport = createFileRoute(
+  '/_layout-dashboard/dashboard/pages/add',
+)()
 
 // Create/Update Routes
-
-const DashboardRoute = DashboardImport.update({
-  path: '/dashboard',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const AuthRoute = AuthImport.update({
   path: '/auth',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
-  id: '/_index',
+const LayoutDashboardRoute = LayoutDashboardImport.update({
+  id: '/_layout-dashboard',
   getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardIndexLazyRoute = DashboardIndexLazyImport.update({
-  path: '/',
-  getParentRoute: () => DashboardRoute,
-} as any).lazy(() =>
-  import('./routes/dashboard/index.lazy').then((d) => d.Route),
-)
-
-const IndexIndexLazyRoute = IndexIndexLazyImport.update({
-  path: '/',
-  getParentRoute: () => IndexRoute,
-} as any).lazy(() => import('./routes/_index/index.lazy').then((d) => d.Route))
-
-const DashboardUsersLazyRoute = DashboardUsersLazyImport.update({
-  path: '/users',
-  getParentRoute: () => DashboardRoute,
-} as any).lazy(() =>
-  import('./routes/dashboard/users.lazy').then((d) => d.Route),
-)
-
-const DashboardSubscriptionsLazyRoute = DashboardSubscriptionsLazyImport.update(
-  {
-    path: '/subscriptions',
-    getParentRoute: () => DashboardRoute,
-  } as any,
-).lazy(() =>
-  import('./routes/dashboard/subscriptions.lazy').then((d) => d.Route),
-)
-
-const DashboardSettingsLazyRoute = DashboardSettingsLazyImport.update({
-  path: '/settings',
-  getParentRoute: () => DashboardRoute,
-} as any).lazy(() =>
-  import('./routes/dashboard/settings.lazy').then((d) => d.Route),
-)
-
-const DashboardReportsLazyRoute = DashboardReportsLazyImport.update({
-  path: '/reports',
-  getParentRoute: () => DashboardRoute,
-} as any).lazy(() =>
-  import('./routes/dashboard/reports.lazy').then((d) => d.Route),
-)
-
-const DashboardCoursesLazyRoute = DashboardCoursesLazyImport.update({
-  path: '/courses',
-  getParentRoute: () => DashboardRoute,
-} as any).lazy(() =>
-  import('./routes/dashboard/courses.lazy').then((d) => d.Route),
-)
-
-const DashboardCategoriesLazyRoute = DashboardCategoriesLazyImport.update({
-  path: '/categories',
-  getParentRoute: () => DashboardRoute,
-} as any).lazy(() =>
-  import('./routes/dashboard/categories.lazy').then((d) => d.Route),
-)
-
-const DashboardBatchesLazyRoute = DashboardBatchesLazyImport.update({
-  path: '/batches',
-  getParentRoute: () => DashboardRoute,
-} as any).lazy(() =>
-  import('./routes/dashboard/batches.lazy').then((d) => d.Route),
-)
-
-const DashboardPagesIndexRoute = DashboardPagesIndexImport.update({
-  path: '/pages/',
-  getParentRoute: () => DashboardRoute,
+const LayoutRoute = LayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardPagesAddLazyRoute = DashboardPagesAddLazyImport.update({
-  path: '/pages/add',
-  getParentRoute: () => DashboardRoute,
-} as any).lazy(() =>
-  import('./routes/dashboard/pages/add.lazy').then((d) => d.Route),
-)
+const LayoutIndexLazyRoute = LayoutIndexLazyImport.update({
+  path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() => import('./routes/_layout/index.lazy').then((d) => d.Route))
+
+const LayoutDashboardDashboardUsersLazyRoute =
+  LayoutDashboardDashboardUsersLazyImport.update({
+    path: '/dashboard/users',
+    getParentRoute: () => LayoutDashboardRoute,
+  } as any).lazy(() =>
+    import('./routes/_layout-dashboard/dashboard/users.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const LayoutDashboardDashboardSubscriptionsLazyRoute =
+  LayoutDashboardDashboardSubscriptionsLazyImport.update({
+    path: '/dashboard/subscriptions',
+    getParentRoute: () => LayoutDashboardRoute,
+  } as any).lazy(() =>
+    import('./routes/_layout-dashboard/dashboard/subscriptions.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const LayoutDashboardDashboardSettingsLazyRoute =
+  LayoutDashboardDashboardSettingsLazyImport.update({
+    path: '/dashboard/settings',
+    getParentRoute: () => LayoutDashboardRoute,
+  } as any).lazy(() =>
+    import('./routes/_layout-dashboard/dashboard/settings.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const LayoutDashboardDashboardReportsLazyRoute =
+  LayoutDashboardDashboardReportsLazyImport.update({
+    path: '/dashboard/reports',
+    getParentRoute: () => LayoutDashboardRoute,
+  } as any).lazy(() =>
+    import('./routes/_layout-dashboard/dashboard/reports.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const LayoutDashboardDashboardOverviewLazyRoute =
+  LayoutDashboardDashboardOverviewLazyImport.update({
+    path: '/dashboard/overview',
+    getParentRoute: () => LayoutDashboardRoute,
+  } as any).lazy(() =>
+    import('./routes/_layout-dashboard/dashboard/overview.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const LayoutDashboardDashboardCoursesLazyRoute =
+  LayoutDashboardDashboardCoursesLazyImport.update({
+    path: '/dashboard/courses',
+    getParentRoute: () => LayoutDashboardRoute,
+  } as any).lazy(() =>
+    import('./routes/_layout-dashboard/dashboard/courses.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const LayoutDashboardDashboardCategoriesLazyRoute =
+  LayoutDashboardDashboardCategoriesLazyImport.update({
+    path: '/dashboard/categories',
+    getParentRoute: () => LayoutDashboardRoute,
+  } as any).lazy(() =>
+    import('./routes/_layout-dashboard/dashboard/categories.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const LayoutDashboardDashboardBatchesLazyRoute =
+  LayoutDashboardDashboardBatchesLazyImport.update({
+    path: '/dashboard/batches',
+    getParentRoute: () => LayoutDashboardRoute,
+  } as any).lazy(() =>
+    import('./routes/_layout-dashboard/dashboard/batches.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const LayoutDashboardDashboardPagesIndexRoute =
+  LayoutDashboardDashboardPagesIndexImport.update({
+    path: '/dashboard/pages/',
+    getParentRoute: () => LayoutDashboardRoute,
+  } as any)
+
+const LayoutDashboardDashboardPagesAddLazyRoute =
+  LayoutDashboardDashboardPagesAddLazyImport.update({
+    path: '/dashboard/pages/add',
+    getParentRoute: () => LayoutDashboardRoute,
+  } as any).lazy(() =>
+    import('./routes/_layout-dashboard/dashboard/pages/add.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_index': {
-      id: '/_index'
+    '/_layout': {
+      id: '/_layout'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof IndexImport
+      preLoaderRoute: typeof LayoutImport
+      parentRoute: typeof rootRoute
+    }
+    '/_layout-dashboard': {
+      id: '/_layout-dashboard'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutDashboardImport
       parentRoute: typeof rootRoute
     }
     '/auth': {
@@ -143,89 +192,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/batches': {
-      id: '/dashboard/batches'
-      path: '/batches'
-      fullPath: '/dashboard/batches'
-      preLoaderRoute: typeof DashboardBatchesLazyImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/categories': {
-      id: '/dashboard/categories'
-      path: '/categories'
-      fullPath: '/dashboard/categories'
-      preLoaderRoute: typeof DashboardCategoriesLazyImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/courses': {
-      id: '/dashboard/courses'
-      path: '/courses'
-      fullPath: '/dashboard/courses'
-      preLoaderRoute: typeof DashboardCoursesLazyImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/reports': {
-      id: '/dashboard/reports'
-      path: '/reports'
-      fullPath: '/dashboard/reports'
-      preLoaderRoute: typeof DashboardReportsLazyImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/settings': {
-      id: '/dashboard/settings'
-      path: '/settings'
-      fullPath: '/dashboard/settings'
-      preLoaderRoute: typeof DashboardSettingsLazyImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/subscriptions': {
-      id: '/dashboard/subscriptions'
-      path: '/subscriptions'
-      fullPath: '/dashboard/subscriptions'
-      preLoaderRoute: typeof DashboardSubscriptionsLazyImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/users': {
-      id: '/dashboard/users'
-      path: '/users'
-      fullPath: '/dashboard/users'
-      preLoaderRoute: typeof DashboardUsersLazyImport
-      parentRoute: typeof DashboardImport
-    }
-    '/_index/': {
-      id: '/_index/'
+    '/_layout/': {
+      id: '/_layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexIndexLazyImport
-      parentRoute: typeof IndexImport
+      preLoaderRoute: typeof LayoutIndexLazyImport
+      parentRoute: typeof LayoutImport
     }
-    '/dashboard/': {
-      id: '/dashboard/'
-      path: '/'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof DashboardIndexLazyImport
-      parentRoute: typeof DashboardImport
+    '/_layout-dashboard/dashboard/batches': {
+      id: '/_layout-dashboard/dashboard/batches'
+      path: '/dashboard/batches'
+      fullPath: '/dashboard/batches'
+      preLoaderRoute: typeof LayoutDashboardDashboardBatchesLazyImport
+      parentRoute: typeof LayoutDashboardImport
     }
-    '/dashboard/pages/add': {
-      id: '/dashboard/pages/add'
-      path: '/pages/add'
+    '/_layout-dashboard/dashboard/categories': {
+      id: '/_layout-dashboard/dashboard/categories'
+      path: '/dashboard/categories'
+      fullPath: '/dashboard/categories'
+      preLoaderRoute: typeof LayoutDashboardDashboardCategoriesLazyImport
+      parentRoute: typeof LayoutDashboardImport
+    }
+    '/_layout-dashboard/dashboard/courses': {
+      id: '/_layout-dashboard/dashboard/courses'
+      path: '/dashboard/courses'
+      fullPath: '/dashboard/courses'
+      preLoaderRoute: typeof LayoutDashboardDashboardCoursesLazyImport
+      parentRoute: typeof LayoutDashboardImport
+    }
+    '/_layout-dashboard/dashboard/overview': {
+      id: '/_layout-dashboard/dashboard/overview'
+      path: '/dashboard/overview'
+      fullPath: '/dashboard/overview'
+      preLoaderRoute: typeof LayoutDashboardDashboardOverviewLazyImport
+      parentRoute: typeof LayoutDashboardImport
+    }
+    '/_layout-dashboard/dashboard/reports': {
+      id: '/_layout-dashboard/dashboard/reports'
+      path: '/dashboard/reports'
+      fullPath: '/dashboard/reports'
+      preLoaderRoute: typeof LayoutDashboardDashboardReportsLazyImport
+      parentRoute: typeof LayoutDashboardImport
+    }
+    '/_layout-dashboard/dashboard/settings': {
+      id: '/_layout-dashboard/dashboard/settings'
+      path: '/dashboard/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof LayoutDashboardDashboardSettingsLazyImport
+      parentRoute: typeof LayoutDashboardImport
+    }
+    '/_layout-dashboard/dashboard/subscriptions': {
+      id: '/_layout-dashboard/dashboard/subscriptions'
+      path: '/dashboard/subscriptions'
+      fullPath: '/dashboard/subscriptions'
+      preLoaderRoute: typeof LayoutDashboardDashboardSubscriptionsLazyImport
+      parentRoute: typeof LayoutDashboardImport
+    }
+    '/_layout-dashboard/dashboard/users': {
+      id: '/_layout-dashboard/dashboard/users'
+      path: '/dashboard/users'
+      fullPath: '/dashboard/users'
+      preLoaderRoute: typeof LayoutDashboardDashboardUsersLazyImport
+      parentRoute: typeof LayoutDashboardImport
+    }
+    '/_layout-dashboard/dashboard/pages/add': {
+      id: '/_layout-dashboard/dashboard/pages/add'
+      path: '/dashboard/pages/add'
       fullPath: '/dashboard/pages/add'
-      preLoaderRoute: typeof DashboardPagesAddLazyImport
-      parentRoute: typeof DashboardImport
+      preLoaderRoute: typeof LayoutDashboardDashboardPagesAddLazyImport
+      parentRoute: typeof LayoutDashboardImport
     }
-    '/dashboard/pages/': {
-      id: '/dashboard/pages/'
-      path: '/pages'
+    '/_layout-dashboard/dashboard/pages/': {
+      id: '/_layout-dashboard/dashboard/pages/'
+      path: '/dashboard/pages'
       fullPath: '/dashboard/pages'
-      preLoaderRoute: typeof DashboardPagesIndexImport
-      parentRoute: typeof DashboardImport
+      preLoaderRoute: typeof LayoutDashboardDashboardPagesIndexImport
+      parentRoute: typeof LayoutDashboardImport
     }
   }
 }
@@ -233,20 +275,20 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  IndexRoute: IndexRoute.addChildren({ IndexIndexLazyRoute }),
-  AuthRoute,
-  DashboardRoute: DashboardRoute.addChildren({
-    DashboardBatchesLazyRoute,
-    DashboardCategoriesLazyRoute,
-    DashboardCoursesLazyRoute,
-    DashboardReportsLazyRoute,
-    DashboardSettingsLazyRoute,
-    DashboardSubscriptionsLazyRoute,
-    DashboardUsersLazyRoute,
-    DashboardIndexLazyRoute,
-    DashboardPagesAddLazyRoute,
-    DashboardPagesIndexRoute,
+  LayoutRoute: LayoutRoute.addChildren({ LayoutIndexLazyRoute }),
+  LayoutDashboardRoute: LayoutDashboardRoute.addChildren({
+    LayoutDashboardDashboardBatchesLazyRoute,
+    LayoutDashboardDashboardCategoriesLazyRoute,
+    LayoutDashboardDashboardCoursesLazyRoute,
+    LayoutDashboardDashboardOverviewLazyRoute,
+    LayoutDashboardDashboardReportsLazyRoute,
+    LayoutDashboardDashboardSettingsLazyRoute,
+    LayoutDashboardDashboardSubscriptionsLazyRoute,
+    LayoutDashboardDashboardUsersLazyRoute,
+    LayoutDashboardDashboardPagesAddLazyRoute,
+    LayoutDashboardDashboardPagesIndexRoute,
   }),
+  AuthRoute,
 })
 
 /* prettier-ignore-end */
@@ -257,78 +299,78 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_index",
-        "/auth",
-        "/dashboard"
+        "/_layout",
+        "/_layout-dashboard",
+        "/auth"
       ]
     },
-    "/_index": {
-      "filePath": "_index.tsx",
+    "/_layout": {
+      "filePath": "_layout.tsx",
       "children": [
-        "/_index/"
+        "/_layout/"
+      ]
+    },
+    "/_layout-dashboard": {
+      "filePath": "_layout-dashboard.tsx",
+      "children": [
+        "/_layout-dashboard/dashboard/batches",
+        "/_layout-dashboard/dashboard/categories",
+        "/_layout-dashboard/dashboard/courses",
+        "/_layout-dashboard/dashboard/overview",
+        "/_layout-dashboard/dashboard/reports",
+        "/_layout-dashboard/dashboard/settings",
+        "/_layout-dashboard/dashboard/subscriptions",
+        "/_layout-dashboard/dashboard/users",
+        "/_layout-dashboard/dashboard/pages/add",
+        "/_layout-dashboard/dashboard/pages/"
       ]
     },
     "/auth": {
       "filePath": "auth.tsx"
     },
-    "/dashboard": {
-      "filePath": "dashboard.tsx",
-      "children": [
-        "/dashboard/batches",
-        "/dashboard/categories",
-        "/dashboard/courses",
-        "/dashboard/reports",
-        "/dashboard/settings",
-        "/dashboard/subscriptions",
-        "/dashboard/users",
-        "/dashboard/",
-        "/dashboard/pages/add",
-        "/dashboard/pages/"
-      ]
+    "/_layout/": {
+      "filePath": "_layout/index.lazy.tsx",
+      "parent": "/_layout"
     },
-    "/dashboard/batches": {
-      "filePath": "dashboard/batches.lazy.tsx",
-      "parent": "/dashboard"
+    "/_layout-dashboard/dashboard/batches": {
+      "filePath": "_layout-dashboard/dashboard/batches.lazy.tsx",
+      "parent": "/_layout-dashboard"
     },
-    "/dashboard/categories": {
-      "filePath": "dashboard/categories.lazy.tsx",
-      "parent": "/dashboard"
+    "/_layout-dashboard/dashboard/categories": {
+      "filePath": "_layout-dashboard/dashboard/categories.lazy.tsx",
+      "parent": "/_layout-dashboard"
     },
-    "/dashboard/courses": {
-      "filePath": "dashboard/courses.lazy.tsx",
-      "parent": "/dashboard"
+    "/_layout-dashboard/dashboard/courses": {
+      "filePath": "_layout-dashboard/dashboard/courses.lazy.tsx",
+      "parent": "/_layout-dashboard"
     },
-    "/dashboard/reports": {
-      "filePath": "dashboard/reports.lazy.tsx",
-      "parent": "/dashboard"
+    "/_layout-dashboard/dashboard/overview": {
+      "filePath": "_layout-dashboard/dashboard/overview.lazy.tsx",
+      "parent": "/_layout-dashboard"
     },
-    "/dashboard/settings": {
-      "filePath": "dashboard/settings.lazy.tsx",
-      "parent": "/dashboard"
+    "/_layout-dashboard/dashboard/reports": {
+      "filePath": "_layout-dashboard/dashboard/reports.lazy.tsx",
+      "parent": "/_layout-dashboard"
     },
-    "/dashboard/subscriptions": {
-      "filePath": "dashboard/subscriptions.lazy.tsx",
-      "parent": "/dashboard"
+    "/_layout-dashboard/dashboard/settings": {
+      "filePath": "_layout-dashboard/dashboard/settings.lazy.tsx",
+      "parent": "/_layout-dashboard"
     },
-    "/dashboard/users": {
-      "filePath": "dashboard/users.lazy.tsx",
-      "parent": "/dashboard"
+    "/_layout-dashboard/dashboard/subscriptions": {
+      "filePath": "_layout-dashboard/dashboard/subscriptions.lazy.tsx",
+      "parent": "/_layout-dashboard"
     },
-    "/_index/": {
-      "filePath": "_index/index.lazy.tsx",
-      "parent": "/_index"
+    "/_layout-dashboard/dashboard/users": {
+      "filePath": "_layout-dashboard/dashboard/users.lazy.tsx",
+      "parent": "/_layout-dashboard"
     },
-    "/dashboard/": {
-      "filePath": "dashboard/index.lazy.tsx",
-      "parent": "/dashboard"
+    "/_layout-dashboard/dashboard/pages/add": {
+      "filePath": "_layout-dashboard/dashboard/pages/add.lazy.tsx",
+      "parent": "/_layout-dashboard"
     },
-    "/dashboard/pages/add": {
-      "filePath": "dashboard/pages/add.lazy.tsx",
-      "parent": "/dashboard"
-    },
-    "/dashboard/pages/": {
-      "filePath": "dashboard/pages/index.tsx",
-      "parent": "/dashboard"
+    "/_layout-dashboard/dashboard/pages/": {
+      "filePath": "_layout-dashboard/dashboard/pages/index.tsx",
+      "parent": "/_layout-dashboard"
     }
   }
 }

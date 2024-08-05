@@ -15,7 +15,7 @@ export const sidelinks: SideLink[] = [
   {
     title: "Dashboard",
     label: "",
-    href: "/dashboard",
+    href: "/dashboard/overview",
     icon: Gauge,
   },
   {

@@ -1,4 +1,3 @@
-import useCheckActiveNav from "@/hooks/useCheckActiveNav"
 import { NavLinkProps } from "@/lib/types"
 import { cn } from "@/lib/utils"
 import { Link } from "@tanstack/react-router"
@@ -11,20 +10,20 @@ export default function NavLinkIcon({
   label,
   href,
 }: NavLinkProps) {
-  const { checkActiveNav } = useCheckActiveNav()
   return (
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
         <Link
           to={href}
+          activeProps={{
+            className: cn(
+              buttonVariants({ variant: "default" }),
+              "md:transition-all md:duration-300 md:ease-in-out hover:text-white",
+            ),
+          }}
           className={cn(
-            buttonVariants({
-              variant: checkActiveNav(href) ? "default" : "ghost",
-              size: "icon",
-            }),
+            buttonVariants({ variant: "ghost", size: "icon" }),
             "h-12 w-12",
-            checkActiveNav(href) &&
-              "md:transition-all md:duration-300 md:ease-in-out",
           )}
         >
           <Icon />

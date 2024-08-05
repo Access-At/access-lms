@@ -66,14 +66,22 @@ export default function Nav({
         className,
       )}
     >
-      <div className='flex h-full flex-col justify-between'>
+      <div
+        className={cn(
+          "flex h-full flex-col justify-between",
+          isCollapsed ? "px-1" : "px-2",
+        )}
+      >
         <TooltipProvider delayDuration={0}>
           <nav className='grid gap-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-0'>
             {links.map(renderLink)}
           </nav>
         </TooltipProvider>
         <Button
-          className={cn("flex items-center justify-center space-x-2")}
+          className={cn(
+            "flex items-center justify-center",
+            isCollapsed ? "" : "space-x-2",
+          )}
           onClick={handleLogout}
         >
           <span

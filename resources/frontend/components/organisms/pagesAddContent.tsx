@@ -19,8 +19,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft } from "lucide-react"
 import { useForm } from "react-hook-form"
 import ReactQuill from "react-quill"
-import { LayoutComponents } from "../atoms/layoutComponents"
-import { UserNav } from "../molecules/userNav"
 import { Input } from "../ui/input"
 
 export default function PagesAddContent() {
@@ -87,63 +85,55 @@ export default function PagesAddContent() {
   }
 
   return (
-    <LayoutComponents>
-      <LayoutComponents.Header className='flex justify-between md:bg-white'>
-        <div className='ml-auto'>Pages</div>
-        <div className='ml-auto flex items-center space-x-4'>
-          <UserNav />
-        </div>
-      </LayoutComponents.Header>
-      <LayoutComponents.Body className='flex h-[calc(100vh-5rem)] items-center justify-center'>
-        <div className='flex flex-col items-start gap-y-2'>
-          <Link
-            to='/dashboard/pages'
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "flex items-center border-destructive text-destructive hover:bg-destructive hover:text-white",
-            )}
+    <div className='flex h-[calc(100vh-5rem)] items-center justify-center'>
+      <div className='flex flex-col items-start gap-y-2'>
+        <Link
+          to='/dashboard/pages'
+          className={cn(
+            buttonVariants({ variant: "outline" }),
+            "flex items-center border-destructive text-destructive hover:bg-destructive hover:text-white",
+          )}
+        >
+          <ArrowLeft className='h-4 w-4' />
+          <span className='capitalize'>back</span>
+        </Link>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className='w-full max-w-3xl space-y-3 rounded-lg bg-white px-4 py-6'
           >
-            <ArrowLeft className='h-4 w-4' />
-            <span className='capitalize'>back</span>
-          </Link>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleSubmit)}
-              className='w-full max-w-3xl space-y-3 rounded-lg bg-white px-4 py-6'
-            >
-              <FormField
-                control={form.control}
-                name='title'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Title</FormLabel>
-                    <FormControl>
-                      <Input placeholder='Title' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='content'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Content</FormLabel>
-                    <FormControl>
-                      <ReactQuill theme='snow' {...field} modules={modules} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type='submit' disabled={isPending}>
-                Submit
-              </Button>
-            </form>
-          </Form>
-        </div>
-      </LayoutComponents.Body>
-    </LayoutComponents>
+            <FormField
+              control={form.control}
+              name='title'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder='Title' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='content'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Content</FormLabel>
+                  <FormControl>
+                    <ReactQuill theme='snow' {...field} modules={modules} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type='submit' disabled={isPending}>
+              Submit
+            </Button>
+          </form>
+        </Form>
+      </div>
+    </div>
   )
 }

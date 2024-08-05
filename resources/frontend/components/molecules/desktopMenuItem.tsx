@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils"
 import { Link } from "@tanstack/react-router"
 import { ChevronDown } from "lucide-react"
 import {
@@ -6,9 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-
-import useCheckActiveNav from "@/hooks/useCheckActiveNav"
-import { cn } from "@/lib/utils"
 
 interface DesktopMenuItemProps {
   item: {
@@ -22,25 +20,9 @@ interface DesktopMenuItemProps {
 }
 
 export default function DesktopMenuItem({ item }: DesktopMenuItemProps) {
-  const { checkActiveNav } = useCheckActiveNav()
-
-  return item.path ? (
-    <>
-      <Link
-        to={item.path ? item.path : ""}
-        className={cn(
-          "py-3 ps-px font-medium sm:px-3",
-          checkActiveNav(item.path)
-            ? "text-blue-600"
-            : "text-gray-500 hover:text-gray-400",
-        )}
-      >
-        {item.name}
-      </Link>
-    </>
-  ) : (
+  return !item.path ? (
     <DropdownMenu>
-      <DropdownMenuTrigger className='flex items-center gap-x-2 py-3 ps-px font-medium text-gray-500 hover:bg-transparent hover:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 sm:px-3'>
+      <DropdownMenuTrigger className='flex items-center gap-x-2 py-3 ps-px font-medium hover:bg-transparent hover:text-blue-500 focus-visible:ring-0 focus-visible:ring-offset-0 sm:px-3'>
         {item.name} <ChevronDown />
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56'>
@@ -51,5 +33,13 @@ export default function DesktopMenuItem({ item }: DesktopMenuItemProps) {
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
+  ) : (
+    <Link
+      to={item.path}
+      activeProps={{ className: "text-blue-600" }}
+      className={cn("py-3 ps-px font-medium hover:text-blue-500 sm:px-3")}
+    >
+      {item.name}
+    </Link>
   )
 }

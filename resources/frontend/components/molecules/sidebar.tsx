@@ -4,23 +4,23 @@ import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { sidelinks } from "@/constant/menuAdmin"
-import { useAuth } from "@/contexts"
 import { cn } from "@/lib/utils"
 import { LayoutComponents } from "../atoms/layoutComponents"
 import Nav from "./nav"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   isCollapsed: boolean
+  role: string
   setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function Sidebar({
   className,
+  role,
   isCollapsed,
   setIsCollapsed,
 }: SidebarProps) {
   const [navOpened, setNavOpened] = useState(false)
-  const { user } = useAuth()
   /* Make body not scrollable when navBar is opened */
   useEffect(() => {
     if (navOpened) {
@@ -79,7 +79,7 @@ export default function Sidebar({
         </LayoutComponents.Header>
 
         {/* Navigation links */}
-        {user?.role === "admin" && (
+        {role === "admin" && (
           <Nav
             id='sidebar-menu'
             className={`z-40 h-full flex-1 overflow-auto ${navOpened ? "max-h-screen" : "max-h-0 py-0 md:max-h-screen md:py-2"}`}
@@ -88,22 +88,22 @@ export default function Sidebar({
             links={sidelinks}
           />
         )}
-        {user?.role === "trainer" && (
+        {role === "trainer" && (
           <Nav
             id='sidebar-menu'
             className={`z-40 h-full flex-1 overflow-auto ${navOpened ? "max-h-screen" : "max-h-0 py-0 md:max-h-screen md:py-2"}`}
             closeNav={() => setNavOpened(false)}
             isCollapsed={isCollapsed}
-            links={sidelinks}
+            links={[]}
           />
         )}
-        {user?.role === "user" && (
+        {role === "user" && (
           <Nav
             id='sidebar-menu'
             className={`z-40 h-full flex-1 overflow-auto ${navOpened ? "max-h-screen" : "max-h-0 py-0 md:max-h-screen md:py-2"}`}
             closeNav={() => setNavOpened(false)}
             isCollapsed={isCollapsed}
-            links={sidelinks}
+            links={[]}
           />
         )}
 

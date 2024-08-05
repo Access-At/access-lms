@@ -14,7 +14,6 @@ interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
     title: string
     href: string
-    isActive: boolean
   }[]
 }
 
@@ -33,11 +32,12 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side='bottom' align='start'>
-            {links.map(({ title, href, isActive }) => (
+            {links.map(({ title, href }) => (
               <DropdownMenuItem key={`${title}-${href}`} asChild>
                 <Link
                   to={href}
-                  className={!isActive ? "text-muted-foreground" : ""}
+                  activeProps={{ className: "text-primary" }}
+                  className='text-muted-foreground'
                 >
                   {title}
                 </Link>
@@ -54,11 +54,12 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
         )}
         {...props}
       >
-        {links.map(({ title, href, isActive }) => (
+        {links.map(({ title, href }) => (
           <Link
             key={`${title}-${href}`}
             to={href}
-            className={`text-sm font-medium transition-colors hover:text-primary ${isActive ? "" : "text-muted-foreground"}`}
+            activeProps={{ className: "text-primary" }}
+            className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
           >
             {title}
           </Link>
